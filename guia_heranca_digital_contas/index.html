@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Herança Digital: O que Acontece com Suas Contas Depois que Você Morrer · Dr. Filipe Ferreira</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Mulish:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:          #f0edf8;
+    --bg2:         #e4e0f2;
+    --bg3:         #d0cae8;
+    --ink:         #100c28;
+    --ink2:        #180e34;
+    --ink3:        #201440;
+    --violeta:     #4a1e8a;
+    --violeta2:    #6830b0;
+    --violeta3:    #9060d8;
+    --vlt-dim:     rgba(74,30,138,0.09);
+    --vlt-brd:     rgba(74,30,138,0.22);
+    --rosa:        #c82878;
+    --rosa2:       #e04090;
+    --rosa3:       #f870b8;
+    --rosa-dim:    rgba(200,40,120,0.08);
+    --rosa-brd:    rgba(200,40,120,0.2);
+    --verde:       #1a5e38;
+    --verde-dim:   rgba(26,94,56,0.08);
+    --verde-brd:   rgba(26,94,56,0.2);
+    --verm:        #8a2020;
+    --verm-dim:    rgba(138,32,32,0.07);
+    --verm-brd:    rgba(138,32,32,0.2);
+    --aviso:       #7a5a00;
+    --aviso-dim:   rgba(122,90,0,0.08);
+    --aviso-brd:   rgba(122,90,0,0.2);
+    --text:        #1e1840;
+    --text2:       #3a3058;
+    --muted:       #8878a8;
+    --branco:      #faf8ff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Mulish', sans-serif;
+    font-weight: 400;
+    line-height: 1.85;
+    font-size: 17px;
+  }
+
+  /* HERO */
+  .hero {
+    background: var(--ink);
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: 80px 28px 72px;
+    position: relative; overflow: hidden;
+  }
+
+  .hero-nebula {
+    position: absolute; inset: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 70% 55% at 50% -10%, rgba(74,30,138,0.45) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 40% at 10% 80%, rgba(200,40,120,0.12) 0%, transparent 55%),
+      radial-gradient(ellipse 40% 40% at 90% 70%, rgba(144,96,216,0.1) 0%, transparent 50%);
+  }
+
+  .hero-stars {
+    position: absolute; inset: 0; pointer-events: none;
+    overflow: hidden;
+  }
+  .star {
+    position: absolute; border-radius: 50%;
+    background: #fff; animation: pulsar 3s ease-in-out infinite;
+  }
+
+  .hero-z { position: relative; z-index: 1; }
+
+  .hero-eyebrow {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 5px; text-transform: uppercase;
+    color: var(--violeta3); margin-bottom: 28px;
+    display: flex; align-items: center;
+    gap: 18px; justify-content: center;
+    animation: surgir 0.7s ease forwards;
+  }
+  .hero-eyebrow::before, .hero-eyebrow::after {
+    content: ''; width: 40px; height: 1px;
+    background: rgba(144,96,216,0.35);
+  }
+
+  .hero-h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 6.5vw, 68px);
+    font-weight: 900;
+    color: var(--bg);
+    line-height: 1.05; margin-bottom: 6px;
+    animation: surgir 0.8s ease forwards;
+  }
+  .hero-h1 .sub {
+    display: block; font-style: italic;
+    font-weight: 400; color: var(--violeta3);
+    font-size: 0.52em; line-height: 1.6; margin-top: 10px;
+  }
+
+  .hero-sep {
+    width: 60px; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--violeta2), var(--rosa), transparent);
+    margin: 28px auto;
+    animation: expandir 1s ease 0.3s both;
+    transform: scaleX(0); transform-origin: center;
+  }
+
+  .hero-desc {
+    font-size: clamp(15px, 2vw, 18px);
+    color: rgba(240,237,248,0.52); font-weight: 300;
+    max-width: 540px; margin: 0 auto 44px; line-height: 1.8;
+    animation: surgir 0.9s ease 0.15s both; opacity: 0;
+  }
+  .hero-desc strong { color: rgba(240,237,248,0.9); font-weight: 600; }
+
+  .hero-pills {
+    display: flex; flex-wrap: wrap;
+    justify-content: center; gap: 10px;
+    animation: surgir 1s ease 0.3s both; opacity: 0;
+  }
+  .pill {
+    background: rgba(74,30,138,0.18);
+    border: 1px solid rgba(144,96,216,0.28);
+    color: var(--violeta3);
+    font-size: 12px; font-weight: 600;
+    padding: 7px 18px; border-radius: 100px;
+  }
+
+  /* CONTADOR DE CONTAS */
+  .hero-contagem {
+    display: flex; flex-wrap: wrap;
+    justify-content: center; gap: 24px;
+    margin-top: 52px;
+    animation: surgir 1.1s ease 0.4s both; opacity: 0;
+  }
+  .contagem-item { text-align: center; }
+  .contagem-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 44px; font-weight: 900;
+    line-height: 1; display: block;
+    background: linear-gradient(135deg, var(--violeta3), var(--rosa2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .contagem-desc {
+    font-size: 12px; font-weight: 500;
+    color: rgba(240,237,248,0.35);
+    letter-spacing: 1px; margin-top: 4px;
+    text-transform: uppercase;
+  }
+
+  /* DIAGNÓSTICO */
+  .diag-section {
+    background: var(--ink2); padding: 80px 28px;
+    border-top: 1px solid rgba(255,255,255,0.04);
+  }
+  .diag-inner { max-width: 700px; margin: 0 auto; text-align: center; }
+  .d-tag {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 4px; text-transform: uppercase;
+    color: var(--violeta3); margin-bottom: 14px; display: block;
+  }
+  .d-titulo {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(22px, 4vw, 34px);
+    font-weight: 700; color: var(--bg);
+    line-height: 1.2; margin-bottom: 10px;
+  }
+  .d-sub {
+    font-size: 16px; color: rgba(240,237,248,0.35);
+    font-weight: 300; margin-bottom: 36px;
+  }
+
+  .q-lista { text-align: left; display: flex; flex-direction: column; gap: 10px; }
+  .q-item {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 10px; padding: 16px 20px;
+    display: flex; align-items: flex-start; gap: 14px;
+    cursor: pointer; transition: all 0.25s; user-select: none;
+  }
+  .q-item:hover { background: var(--vlt-dim); border-color: var(--vlt-brd); }
+  .q-item.on { background: rgba(74,30,138,0.15); border-color: var(--violeta2); }
+  .q-box {
+    width: 22px; height: 22px; border-radius: 5px;
+    border: 1.5px solid rgba(255,255,255,0.15);
+    flex-shrink: 0; margin-top: 2px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 700; transition: all 0.2s;
+  }
+  .q-item.on .q-box { background: var(--violeta2); border-color: var(--violeta2); }
+  .q-texto { font-size: 16px; color: rgba(240,237,248,0.6); line-height: 1.55; }
+  .q-item.on .q-texto { color: var(--bg); }
+
+  .q-res {
+    display: none; margin-top: 24px;
+    padding: 24px 28px; border-radius: 10px;
+    text-align: left; animation: surgir 0.4s ease forwards;
+  }
+  .q-res.visivel { display: block; }
+  .q-res.violeta  { background: var(--vlt-dim);   border: 1.5px solid var(--vlt-brd);   }
+  .q-res.rosa     { background: var(--rosa-dim);  border: 1.5px solid var(--rosa-brd);  }
+  .q-res.vermelho { background: var(--verm-dim);  border: 1.5px solid var(--verm-brd);  }
+  .q-res.verde    { background: var(--verde-dim); border: 1.5px solid var(--verde-brd); }
+  .q-res-label {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 3px; text-transform: uppercase;
+    margin-bottom: 8px; display: block;
+  }
+  .violeta  .q-res-label { color: var(--violeta3); }
+  .rosa     .q-res-label { color: var(--rosa2); }
+  .vermelho .q-res-label { color: #d06060; }
+  .verde    .q-res-label { color: #50c080; }
+  .q-res-texto { font-size: 16px; line-height: 1.8; }
+  .violeta  .q-res-texto { color: #7858b8; }
+  .rosa     .q-res-texto { color: #c05080; }
+  .vermelho .q-res-texto { color: #a05050; }
+  .verde    .q-res-texto { color: #3a8058; }
+  .q-res-texto strong { font-weight: 700; }
+
+  /* MAIN */
+  .main { max-width: 780px; margin: 0 auto; padding: 80px 28px 100px; }
+
+  .secao { margin-bottom: 80px; }
+  .secao-n {
+    font-family: 'Playfair Display', serif;
+    font-size: 110px; font-weight: 900; color: var(--bg2);
+    line-height: 0.85; display: block;
+    margin-bottom: -8px; user-select: none;
+  }
+  .secao-titulo {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(22px, 3.5vw, 30px);
+    font-weight: 700; color: var(--ink);
+    line-height: 1.2; padding-bottom: 16px; margin-bottom: 28px;
+    border-bottom: 1px solid var(--bg3); position: relative;
+  }
+  .secao-titulo::after {
+    content: ''; position: absolute;
+    left: 0; bottom: -1px; width: 48px; height: 2px;
+    background: linear-gradient(90deg, var(--violeta), var(--rosa));
+  }
+
+  .p { font-size: 17px; color: var(--text2); line-height: 1.9; margin-bottom: 22px; }
+  .p strong { color: var(--ink); font-weight: 700; }
+
+  /* LEI */
+  .lei {
+    background: var(--ink); border-radius: 10px;
+    padding: 24px 30px; margin: 28px 0;
+    position: relative; overflow: hidden;
+  }
+  .lei::after {
+    content: '§'; position: absolute; right: 20px; top: 8px;
+    font-family: 'Playfair Display', serif;
+    font-size: 72px; color: rgba(74,30,138,0.1);
+    line-height: 1; pointer-events: none;
+  }
+  .lei-ref {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 3px; color: var(--violeta3);
+    text-transform: uppercase; margin-bottom: 10px; display: block;
+  }
+  .lei-texto {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px; font-style: italic;
+    color: rgba(240,237,248,0.8); line-height: 1.85;
+  }
+  .lei-texto strong { color: var(--violeta3); font-style: normal; font-weight: 700; }
+
+  /* CAIXAS */
+  .cx { border-radius: 10px; padding: 24px 28px; margin: 28px 0; }
+  .cx.violeta { background: var(--vlt-dim);   border: 1.5px solid var(--vlt-brd);   }
+  .cx.rosa    { background: var(--rosa-dim);  border: 1.5px solid var(--rosa-brd);  }
+  .cx.verde   { background: var(--verde-dim); border: 1.5px solid var(--verde-brd); }
+  .cx.verm    { background: var(--verm-dim);  border: 1.5px solid var(--verm-brd);  }
+  .cx.aviso   { background: var(--aviso-dim); border: 1.5px solid var(--aviso-brd); }
+  .cx-tag {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 3px; text-transform: uppercase;
+    margin-bottom: 8px; display: block;
+  }
+  .violeta .cx-tag { color: var(--violeta); }
+  .rosa    .cx-tag { color: var(--rosa); }
+  .verde   .cx-tag { color: var(--verde); }
+  .verm    .cx-tag { color: var(--verm); }
+  .aviso   .cx-tag { color: var(--aviso); }
+  .cx-titulo {
+    font-family: 'Playfair Display', serif;
+    font-size: 19px; font-weight: 700; margin-bottom: 8px;
+  }
+  .violeta .cx-titulo { color: #4a2880; }
+  .rosa    .cx-titulo { color: #b02860; }
+  .verde   .cx-titulo { color: #1a5830; }
+  .verm    .cx-titulo { color: #a83030; }
+  .aviso   .cx-titulo { color: #9a7010; }
+  .cx-texto { font-size: 17px; line-height: 1.85; }
+  .violeta .cx-texto { color: #503880; }
+  .rosa    .cx-texto { color: #a82860; }
+  .verde   .cx-texto { color: #286040; }
+  .verm    .cx-texto { color: #8a3030; }
+  .aviso   .cx-texto { color: #806010; }
+  .cx-texto strong { font-weight: 700; }
+  .violeta .cx-texto strong { color: #4a2880; }
+  .rosa    .cx-texto strong { color: #b02860; }
+  .verde   .cx-texto strong { color: #1a5830; }
+  .verm    .cx-texto strong { color: #a83030; }
+  .aviso   .cx-texto strong { color: #8a6010; }
+
+  /* CARDS DE PLATAFORMA */
+  .plat-grid { display: flex; flex-direction: column; gap: 12px; margin: 28px 0; }
+  .plat-card {
+    background: var(--branco); border: 1px solid var(--bg3);
+    border-radius: 10px; overflow: hidden;
+    cursor: pointer; transition: border-color 0.2s;
+  }
+  .plat-card:hover { border-color: var(--vlt-brd); }
+  .plat-card.aberto { border-color: var(--violeta2); }
+  .plat-header {
+    display: flex; align-items: center;
+    gap: 14px; padding: 16px 22px;
+  }
+  .plat-emoji {
+    width: 40px; height: 40px; border-radius: 8px;
+    background: var(--vlt-dim); border: 1px solid var(--vlt-brd);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .plat-info { flex: 1; }
+  .plat-nome { font-size: 17px; font-weight: 700; color: var(--ink); line-height: 1.2; }
+  .plat-resumo { font-size: 13px; color: var(--muted); margin-top: 2px; }
+  .plat-badge {
+    font-size: 11px; font-weight: 700;
+    padding: 4px 12px; border-radius: 100px; letter-spacing: 1px;
+    flex-shrink: 0;
+  }
+  .plat-badge.encerra { background: var(--verm-dim); color: var(--verm); border: 1px solid var(--verm-brd); }
+  .plat-badge.memorial { background: var(--verde-dim); color: var(--verde); border: 1px solid var(--verde-brd); }
+  .plat-badge.legado { background: var(--vlt-dim); color: var(--violeta2); border: 1px solid var(--vlt-brd); }
+  .plat-badge.limbo { background: var(--aviso-dim); color: var(--aviso); border: 1px solid var(--aviso-brd); }
+  .plat-seta { color: var(--muted); font-size: 12px; transition: transform 0.3s; flex-shrink: 0; }
+  .plat-card.aberto .plat-seta { transform: rotate(180deg); }
+  .plat-corpo {
+    display: none;
+    padding: 0 22px 20px 76px;
+    font-size: 17px; color: var(--text2); line-height: 1.82;
+    border-top: 1px solid var(--bg2); padding-top: 16px;
+  }
+  .plat-card.aberto .plat-corpo { display: block; }
+  .plat-corpo strong { color: var(--ink); font-weight: 700; }
+  .plat-acao {
+    margin-top: 12px;
+    background: var(--vlt-dim);
+    border-left: 3px solid var(--violeta);
+    border-radius: 0 6px 6px 0;
+    padding: 10px 14px;
+    font-size: 16px; color: #4a2888; font-weight: 600;
+  }
+
+  /* LINHA DO TEMPO */
+  .tl { margin: 28px 0; }
+  .tl-item { display: flex; gap: 20px; padding-bottom: 28px; position: relative; }
+  .tl-item:not(:last-child)::after {
+    content: ''; position: absolute;
+    left: 21px; top: 46px; bottom: 0; width: 2px;
+    background: linear-gradient(to bottom, rgba(104,48,176,0.3), transparent);
+  }
+  .tl-dot {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--ink); border: 2px solid var(--vlt-brd);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 17px; font-weight: 700;
+    color: var(--violeta3); flex-shrink: 0;
+  }
+  .tl-dot.ativo {
+    background: linear-gradient(135deg, var(--violeta), var(--rosa));
+    border-color: var(--violeta); color: #fff;
+  }
+  .tl-tag {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 3px; color: var(--violeta2);
+    text-transform: uppercase; margin-bottom: 4px; display: block;
+  }
+  .tl-titulo {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px; font-weight: 700; color: var(--ink); margin-bottom: 6px;
+  }
+  .tl-texto { font-size: 17px; color: var(--text2); line-height: 1.8; }
+  .tl-texto strong { color: var(--ink); font-weight: 700; }
+
+  /* DESTAQUE */
+  .destaque {
+    background: var(--ink);
+    border-top: 3px solid transparent;
+    border-image: linear-gradient(90deg, var(--violeta2), var(--rosa)) 1;
+    border-radius: 0 0 10px 10px;
+    padding: 32px 36px; margin: 36px 0;
+    position: relative; overflow: hidden;
+  }
+  .destaque::before {
+    content: '"'; font-family: 'Playfair Display', serif;
+    font-size: 130px; color: rgba(104,48,176,0.08);
+    position: absolute; top: -20px; left: 12px;
+    line-height: 1; pointer-events: none;
+  }
+  .dest-texto {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(17px, 2.5vw, 21px);
+    font-style: italic; color: rgba(240,237,248,0.85);
+    line-height: 1.7; position: relative; z-index: 1;
+  }
+  .dest-texto strong { color: var(--violeta3); font-style: normal; }
+  .dest-autor {
+    margin-top: 16px; font-size: 11px; font-weight: 700;
+    letter-spacing: 2px; color: var(--violeta2);
+    text-transform: uppercase; position: relative; z-index: 1;
+  }
+
+  /* DIVISOR */
+  .divisor {
+    display: flex; align-items: center; gap: 20px; margin: 64px 0;
+  }
+  .divisor::before, .divisor::after {
+    content: ''; flex: 1; height: 1px; background: var(--bg3);
+  }
+  .divisor-sym {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px; color: var(--violeta); opacity: 0.4;
+  }
+
+  /* GRAVA */
+  .grava {
+    background: linear-gradient(135deg, var(--vlt-dim), rgba(74,30,138,0.02));
+    border: 1px solid var(--vlt-brd); border-radius: 10px;
+    padding: 32px 36px; margin: 48px 0; text-align: center;
+  }
+  .grava-label {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 4px; color: var(--violeta);
+    text-transform: uppercase; margin-bottom: 24px; display: block;
+  }
+  .grava-item {
+    font-size: 17px; font-weight: 700;
+    color: var(--violeta2); margin-bottom: 10px; line-height: 1.6;
+  }
+  .grava-item span { color: var(--ink2); font-weight: 400; }
+
+  /* CTA */
+  .cta-box {
+    background: var(--ink); border-radius: 12px;
+    padding: 60px 40px; text-align: center;
+    margin-top: 72px; position: relative; overflow: hidden;
+  }
+  .cta-box::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 50% 110%, rgba(74,30,138,0.25) 0%, transparent 70%),
+      radial-gradient(ellipse 30% 30% at 80% 20%, rgba(200,40,120,0.08) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .cta-tag {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 4px; color: var(--violeta3);
+    text-transform: uppercase; margin-bottom: 18px; display: block;
+    position: relative; z-index: 1;
+  }
+  .cta-titulo {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(26px, 5vw, 44px);
+    font-weight: 900; color: var(--bg);
+    line-height: 1.1; margin-bottom: 14px;
+    position: relative; z-index: 1;
+  }
+  .cta-titulo em { color: var(--violeta3); font-style: italic; }
+  .cta-sub {
+    font-size: 17px; font-weight: 300;
+    color: rgba(240,237,248,0.4); max-width: 440px;
+    margin: 0 auto 36px; position: relative; z-index: 1; line-height: 1.7;
+  }
+  .cta-btns {
+    display: flex; flex-wrap: wrap;
+    justify-content: center; gap: 12px; position: relative; z-index: 1;
+  }
+  .btn-p {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: linear-gradient(135deg, var(--violeta), var(--rosa));
+    color: #fff; font-size: 14px; font-weight: 700;
+    letter-spacing: 1px; text-transform: uppercase;
+    padding: 16px 32px; border-radius: 100px;
+    text-decoration: none; transition: all 0.3s;
+  }
+  .btn-p:hover { opacity: 0.9; transform: translateY(-2px); }
+  .btn-s {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: transparent; color: var(--violeta3);
+    font-size: 14px; font-weight: 600;
+    padding: 16px 28px; border-radius: 100px;
+    text-decoration: none; border: 1px solid var(--vlt-brd); transition: all 0.3s;
+  }
+  .btn-s:hover { background: var(--vlt-dim); border-color: var(--violeta2); }
+  .cta-oab {
+    margin-top: 20px; font-size: 12px; letter-spacing: 2px;
+    color: rgba(240,237,248,0.15); text-transform: uppercase;
+    position: relative; z-index: 1;
+  }
+
+  .footer {
+    background: var(--ink2); text-align: center;
+    padding: 32px 24px; border-top: 1px solid rgba(74,30,138,0.14);
+  }
+  .footer-nome {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px; color: var(--bg); margin-bottom: 4px;
+  }
+  .footer-sub {
+    font-size: 12px; letter-spacing: 2px;
+    color: rgba(240,237,248,0.15); text-transform: uppercase;
+  }
+
+  @keyframes surgir {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes expandir {
+    from { transform: scaleX(0); }
+    to   { transform: scaleX(1); }
+  }
+  @keyframes pulsar {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+  }
+
+  @media (max-width: 600px) {
+    .plat-corpo { padding-left: 22px; }
+    .cta-box { padding: 40px 22px; }
+    .hero-contagem { gap: 16px; }
+    .plat-badge { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-nebula"></div>
+  <div class="hero-stars" id="stars"></div>
+  <div class="hero-z">
+
+    <div class="hero-eyebrow">Herança Digital</div>
+
+    <h1 class="hero-h1">
+      O que Acontece com
+      Suas Contas e Bens Online
+      <span class="sub">Depois que você morrer</span>
+    </h1>
+
+    <div class="hero-sep"></div>
+
+    <p class="hero-desc">
+      Suas contas digitais não desaparecem quando você morre. <strong>Algumas ficam em um limbo eterno. Outras somem para sempre. E nenhuma se transfere automaticamente aos seus herdeiros</strong> sem que você tenha planejado isso em vida.
+    </p>
+
+    <div class="hero-pills">
+      <span class="pill">Facebook e Instagram</span>
+      <span class="pill">Google e YouTube</span>
+      <span class="pill">Bancos Digitais</span>
+      <span class="pill">Assinaturas</span>
+      <span class="pill">Marco Civil</span>
+      <span class="pill">Testamento</span>
+    </div>
+
+    <div class="hero-contagem">
+      <div class="contagem-item">
+        <span class="contagem-num">+30</span>
+        <span class="contagem-desc">contas digitais em média por pessoa</span>
+      </div>
+      <div class="contagem-item">
+        <span class="contagem-num">0</span>
+        <span class="contagem-desc">se transferem automaticamente</span>
+      </div>
+      <div class="contagem-item">
+        <span class="contagem-num">1</span>
+        <span class="contagem-desc">testamento resolve quase tudo</span>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- DIAGNÓSTICO -->
+<section class="diag-section">
+  <div class="diag-inner">
+    <span class="d-tag">🔍 Diagnóstico rápido</span>
+    <h2 class="d-titulo">O que mais te preocupa neste momento?</h2>
+    <p class="d-sub">Selecione e veja a orientação para o seu caso.</p>
+
+    <div class="q-lista">
+      <div class="q-item" onclick="marcar(this,'a')">
+        <div class="q-box"></div>
+        <div class="q-texto">Quero saber o que vai acontecer com minhas contas quando eu morrer e como proteger meu patrimônio digital</div>
+      </div>
+      <div class="q-item" onclick="marcar(this,'b')">
+        <div class="q-box"></div>
+        <div class="q-texto">Um familiar faleceu e preciso saber como acessar ou encerrar as contas digitais dele</div>
+      </div>
+      <div class="q-item" onclick="marcar(this,'c')">
+        <div class="q-box"></div>
+        <div class="q-texto">Tenho um perfil ou canal com valor comercial relevante e quero garantir que ele seja transmitido</div>
+      </div>
+      <div class="q-item" onclick="marcar(this,'d')">
+        <div class="q-box"></div>
+        <div class="q-texto">Quero entender o que diz a lei brasileira sobre herança digital antes de tomar qualquer decisão</div>
+      </div>
+    </div>
+
+    <div class="q-res" id="q-res"></div>
+  </div>
+</section>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- SEÇÃO 1 -->
+  <section class="secao">
+    <span class="secao-n">01</span>
+    <h2 class="secao-titulo">O problema que ninguém imagina: 30 contas e nenhuma instrução</h2>
+
+    <p class="p">
+      Pesquisas de comportamento digital indicam que uma pessoa adulta brasileira conectada mantém, em média, mais de 30 contas ativas em plataformas digitais. E-mail, redes sociais, bancos digitais, aplicativos de streaming, plataformas de investimento, lojas virtuais, serviços de armazenamento em nuvem, ferramentas de trabalho, jogos online. Cada uma dessas contas tem credenciais de acesso que provavelmente só o titular conhece.
+    </p>
+
+    <p class="p">
+      Quando essa pessoa morre, o que acontece com tudo isso? A resposta depende de qual é a plataforma, de onde ela está sediada, de qual é a política interna de contas de usuários falecidos e, acima de tudo, de se o titular planejou ou não a transmissão desse patrimônio antes de morrer. Na ausência de qualquer planejamento, o cenário mais comum é um de três: a conta fica em um limbo eterno sem ninguém com acesso legítimo, a plataforma encerra a conta após um período de inatividade apagando tudo, ou os herdeiros iniciam um processo longo, burocrático e muitas vezes infrutífero para tentar provar que têm direito ao acesso.
+    </p>
+
+    <div class="cx verm">
+      <span class="cx-tag">🔴 O caso mais extremo</span>
+      <div class="cx-titulo">Fotografias, memórias e histórico de vida que desaparecem para sempre</div>
+      <p class="cx-texto">
+        Muitas famílias já viveram a situação de não conseguir recuperar as fotos de um familiar falecido porque estavam armazenadas exclusivamente na nuvem de um serviço que encerrou a conta por inatividade. Não se trata de patrimônio financeiro, mas de memória afetiva com valor que nenhum inventário consegue repor. <strong>A transmissão digital vai muito além do dinheiro: envolve a preservação da história de vida de uma pessoa, e a lei brasileira ainda não obriga nenhuma plataforma a garantir esse acesso aos herdeiros.</strong>
+      </p>
+    </div>
+
+    <p class="p">
+      O ponto de partida para entender o problema é aceitar que o mundo digital criou uma categoria inteiramente nova de bens e memórias que o Direito ainda não absorveu completamente. O Código Civil de 2002 não conhecia redes sociais, carteiras digitais, canais no YouTube ou contratos de assinatura mensal. O resultado é um vácuo legal que precisa ser preenchido pela iniciativa individual de cada pessoa, por meio do planejamento, e pela orientação de advogados que dominam o tema.
+    </p>
+  </section>
+
+  <div class="divisor"><div class="divisor-sym">◆</div></div>
+
+  <!-- SEÇÃO 2 -->
+  <section class="secao">
+    <span class="secao-n">02</span>
+    <h2 class="secao-titulo">O que a lei brasileira diz e o que ela não diz</h2>
+
+    <p class="p">
+      O Brasil não possui legislação específica que trate da herança digital de forma abrangente. O que existe é um conjunto de dispositivos legais aplicados por analogia, combinados com as políticas internas de cada plataforma, que juntos formam um cenário juridicamente incerto para os herdeiros.
+    </p>
+
+    <p class="p">
+      O Marco Civil da Internet, Lei 12.965 de 2014, garante o direito à privacidade dos dados pessoais do usuário e determina que as plataformas devem guardar registros de acesso. Mas esse mesmo dispositivo que protege a privacidade do usuário em vida pode ser invocado pelas plataformas para negar acesso dos herdeiros ao conteúdo pessoal após a morte, alegando que o titular não autorizou expressamente esse acesso.
+    </p>
+
+    <div class="lei">
+      <span class="lei-ref">Marco Civil da Internet — Lei 12.965/2014 · Art. 7º</span>
+      <p class="lei-texto">
+        "O acesso à internet é essencial ao exercício da cidadania, e ao usuário são assegurados os seguintes direitos: I — inviolabilidade da intimidade e da vida privada, sua proteção e <strong>indenização pelo dano material ou moral decorrente de sua violação.</strong>"
+      </p>
+    </div>
+
+    <p class="p">
+      A Lei Geral de Proteção de Dados, Lei 13.709 de 2018, trata de dados pessoais de pessoas vivas e não aborda diretamente a titularidade desses dados após a morte. O Código Civil, em seus artigos sobre herança, transmite aos herdeiros os direitos patrimoniais do falecido, o que a interpretação dominante estende aos ativos digitais com conteúdo econômico, mas não resolve a questão dos dados de natureza existencial como mensagens privadas e histórico de navegação.
+    </p>
+
+    <div class="cx violeta">
+      <span class="cx-tag">📌 A distinção que o Direito começa a fazer</span>
+      <div class="cx-titulo">Patrimônio digital versus memória digital: dois destinos diferentes</div>
+      <p class="cx-texto">
+        A doutrina brasileira e os primeiros precedentes judiciais caminham para distinguir dois tipos de conteúdo digital. O <strong>patrimônio digital</strong> inclui tudo que tem valor econômico mensurável: saldos em contas digitais, criptoativos, receitas de canais, domínios, assinaturas pagas, conteúdo monetizado. Esse patrimônio segue as regras do direito sucessório e é transmissível por herança. A <strong>memória digital</strong> inclui conversas privadas, e-mails pessoais, histórico de navegação e conteúdo de natureza íntima. Esse conteúdo levanta questões de privacidade que o próprio titular poderia ter interesse em não transmitir, e a lei ainda não deu uma resposta clara sobre o que acontece com ele.
+      </p>
+    </div>
+  </section>
+
+  <div class="divisor"><div class="divisor-sym">◆</div></div>
+
+  <!-- SEÇÃO 3 -->
+  <section class="secao">
+    <span class="secao-n">03</span>
+    <h2 class="secao-titulo">O que cada plataforma faz com a sua conta quando você morre</h2>
+
+    <p class="p">
+      Cada grande plataforma tem uma política própria para lidar com contas de usuários falecidos. Conhecer essas políticas é o primeiro passo prático para qualquer planejamento, porque a solução varia completamente dependendo de onde seus ativos e memórias estão armazenados.
+    </p>
+
+    <div class="plat-grid">
+
+      <div class="plat-card" onclick="togglePlat(this)">
+        <div class="plat-header">
+          <div class="plat-emoji">📘</div>
+          <div class="plat-info">
+            <div class="plat-nome">Facebook e Instagram</div>
+            <div class="plat-resumo">Meta permite perfil memorializado ou exclusão</div>
+          </div>
+          <span class="plat-badge memorial">Memorial</span>
+          <div class="plat-seta">▾</div>
+        </div>
+        <div class="plat-corpo">
+          O Facebook é a plataforma com a política mais estruturada para morte de usuários. Permite que o titular designe um <strong>contato legado</strong> nas configurações de conta, uma pessoa que poderá fixar publicações, aceitar solicitações de amizade e atualizar a foto de perfil do perfil memorializado, mas sem acesso às mensagens privadas. O perfil pode também ser excluído definitivamente a pedido de familiar com documentação.<br><br>
+          O Instagram segue política similar. A conta pode ser transformada em memorial ou excluída mediante solicitação de familiar com comprovação do óbito e do vínculo.<br><br>
+          <div class="plat-acao">Ação recomendada: configure agora o contato legado no Facebook em Configurações, seção Memória. Designe a pessoa que você quer que gerencie seu perfil após a morte.</div>
+        </div>
+      </div>
+
+      <div class="plat-card" onclick="togglePlat(this)">
+        <div class="plat-header">
+          <div class="plat-emoji">🔍</div>
+          <div class="plat-info">
+            <div class="plat-nome">Google (Gmail, Drive, YouTube, Fotos)</div>
+            <div class="plat-resumo">Gerenciador de Conta Inativa permite planejamento completo</div>
+          </div>
+          <span class="plat-badge legado">Legado</span>
+          <div class="plat-seta">▾</div>
+        </div>
+        <div class="plat-corpo">
+          O Google oferece o <strong>Gerenciador de Conta Inativa</strong>, acessível em myaccount.google.com, que é a ferramenta mais completa disponível para planejamento de herança digital. Você pode definir um período de inatividade após o qual o sistema notifica a conta, e se não houver resposta, executa as instruções que você deixou: dar acesso a pessoas específicas, apagar tudo ou uma combinação dos dois.<br><br>
+          Isso cobre Gmail, Google Drive, Google Fotos, YouTube e todos os serviços Google vinculados. Para canais monetizados no YouTube, essa configuração é essencial porque sem ela o saldo no AdSense fica inacessível aos herdeiros.<br><br>
+          <div class="plat-acao">Ação recomendada: acesse myaccount.google.com, procure por "Gerenciador de Conta Inativa" e configure um contato de confiança com acesso aos dados e um período de inatividade de 3 a 6 meses.</div>
+        </div>
+      </div>
+
+      <div class="plat-card" onclick="togglePlat(this)">
+        <div class="plat-header">
+          <div class="plat-emoji">🍎</div>
+          <div class="plat-info">
+            <div class="plat-nome">Apple (iCloud, Fotos, App Store)</div>
+            <div class="plat-resumo">Contato de Herança disponível desde o iOS 15.2</div>
+          </div>
+          <span class="plat-badge legado">Legado</span>
+          <div class="plat-seta">▾</div>
+        </div>
+        <div class="plat-corpo">
+          A Apple introduziu o <strong>Contato de Herança</strong> a partir do iOS 15.2. Você pode designar até cinco pessoas que receberão uma chave de acesso digital após a sua morte, permitindo que acessem seus dados no iCloud por um período limitado de três anos. O acesso inclui fotos, arquivos, e-mails, contatos e notas, mas não senhas salvas no Keychain, conteúdo comprado na App Store ou informações financeiras vinculadas ao Apple Pay.<br><br>
+          <strong>Para famílias que armazenam a maior parte das fotos pessoais no iCloud, essa configuração é a mais importante de todas.</strong> A perda de acesso às fotos de uma pessoa querida é irreversível se o contato de herança não foi configurado em vida.<br><br>
+          <div class="plat-acao">Ação recomendada: em um iPhone com iOS 15.2 ou superior, acesse Ajustes, seu nome, Senha e Segurança, Contato de Herança, e adicione as pessoas de confiança.</div>
+        </div>
+      </div>
+
+      <div class="plat-card" onclick="togglePlat(this)">
+        <div class="plat-header">
+          <div class="plat-emoji">🏦</div>
+          <div class="plat-info">
+            <div class="plat-nome">Bancos digitais (Nubank, Inter, C6, PicPay)</div>
+            <div class="plat-resumo">Seguem regras bancárias tradicionais para herança</div>
+          </div>
+          <span class="plat-badge legado">Inventário</span>
+          <div class="plat-seta">▾</div>
+        </div>
+        <div class="plat-corpo">
+          Bancos digitais seguem exatamente as mesmas regras dos bancos tradicionais para transmissão por herança: os saldos entram no inventário, os herdeiros precisam se habilitar formalmente e o acesso só é liberado após a conclusão do processo. A diferença em relação aos bancos tradicionais é que o processo de comunicação e habilitação tende a ser feito digitalmente, mas o resultado prático é o mesmo.<br><br>
+          <strong>O risco específico dos bancos digitais é o esquecimento.</strong> Muitas pessoas têm contas em bancos digitais com saldos relevantes que os familiares simplesmente não sabem que existem, porque não há fatura impressa nem agência física visível. Incluir todas as contas digitais em um inventário de ativos organizado é a medida mais simples para evitar que esses valores se percam.<br><br>
+          <div class="plat-acao">Ação recomendada: liste todas as suas contas digitais em um documento seguro acessível aos herdeiros. O extrato das últimas transações de cada conta é o documento de prova mais útil para o processo de habilitação.</div>
+        </div>
+      </div>
+
+      <div class="plat-card" onclick="togglePlat(this)">
+        <div class="plat-header">
+          <div class="plat-emoji">🎬</div>
+          <div class="plat-info">
+            <div class="plat-nome">Netflix, Spotify, Amazon Prime e similares</div>
+            <div class="plat-resumo">Assinaturas encerram com a morte e não são transmissíveis</div>
+          </div>
+          <span class="plat-badge encerra">Encerra</span>
+          <div class="plat-seta">▾</div>
+        </div>
+        <div class="plat-corpo">
+          Serviços de assinatura de streaming têm termos de uso que vinculam a conta exclusivamente ao titular. O acesso é pessoal e intransferível nos termos de serviço de praticamente todas as plataformas. Isso significa que playlists, listas de favoritos, histórico de visualização e conteúdo personalizado não são transmissíveis aos herdeiros.<br><br>
+          Do ponto de vista prático, o que importa é <strong>cancelar as assinaturas em nome do falecido</strong> para evitar cobranças contínuas no cartão de crédito vinculado. Isso precisa ser feito pelos herdeiros assim que possível. A ausência de cancelamento formal pode resultar em meses de cobranças indevidas em cartões que os herdeiros nem sabiam que estavam vinculados àquela assinatura.<br><br>
+          <div class="plat-acao">Ação preventiva: mantenha em seu inventário digital a lista de todas as assinaturas ativas com os dados de acesso, para que os herdeiros possam cancelá-las rapidamente após a morte.</div>
+        </div>
+      </div>
+
+      <div class="plat-card" onclick="togglePlat(this)">
+        <div class="plat-header">
+          <div class="plat-emoji">🌐</div>
+          <div class="plat-info">
+            <div class="plat-nome">Domínios e sites</div>
+            <div class="plat-resumo">Vencem e são liberados para qualquer pessoa registrar</div>
+          </div>
+          <span class="plat-badge limbo">Risco de perda</span>
+          <div class="plat-seta">▾</div>
+        </div>
+        <div class="plat-corpo">
+          Domínios registrados em nome do titular vencem anualmente ou em outros períodos conforme o contrato com o registrador. Sem renovação, o domínio é liberado para registro por qualquer pessoa. Um site ou marca digital construída ao longo de anos pode ser perdida permanentemente se os herdeiros não souberem que o domínio existe e precisava ser renovado.<br><br>
+          <strong>Para empresas e profissionais liberais que dependem do domínio para o negócio, a perda pode ser devastadora.</strong> O nome de domínio pode ser registrado por um concorrente ou por especuladores que cobrarão valores altos para devolvê-lo. A solução é documentar todos os domínios com as datas de vencimento e garantir que os herdeiros saibam onde acessar as credenciais de renovação.<br><br>
+          <div class="plat-acao">Ação recomendada: configure renovação automática em todos os seus domínios e inclua no inventário digital o registrador usado e as credenciais de acesso ao painel de gerenciamento.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divisor"><div class="divisor-sym">◆</div></div>
+
+  <!-- SEÇÃO 4 -->
+  <section class="secao">
+    <span class="secao-n">04</span>
+    <h2 class="secao-titulo">Como planejar a transmissão do seu patrimônio digital em cinco passos</h2>
+
+    <p class="p">
+      O planejamento de herança digital não precisa ser complexo para ser eficaz. A maior parte das perdas acontece não por falta de instrumentos jurídicos, mas por falta de organização básica. Os cinco passos abaixo, implementados em ordem, cobrem as situações mais comuns com o mínimo de esforço e o máximo de resultado.
+    </p>
+
+    <div class="tl">
+
+      <div class="tl-item">
+        <div class="tl-dot ativo">1</div>
+        <div>
+          <span class="tl-tag">Passo 01</span>
+          <div class="tl-titulo">Faça o inventário completo dos seus ativos digitais</div>
+          <p class="tl-texto">
+            Antes de qualquer planejamento, é preciso saber o que existe. Liste todas as contas com valor econômico: bancos digitais com saldo, contas de investimento online, plataformas de criptoativos, canais ou perfis que geram renda, domínios registrados, assinaturas com pagamento automático. Inclua também os ativos de memória que você quer preservar: onde estão suas fotos, quais serviços de nuvem você usa, quais são as contas de e-mail com histórico relevante. <strong>Esse inventário precisa ser atualizado pelo menos uma vez por ano</strong>, porque o patrimônio digital muda com frequência.
+          </p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot">2</div>
+        <div>
+          <span class="tl-tag">Passo 02</span>
+          <div class="tl-titulo">Configure as ferramentas nativas de legado nas plataformas principais</div>
+          <p class="tl-texto">
+            Google, Facebook, Instagram e Apple já oferecem ferramentas que permitem designar um contato de confiança para receber acesso ou gerenciar a conta após a morte. Configurar essas ferramentas é gratuito, leva menos de dez minutos por plataforma e resolve, sem necessidade de processo judicial, o acesso à grande maioria das contas de uso cotidiano. <strong>Essas configurações são o investimento de menor custo e maior retorno em todo o planejamento de herança digital.</strong>
+          </p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot">3</div>
+        <div>
+          <span class="tl-tag">Passo 03</span>
+          <div class="tl-titulo">Organize as credenciais de acesso de forma segura e acessível</div>
+          <p class="tl-texto">
+            As senhas e credenciais precisam estar em algum lugar que seus herdeiros possam encontrar após a morte, mas que não fique exposto em vida. A solução mais recomendada é um gerenciador de senhas com contato de emergência designado, combinado com um documento físico em envelope lacrado guardado em local seguro e conhecido por pelo menos uma pessoa de confiança. <strong>Nunca guarde as credenciais no próprio testamento</strong>, que é um documento público no processo de inventário.
+          </p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot">4</div>
+        <div>
+          <span class="tl-tag">Passo 04</span>
+          <div class="tl-titulo">Inclua os ativos digitais no testamento com orientação jurídica</div>
+          <p class="tl-texto">
+            Um testamento público lavrado em cartório que mencione expressamente os ativos digitais com valor econômico, designe os beneficiários de cada categoria e indique onde está o inventário de acessos resolve, em um único documento formal, a maior parte das disputas que poderiam surgir entre herdeiros. <strong>O testamento não precisa listar senhas, mas precisa existir e precisar indicar onde está o cofre digital.</strong> Sem testamento, os ativos digitais seguem a ordem de vocação hereditária do Código Civil, o que pode resultar em partilha indesejada.
+          </p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot">5</div>
+        <div>
+          <span class="tl-tag">Passo 05</span>
+          <div class="tl-titulo">Revise o planejamento anualmente e após mudanças significativas</div>
+          <p class="tl-texto">
+            O mundo digital muda com rapidez. Novas contas surgem, velhas contas são abandonadas, valores de ativos mudam, relacionamentos mudam. Um planejamento de herança digital que foi feito há três anos pode estar completamente desatualizado. A revisão anual, idealmente na mesma época da declaração de IR, garante que o plano reflita a realidade atual do seu patrimônio e das pessoas que você quer beneficiar. <strong>Seu advogado pode integrar essa revisão ao planejamento patrimonial geral do seu escritório ou da sua família.</strong>
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divisor"><div class="divisor-sym">◆</div></div>
+
+  <!-- SEÇÃO 5 -->
+  <section class="secao">
+    <span class="secao-n">05</span>
+    <h2 class="secao-titulo">Herança digital no inventário: como os herdeiros devem agir</h2>
+
+    <p class="p">
+      Para quem está do outro lado da situação, tendo perdido um familiar e precisando lidar com o patrimônio digital deixado por ele, o caminho prático depende do que foi ou não planejado. Quando há planejamento, o processo é relativamente direto. Quando não há, a investigação precisa começar do zero.
+    </p>
+
+    <div class="cx rosa">
+      <span class="cx-tag">📋 Por onde começar</span>
+      <div class="cx-titulo">As três fontes de informação mais úteis nos primeiros dias</div>
+      <p class="cx-texto">
+        A primeira fonte é o histórico de e-mails do falecido. Confirmações de cadastro em plataformas, extratos de saldo, notificações de cobranças e comunicações de bancos digitais ficam registradas no e-mail e permitem identificar praticamente todas as contas ativas. A segunda fonte é o extrato do cartão de crédito ou da conta bancária dos últimos meses, que revela assinaturas ativas e transferências para plataformas digitais. A terceira, e mais formal, é a <strong>declaração de Imposto de Renda dos últimos anos</strong>, que deve listar bens digitais com valor acima de R$ 5 mil, incluindo criptoativos.
+      </p>
+    </div>
+
+    <p class="p">
+      Para acessar ou encerrar contas de plataformas específicas, o conjunto de documentos que a maioria das plataformas exige é consistente: certidão de óbito, documento de identidade do herdeiro ou do inventariante, comprovação do vínculo com o falecido, como certidão de nascimento ou casamento, e, nos casos de valores relevantes, um documento de habilitação emitido em inventário judicial ou extrajudicial.
+    </p>
+
+    <div class="cx aviso">
+      <span class="cx-tag">⚠️ Prazo que poucos conhecem</span>
+      <div class="cx-titulo">Contas inativas podem ser encerradas automaticamente pelas plataformas</div>
+      <p class="cx-texto">
+        Diversas plataformas têm políticas de encerramento de contas inativas após um período que varia de 6 meses a 2 anos. Sem login e sem atividade, a conta pode ser encerrada e o conteúdo, excluído permanentemente, antes que os herdeiros consigam iniciar o processo de habilitação. <strong>Comunicar a morte ao suporte das plataformas mais relevantes o quanto antes após o óbito é uma medida preventiva importante</strong>, mesmo que o processo de habilitação formal leve mais tempo.
+      </p>
+    </div>
+  </section>
+
+  <div class="divisor"><div class="divisor-sym">◆</div></div>
+
+  <div class="destaque">
+    <p class="dest-texto">
+      Você passou anos construindo uma presença digital, acumulando memórias, patrimônio e contatos nesse universo. <strong>Dedicar algumas horas a planejar o que acontece com tudo isso não é morbidez. É o mesmo cuidado que você tem com o imóvel, com o carro e com a conta bancária.</strong>
+    </p>
+    <div class="dest-autor">Dr. Filipe Ferreira · OAB/ES 37.159</div>
+  </div>
+
+  <div class="grava">
+    <span class="grava-label">📌 Os 7 pontos essenciais</span>
+    <div class="grava-item">Nenhuma conta digital se transfere automaticamente aos herdeiros: <span>sempre há uma ação necessária, em vida ou após a morte.</span></div>
+    <div class="grava-item">Patrimônio digital com valor econômico: <span>transmissível por herança. Memória digital: ainda sem resposta clara na lei brasileira.</span></div>
+    <div class="grava-item">Google, Facebook e Apple têm ferramentas de legado: <span>configure agora, de graça, em menos de dez minutos por plataforma.</span></div>
+    <div class="grava-item">Credenciais nunca no testamento: <span>o testamento indica onde está o cofre digital, não as senhas em si.</span></div>
+    <div class="grava-item">Assinaturas de streaming: <span>não são transmissíveis. Cancele rapidamente para evitar cobranças após a morte.</span></div>
+    <div class="grava-item">Contas inativas: <span>podem ser encerradas automaticamente pelas plataformas. Comunique o óbito o quanto antes.</span></div>
+    <div class="grava-item">Testamento público com menção aos ativos digitais: <span>a forma mais robusta e segura de garantir a transmissão correta.</span></div>
+  </div>
+
+  <div class="cta-box">
+    <span class="cta-tag">Consultoria especializada</span>
+    <h2 class="cta-titulo">
+      Seu patrimônio digital tem<br><em>um destino planejado?</em>
+    </h2>
+    <p class="cta-sub">Planejamento sucessório com ativos digitais. Testamento e inventário. Atendimento online para todo o Brasil.</p>
+    <div class="cta-btns">
+      <a href="https://wa.me/5527995187279?text=Ol%C3%A1%2C+vim+pelo+guia+de+Heran%C3%A7a+Digital+e+gostaria+de+uma+orienta%C3%A7%C3%A3o." class="btn-p">
+        💬 WhatsApp — Falar Agora
+      </a>
+      <a href="mailto:escritorio@filipeeassociadosadvogado.com.br?subject=Consulta%20sobre%20Herança%20Digital" class="btn-s">
+        ✉️ Enviar E-mail
+      </a>
+    </div>
+    <div class="cta-oab">Filipe Ferreira · OAB/ES 37.159 · Direito de Família e Proteção Patrimonial</div>
+  </div>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-nome">Filipe Ferreira — Advogado e Associados</div>
+  <div class="footer-sub">OAB/ES 37.159 · Linhares, ES · Atendimento Online · Brasil</div>
+</footer>
+
+<script>
+  // Estrelas no hero
+  const starsContainer = document.getElementById('stars');
+  for (let i = 0; i < 60; i++) {
+    const s = document.createElement('div');
+    s.classList.add('star');
+    const size = Math.random() * 2 + 1;
+    s.style.cssText = `
+      width:${size}px; height:${size}px;
+      top:${Math.random()*100}%;
+      left:${Math.random()*100}%;
+      animation-delay:${Math.random()*3}s;
+      animation-duration:${2+Math.random()*3}s;
+    `;
+    starsContainer.appendChild(s);
+  }
+
+  // Diagnóstico
+  const respostas = {
+    a: { cls: 'violeta', label: '📋 Guia completo está aqui',
+      txt: 'Você está no lugar certo. Este guia cobre as políticas de cada plataforma, os cinco passos do planejamento e o papel do testamento na transmissão digital. <strong>A ação mais importante que você pode tomar hoje</strong> é configurar o Gerenciador de Conta Inativa do Google e o Contato de Herança do iPhone, se você usa Apple, porque essas duas configurações cobrem a maior parte do que a maioria das pessoas tem armazenado digitalmente. Para um planejamento mais completo incluindo ativos financeiros digitais e testamento, a orientação de um advogado especialista é o próximo passo.' },
+    b: { cls: 'rosa', label: '📌 Por onde começar agora',
+      txt: 'As três primeiras ações são: revisar os e-mails do falecido em busca de confirmações de contas ativas, verificar os extratos bancários e de cartão de crédito dos últimos meses para identificar assinaturas e transferências a plataformas, e consultar as declarações de Imposto de Renda dos últimos anos para localizar bens digitais declarados. <strong>Comunique o óbito às plataformas mais relevantes o quanto antes</strong> para evitar que contas sejam encerradas por inatividade antes que você consiga iniciar o processo de habilitação.' },
+    c: { cls: 'verde', label: '✅ Proteção para conteúdo com valor comercial',
+      txt: 'Perfis com seguidores, canais monetizados e marcas digitais têm valor econômico real e são transmissíveis como patrimônio. <strong>O testamento é o instrumento mais robusto</strong> para designar o beneficiário e garantir continuidade. Combine isso com a configuração do Gerenciador de Conta Inativa do Google para canais no YouTube, o contato legado no Facebook para perfis comerciais no Instagram e a documentação das credenciais de acesso no cofre digital. Para perfis com receita expressiva, a orientação jurídica sobre a melhor estrutura de transmissão é indispensável.' },
+    d: { cls: 'violeta', label: '📖 Resumo jurídico',
+      txt: 'O Brasil não tem lei específica sobre herança digital. O patrimônio digital com valor econômico é transmissível por herança com base nas regras gerais do Código Civil. O Marco Civil da Internet garante privacidade mas pode ser usado pelas plataformas para negar acesso de herdeiros a conteúdo pessoal. <strong>A LGPD não cobre dados de pessoas falecidas de forma direta.</strong> A interpretação que vem sendo consolidada distingue patrimônio digital, que se transmite, de memória digital, que levanta questões de privacidade ainda sem resposta definitiva na lei brasileira. O planejamento preventivo via testamento e organização das credenciais é a única solução prática disponível hoje.' }
+  };
+
+  let ativo = null;
+  function marcar(el, id) {
+    document.querySelectorAll('.q-item').forEach(q => {
+      q.classList.remove('on'); q.querySelector('.q-box').textContent = '';
+    });
+    const res = document.getElementById('q-res');
+    if (ativo === id) { ativo = null; res.classList.remove('visivel'); return; }
+    ativo = id;
+    el.classList.add('on'); el.querySelector('.q-box').textContent = '✓';
+    const r = respostas[id];
+    res.className = `q-res visivel ${r.cls}`;
+    res.innerHTML = `<span class="q-res-label">${r.label}</span><p class="q-res-texto">${r.txt}</p>`;
+  }
+
+  function togglePlat(el) {
+    const ab = el.classList.contains('aberto');
+    document.querySelectorAll('.plat-card').forEach(p => p.classList.remove('aberto'));
+    if (!ab) el.classList.add('aberto');
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Divórcio com Empresa Envolvida · Dr. Filipe Ferreira</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:        #f4f7f4;
+    --bg2:       #e8ede8;
+    --bg3:       #d8e0d8;
+    --ink:       #0e1a0e;
+    --ink2:      #182018;
+    --ink3:      #222e22;
+    --verde:     #1e5c34;
+    --verde2:    #2a7a46;
+    --verde3:    #3da060;
+    --verde-dim: rgba(30,92,52,0.08);
+    --verde-brd: rgba(30,92,52,0.2);
+    --ouro:      #7a5a10;
+    --ouro2:     #a07820;
+    --ouro3:     #c89a30;
+    --ouro-dim:  rgba(122,90,16,0.08);
+    --ouro-brd:  rgba(122,90,16,0.2);
+    --verm:      #8a2828;
+    --verm-dim:  rgba(138,40,40,0.07);
+    --verm-brd:  rgba(138,40,40,0.2);
+    --text:      #1e2a1e;
+    --text2:     #3a4a3a;
+    --muted:     #7a907a;
+    --branco:    #fbfdfb;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Manrope', sans-serif;
+    font-weight: 400;
+    line-height: 1.85;
+    font-size: 17px;
+  }
+
+  /* HERO */
+  .hero {
+    background: var(--ink);
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: 80px 28px 72px;
+    position: relative; overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 90% 60% at 50% -5%,  rgba(30,92,52,0.22) 0%, transparent 65%),
+      radial-gradient(ellipse 50% 50% at 90% 90%,  rgba(122,90,16,0.1) 0%, transparent 60%);
+  }
+  .hero-linhas {
+    position: absolute; inset: 0; pointer-events: none;
+    background-image: repeating-linear-gradient(
+      90deg, transparent, transparent 79px,
+      rgba(30,92,52,0.04) 79px, rgba(30,92,52,0.04) 80px
+    );
+  }
+  .hero-z { position: relative; z-index: 1; }
+
+  .hero-eyebrow {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 5px; text-transform: uppercase;
+    color: var(--verde3); margin-bottom: 28px;
+    display: flex; align-items: center;
+    gap: 18px; justify-content: center;
+    animation: up 0.7s ease forwards;
+  }
+  .hero-eyebrow::before, .hero-eyebrow::after {
+    content: ''; width: 40px; height: 1px;
+    background: rgba(61,160,96,0.3);
+  }
+
+  .hero-h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(38px, 7.5vw, 76px);
+    font-weight: 400; color: var(--bg);
+    line-height: 1.05; margin-bottom: 6px;
+    animation: up 0.8s ease forwards;
+  }
+  .hero-h1 .sub {
+    display: block; font-style: italic;
+    color: var(--verde3); font-size: 0.55em;
+    line-height: 1.6; margin-top: 10px; font-weight: 400;
+  }
+
+  .hero-sep {
+    width: 60px; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--verde2), transparent);
+    margin: 28px auto;
+    animation: expandir 1s ease 0.3s both;
+    transform: scaleX(0); transform-origin: center;
+  }
+
+  .hero-desc {
+    font-size: clamp(15px, 2vw, 18px);
+    color: rgba(244,247,244,0.5); font-weight: 300;
+    max-width: 540px; margin: 0 auto 44px; line-height: 1.8;
+    animation: up 0.9s ease 0.15s both; opacity: 0;
+  }
+  .hero-desc strong { color: rgba(244,247,244,0.88); font-weight: 600; }
+
+  .hero-pills {
+    display: flex; flex-wrap: wrap;
+    justify-content: center; gap: 10px;
+    animation: up 1s ease 0.3s both; opacity: 0;
+  }
+  .pill {
+    background: rgba(30,92,52,0.16);
+    border: 1px solid rgba(61,160,96,0.25);
+    color: var(--verde3);
+    font-size: 12px; font-weight: 600;
+    padding: 7px 18px; border-radius: 100px;
+  }
+
+  .hero-risco {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 16px; margin-top: 56px;
+    max-width: 520px; width: 100%;
+    animation: up 1.1s ease 0.4s both; opacity: 0;
+  }
+  .risco-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 10px; padding: 18px 14px; text-align: center;
+  }
+  .risco-card.alto  { border-color: rgba(138,40,40,0.4);  background: rgba(138,40,40,0.07);  }
+  .risco-card.medio { border-color: rgba(122,90,16,0.4);  background: rgba(122,90,16,0.07);  }
+  .risco-card.baixo { border-color: rgba(30,92,52,0.4);   background: rgba(30,92,52,0.07);   }
+  .risco-label {
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 6px; display: block;
+  }
+  .alto  .risco-label { color: #e07070; }
+  .medio .risco-label { color: var(--ouro3); }
+  .baixo .risco-label { color: var(--verde3); }
+  .risco-titulo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 15px; color: var(--bg); line-height: 1.3;
+  }
+
+  /* DIAGNÓSTICO */
+  .diag-section {
+    background: var(--ink2); padding: 80px 28px;
+    border-top: 1px solid rgba(255,255,255,0.04);
+  }
+  .diag-inner { max-width: 700px; margin: 0 auto; text-align: center; }
+  .d-tag {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 4px; text-transform: uppercase;
+    color: var(--verde3); margin-bottom: 14px; display: block;
+  }
+  .d-titulo {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(22px, 4vw, 34px);
+    color: var(--bg); line-height: 1.2; margin-bottom: 10px;
+  }
+  .d-sub {
+    font-size: 16px; color: rgba(244,247,244,0.35);
+    font-weight: 300; margin-bottom: 36px;
+  }
+
+  .q-lista { text-align: left; display: flex; flex-direction: column; gap: 10px; }
+  .q-item {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 10px; padding: 16px 20px;
+    display: flex; align-items: flex-start; gap: 14px;
+    cursor: pointer; transition: all 0.25s; user-select: none;
+  }
+  .q-item:hover { background: var(--verde-dim); border-color: var(--verde-brd); }
+  .q-item.on { background: rgba(30,92,52,0.14); border-color: var(--verde2); }
+  .q-box {
+    width: 22px; height: 22px; border-radius: 5px;
+    border: 1.5px solid rgba(255,255,255,0.15);
+    flex-shrink: 0; margin-top: 2px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 700; transition: all 0.2s;
+  }
+  .q-item.on .q-box { background: var(--verde2); border-color: var(--verde2); }
+  .q-texto { font-size: 16px; color: rgba(244,247,244,0.6); line-height: 1.55; }
+  .q-item.on .q-texto { color: var(--bg); }
+
+  .q-res {
+    display: none; margin-top: 24px;
+    padding: 24px 28px; border-radius: 10px;
+    text-align: left; animation: up 0.4s ease forwards;
+  }
+  .q-res.visivel { display: block; }
+  .q-res.verde   { background: var(--verde-dim); border: 1.5px solid var(--verde-brd); }
+  .q-res.amarelo { background: var(--ouro-dim);  border: 1.5px solid var(--ouro-brd);  }
+  .q-res.vermelho{ background: var(--verm-dim);  border: 1.5px solid var(--verm-brd);  }
+  .q-res-label {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 3px; text-transform: uppercase;
+    margin-bottom: 8px; display: block;
+  }
+  .verde   .q-res-label { color: #50b070; }
+  .amarelo .q-res-label { color: var(--ouro3); }
+  .vermelho .q-res-label{ color: #d07070; }
+  .q-res-texto { font-size: 16px; line-height: 1.8; }
+  .verde   .q-res-texto { color: #60a880; }
+  .amarelo .q-res-texto { color: #9a7830; }
+  .vermelho .q-res-texto{ color: #a06060; }
+  .q-res-texto strong { font-weight: 700; }
+
+  /* MAIN */
+  .main { max-width: 780px; margin: 0 auto; padding: 80px 28px 100px; }
+
+  .secao { margin-bottom: 80px; }
+  .secao-n {
+    font-family: 'DM Serif Display', serif;
+    font-size: 110px; color: var(--bg2);
+    line-height: 0.85; display: block;
+    margin-bottom: -8px; user-select: none;
+  }
+  .secao-titulo {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(22px, 3.5vw, 30px);
+    color: var(--ink); line-height: 1.2;
+    padding-bottom: 16px; margin-bottom: 28px;
+    border-bottom: 1px solid var(--bg3); position: relative;
+  }
+  .secao-titulo::after {
+    content: ''; position: absolute;
+    left: 0; bottom: -1px; width: 48px; height: 2px;
+    background: var(--verde);
+  }
+
+  .p { font-size: 17px; color: var(--text2); line-height: 1.9; margin-bottom: 22px; }
+  .p strong { color: var(--ink); font-weight: 700; }
+
+  /* LEI */
+  .lei {
+    background: var(--ink); border-radius: 10px;
+    padding: 24px 30px; margin: 28px 0;
+    position: relative; overflow: hidden;
+  }
+  .lei::after {
+    content: '§'; position: absolute;
+    right: 20px; top: 8px;
+    font-family: 'DM Serif Display', serif;
+    font-size: 72px; color: rgba(30,92,52,0.08);
+    line-height: 1; pointer-events: none;
+  }
+  .lei-ref {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 3px; color: var(--verde3);
+    text-transform: uppercase; margin-bottom: 10px; display: block;
+  }
+  .lei-texto {
+    font-family: 'DM Serif Display', serif;
+    font-size: 17px; font-style: italic;
+    color: rgba(244,247,244,0.8); line-height: 1.85;
+  }
+  .lei-texto strong { color: var(--verde3); font-style: normal; font-weight: 400; }
+
+  /* CAIXAS */
+  .cx { border-radius: 10px; padding: 24px 28px; margin: 28px 0; }
+  .cx.verde   { background: var(--verde-dim); border: 1.5px solid var(--verde-brd); }
+  .cx.ouro    { background: var(--ouro-dim);  border: 1.5px solid var(--ouro-brd);  }
+  .cx.verm    { background: var(--verm-dim);  border: 1.5px solid var(--verm-brd);  }
+  .cx-tag {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 3px; text-transform: uppercase;
+    margin-bottom: 8px; display: block;
+  }
+  .verde .cx-tag { color: var(--verde); }
+  .ouro  .cx-tag { color: var(--ouro);  }
+  .verm  .cx-tag { color: var(--verm);  }
+  .cx-titulo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 19px; margin-bottom: 8px;
+  }
+  .verde .cx-titulo { color: #1e7040; }
+  .ouro  .cx-titulo { color: #a07820; }
+  .verm  .cx-titulo { color: #b04040; }
+  .cx-texto { font-size: 17px; line-height: 1.85; }
+  .verde .cx-texto { color: #2a7848; }
+  .ouro  .cx-texto { color: #806020; }
+  .verm  .cx-texto { color: #8a3838; }
+  .cx-texto strong { font-weight: 700; }
+  .verde .cx-texto strong { color: #1e6838; }
+  .ouro  .cx-texto strong { color: #907030; }
+  .verm  .cx-texto strong { color: #a03838; }
+
+  /* JURISPRUDÊNCIA */
+  .juris {
+    background: var(--verde-dim);
+    border: 1.5px solid var(--verde-brd);
+    border-radius: 10px; padding: 24px 28px; margin: 28px 0;
+  }
+  .juris-ref {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 3px; color: var(--verde);
+    text-transform: uppercase; margin-bottom: 6px; display: block;
+  }
+  .juris-titulo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px; color: #1e6838; margin-bottom: 10px;
+  }
+  .juris-tese {
+    font-family: 'DM Serif Display', serif;
+    font-size: 16px; font-style: italic;
+    color: rgba(30,92,52,0.75);
+    border-left: 2px solid rgba(30,92,52,0.3);
+    padding-left: 14px; margin-bottom: 12px; line-height: 1.8;
+  }
+  .juris-analise { font-size: 17px; color: #2a7848; line-height: 1.8; }
+  .juris-analise strong { color: #1e6838; font-weight: 700; }
+
+  /* CASOS ACCORDION */
+  .casos { display: flex; flex-direction: column; gap: 14px; margin: 28px 0; }
+  .caso-item {
+    background: var(--branco); border: 1px solid var(--bg3);
+    border-radius: 10px; overflow: hidden; cursor: pointer;
+    transition: border-color 0.2s;
+  }
+  .caso-item:hover { border-color: var(--verde-brd); }
+  .caso-item.aberto { border-color: var(--verde2); }
+  .caso-header {
+    display: flex; align-items: flex-start;
+    gap: 14px; padding: 20px 22px;
+  }
+  .caso-icone {
+    width: 38px; height: 38px; border-radius: 8px;
+    background: var(--verde-dim); border: 1px solid var(--verde-brd);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; flex-shrink: 0; margin-top: 1px;
+  }
+  .caso-titulo { font-size: 17px; font-weight: 600; color: var(--ink); line-height: 1.4; flex: 1; padding-top: 4px; }
+  .caso-seta { color: var(--muted); font-size: 12px; transition: transform 0.3s; flex-shrink: 0; padding-top: 8px; }
+  .caso-item.aberto .caso-seta { transform: rotate(180deg); }
+  .caso-corpo {
+    display: none;
+    padding: 0 22px 22px 74px;
+    font-size: 17px; color: var(--text2); line-height: 1.85;
+    border-top: 1px solid var(--bg2); padding-top: 18px;
+  }
+  .caso-item.aberto .caso-corpo { display: block; }
+  .caso-corpo strong { color: var(--ink); font-weight: 700; }
+  .caso-corpo .sim { color: var(--verde); font-weight: 700; }
+  .caso-corpo .nao { color: var(--verm); font-weight: 700; }
+  .caso-corpo .dep { color: var(--ouro2); font-weight: 700; }
+
+  /* LINHA DO TEMPO */
+  .tl { margin: 28px 0; }
+  .tl-item { display: flex; gap: 20px; padding-bottom: 28px; position: relative; }
+  .tl-item:not(:last-child)::after {
+    content: ''; position: absolute;
+    left: 21px; top: 46px; bottom: 0; width: 2px;
+    background: linear-gradient(to bottom, rgba(30,92,52,0.3), transparent);
+  }
+  .tl-dot {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--ink); border: 2px solid var(--verde-brd);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px; color: var(--verde3); flex-shrink: 0;
+  }
+  .tl-dot.ativo { background: var(--verde); border-color: var(--verde); color: #fff; }
+  .tl-tag {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 3px; color: var(--verde2);
+    text-transform: uppercase; margin-bottom: 4px; display: block;
+  }
+  .tl-titulo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px; color: var(--ink); margin-bottom: 6px;
+  }
+  .tl-texto { font-size: 17px; color: var(--text2); line-height: 1.8; }
+  .tl-texto strong { color: var(--ink); font-weight: 700; }
+
+  /* DESTAQUE */
+  .destaque {
+    background: var(--ink);
+    border-top: 3px solid var(--verde2);
+    border-radius: 0 0 10px 10px;
+    padding: 32px 36px; margin: 36px 0;
+    position: relative; overflow: hidden;
+  }
+  .destaque::before {
+    content: '"'; font-family: 'DM Serif Display', serif;
+    font-size: 130px; color: rgba(30,92,52,0.07);
+    position: absolute; top: -20px; left: 12px;
+    line-height: 1; pointer-events: none;
+  }
+  .dest-texto {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(17px, 2.5vw, 21px); font-style: italic;
+    color: rgba(244,247,244,0.85); line-height: 1.7;
+    position: relative; z-index: 1;
+  }
+  .dest-texto strong { color: var(--verde3); font-style: normal; }
+  .dest-autor {
+    margin-top: 16px; font-size: 11px; font-weight: 700;
+    letter-spacing: 2px; color: var(--verde2);
+    text-transform: uppercase; position: relative; z-index: 1;
+  }
+
+  /* DIVISOR */
+  .divisor {
+    display: flex; align-items: center; gap: 20px; margin: 64px 0;
+  }
+  .divisor::before, .divisor::after {
+    content: ''; flex: 1; height: 1px; background: var(--bg3);
+  }
+  .divisor-sym {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px; color: var(--verde); opacity: 0.4;
+  }
+
+  /* GRAVA */
+  .grava {
+    background: linear-gradient(135deg, var(--verde-dim), rgba(30,92,52,0.02));
+    border: 1px solid var(--verde-brd); border-radius: 10px;
+    padding: 32px 36px; margin: 48px 0; text-align: center;
+  }
+  .grava-label {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 4px; color: var(--verde);
+    text-transform: uppercase; margin-bottom: 24px; display: block;
+  }
+  .grava-item {
+    font-size: 17px; font-weight: 700;
+    color: var(--verde2); margin-bottom: 10px; line-height: 1.6;
+  }
+  .grava-item span { color: var(--ink2); font-weight: 400; }
+
+  /* CTA */
+  .cta-box {
+    background: var(--ink); border-radius: 12px;
+    padding: 60px 40px; text-align: center;
+    margin-top: 72px; position: relative; overflow: hidden;
+  }
+  .cta-box::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 50% at 50% 110%, rgba(30,92,52,0.2) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .cta-tag {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 4px; color: var(--verde3);
+    text-transform: uppercase; margin-bottom: 18px; display: block;
+    position: relative; z-index: 1;
+  }
+  .cta-titulo {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(26px, 5vw, 44px);
+    color: var(--bg); line-height: 1.1; margin-bottom: 14px;
+    position: relative; z-index: 1;
+  }
+  .cta-titulo em { color: var(--verde3); font-style: italic; }
+  .cta-sub {
+    font-size: 17px; font-weight: 300;
+    color: rgba(244,247,244,0.4); max-width: 440px;
+    margin: 0 auto 36px; position: relative; z-index: 1; line-height: 1.7;
+  }
+  .cta-btns {
+    display: flex; flex-wrap: wrap;
+    justify-content: center; gap: 12px; position: relative; z-index: 1;
+  }
+  .btn-p {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--verde); color: #fff;
+    font-size: 14px; font-weight: 700;
+    letter-spacing: 1px; text-transform: uppercase;
+    padding: 16px 32px; border-radius: 100px;
+    text-decoration: none; transition: all 0.3s;
+  }
+  .btn-p:hover { background: var(--verde2); transform: translateY(-2px); }
+  .btn-s {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: transparent; color: var(--verde3);
+    font-size: 14px; font-weight: 600;
+    padding: 16px 28px; border-radius: 100px;
+    text-decoration: none; border: 1px solid var(--verde-brd); transition: all 0.3s;
+  }
+  .btn-s:hover { background: var(--verde-dim); border-color: var(--verde2); }
+  .cta-oab {
+    margin-top: 20px; font-size: 12px; letter-spacing: 2px;
+    color: rgba(244,247,244,0.15); text-transform: uppercase;
+    position: relative; z-index: 1;
+  }
+
+  .footer {
+    background: var(--ink2); text-align: center;
+    padding: 32px 24px; border-top: 1px solid rgba(30,92,52,0.12);
+  }
+  .footer-nome {
+    font-family: 'DM Serif Display', serif;
+    font-size: 17px; color: var(--bg); margin-bottom: 4px;
+  }
+  .footer-sub {
+    font-size: 12px; letter-spacing: 2px;
+    color: rgba(244,247,244,0.15); text-transform: uppercase;
+  }
+
+  @keyframes up {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes expandir {
+    from { transform: scaleX(0); }
+    to   { transform: scaleX(1); }
+  }
+
+  @media (max-width: 600px) {
+    .hero-risco { grid-template-columns: 1fr; }
+    .caso-corpo { padding-left: 22px; }
+    .cta-box { padding: 40px 22px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-linhas"></div>
+  <div class="hero-z">
+
+    <div class="hero-eyebrow">Proteção Patrimonial</div>
+
+    <h1 class="hero-h1">
+      Divórcio com
+      Empresa Envolvida
+      <span class="sub">Quando o patrimônio empresarial entra na disputa</span>
+    </h1>
+
+    <div class="hero-sep"></div>
+
+    <p class="hero-desc">
+      Ter uma empresa não protege automaticamente o patrimônio no divórcio. <strong>O que protege é a estrutura montada antes do casamento, não depois.</strong> Entenda os riscos reais e o que ainda pode ser feito.
+    </p>
+
+    <div class="hero-pills">
+      <span class="pill">Cotas Societárias</span>
+      <span class="pill">Holding Familiar</span>
+      <span class="pill">Valorização Ativa</span>
+      <span class="pill">Stock Options</span>
+      <span class="pill">REsp 1.787.027</span>
+      <span class="pill">Apuração de Haveres</span>
+    </div>
+
+    <div class="hero-risco">
+      <div class="risco-card alto">
+        <span class="risco-label">Risco Alto</span>
+        <div class="risco-titulo">Empresa criada durante o casamento</div>
+      </div>
+      <div class="risco-card medio">
+        <span class="risco-label">Risco Médio</span>
+        <div class="risco-titulo">Empresa anterior, valorização ativa no casamento</div>
+      </div>
+      <div class="risco-card baixo">
+        <span class="risco-label">Risco Baixo</span>
+        <div class="risco-titulo">Holding anterior com pacto antenupcial</div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- DIAGNÓSTICO -->
+<section class="diag-section">
+  <div class="diag-inner">
+    <span class="d-tag">🔍 Qual é o seu cenário</span>
+    <h2 class="d-titulo">Selecione a situação mais próxima da sua</h2>
+    <p class="d-sub">Cada cenário tem análise e nível de risco diferente.</p>
+
+    <div class="q-lista">
+      <div class="q-item" onclick="marcar(this,'a')">
+        <div class="q-box"></div>
+        <div class="q-texto">Sou sócio de empresa anterior ao casamento. Agora estou me divorciando e a empresa cresceu muito.</div>
+      </div>
+      <div class="q-item" onclick="marcar(this,'b')">
+        <div class="q-box"></div>
+        <div class="q-texto">Abri a empresa durante o casamento. Quero saber se o cônjuge tem direito às cotas.</div>
+      </div>
+      <div class="q-item" onclick="marcar(this,'c')">
+        <div class="q-box"></div>
+        <div class="q-texto">Recebi stock options da empresa onde trabalho. Quero saber se entram na partilha.</div>
+      </div>
+      <div class="q-item" onclick="marcar(this,'d')">
+        <div class="q-box"></div>
+        <div class="q-texto">Tenho holding familiar. Quero saber se o cônjuge pode se tornar sócio no divórcio.</div>
+      </div>
+      <div class="q-item" onclick="marcar(this,'e')">
+        <div class="q-box"></div>
+        <div class="q-texto">Meu cônjuge tem empresa e acredito que estou sendo lesado na partilha das cotas.</div>
+      </div>
+    </div>
+
+    <div class="q-res" id="q-res"></div>
+  </div>
+</section>
+
+<!-- MAIN -->
+<main class="main">
+
+  <section class="secao">
+    <span class="secao-n">01</span>
+    <h2 class="secao-titulo">A pergunta que define tudo: a empresa é anterior ou posterior ao casamento?</h2>
+
+    <p class="p">
+      Quando uma empresa aparece em um divórcio, a primeira pergunta que o advogado precisa responder não é quanto ela vale. É quando ela foi criada. Esse detalhe define, de forma quase completa, qual é o nível de exposição patrimonial do sócio.
+    </p>
+
+    <p class="p">
+      Em um casamento sob regime de Comunhão Parcial de Bens, bens anteriores ao casamento são particulares e não entram na partilha. Isso vale para imóveis, para investimentos e também para cotas de empresa. Se a empresa foi constituída antes do casamento, as cotas originais são bens particulares do sócio. O cônjuge, em princípio, não tem direito a elas.
+    </p>
+
+    <p class="p">
+      O problema aparece em dois momentos específicos. O primeiro é quando a empresa foi aberta durante o casamento, porque nesse caso as cotas são bens comuns pelo Art. 1.660, I do Código Civil. O segundo, e mais frequentemente ignorado, é quando a empresa foi aberta antes do casamento mas cresceu significativamente durante ele, porque o STJ desenvolveu uma tese que pode tornar essa valorização objeto de partilha.
+    </p>
+
+    <div class="lei">
+      <span class="lei-ref">Art. 1.660, I — Código Civil</span>
+      <p class="lei-texto">
+        "Entram na comunhão: I — os bens adquiridos na constância do casamento <strong>por título oneroso</strong>, ainda que só em nome de um dos cônjuges."
+      </p>
+    </div>
+
+    <p class="p">
+      A leitura combinada desse artigo com o Art. 1.659, I, que exclui da comunhão os bens anteriores ao casamento, cria a linha divisória fundamental. Empresa anterior: cotas particulares. Empresa criada durante o casamento com recursos comuns: cotas comuns. O desafio real está nos casos intermediários, que são a maioria dos que chegam aos escritórios.
+    </p>
+  </section>
+
+  <div class="divisor"><div class="divisor-sym">◆</div></div>
+
+  <section class="secao">
+    <span class="secao-n">02</span>
+    <h2 class="secao-titulo">A valorização da empresa durante o casamento: o risco que poucos antecipam</h2>
+
+    <p class="p">
+      Este é o ponto técnico mais relevante e menos compreendido por empresários que se divorciam. A lógica parece simples: empresa anterior ao casamento é bem particular, então não entra na partilha. O problema é que o STJ não aceita essa lógica quando a valorização da empresa durante o casamento decorreu do esforço conjunto do casal.
+    </p>
+
+    <p class="p">
+      A Terceira Turma do STJ, no REsp 1.787.027/RS, firmou posição de que quando a empresa preexistente ao casamento cresceu durante a constância do matrimônio em razão do esforço comum dos cônjuges, a valorização ocorrida nesse período pode ser objeto de partilha. O critério decisivo é distinguir entre valorização passiva e valorização ativa.
+    </p>
+
+    <div class="juris">
+      <span class="juris-ref">REsp 1.787.027/RS · STJ · 4ª Turma · 2022</span>
+      <div class="juris-titulo">Valorização ativa de empresa durante o casamento pode ser partilhada</div>
+      <p class="juris-tese">
+        "Na hipótese em que a empresa foi constituída antes do casamento e se desenvolveu durante a constância do matrimônio, em razão do esforço comum dos cônjuges, a valorização ocorrida durante o casamento pode ser objeto de partilha, desde que comprovado o esforço comum na construção do patrimônio empresarial."
+      </p>
+      <p class="juris-analise">
+        O ponto central é a distinção entre dois tipos de valorização. A <strong>valorização passiva</strong> decorre de fatores externos ao esforço do casal: crescimento do setor, inflação, conjuntura econômica. Essa valorização, em princípio, não comunica. A <strong>valorização ativa</strong> ocorre porque o sócio se dedicou ao negócio, muitas vezes liberado para isso porque o cônjuge assumiu a gestão da casa e dos filhos. Essa valorização, segundo o STJ, pode e deve ser considerada na partilha.
+      </p>
+    </div>
+
+    <div class="cx ouro">
+      <span class="cx-tag">⚡ Implicação prática</span>
+      <div class="cx-titulo">O cônjuge que cuidou dos filhos pode ter direito à valorização da empresa</div>
+      <p class="cx-texto">
+        O esforço comum não precisa ser direto, como trabalhar na empresa. O STJ reconhece que o cônjuge que abriu mão da carreira para cuidar da casa e dos filhos, liberando o sócio para se dedicar integralmente ao negócio, contribuiu indiretamente para o crescimento empresarial. <strong>Essa contribuição indireta é suficiente para fundamentar o direito à participação na valorização</strong>, desde que provada. Um empresário que entrou no casamento com empresa valendo R$ 1 milhão e sai com ela valendo R$ 9 milhões enfrenta uma disputa real sobre os R$ 8 milhões de diferença.
+      </p>
+    </div>
+
+    <p class="p">
+      A defesa do empresário nesse cenário passa obrigatoriamente por prova pericial que isole, com precisão técnica, quanto da valorização decorreu de fatores de mercado externos e quanto decorreu do trabalho do sócio. Um laudo bem construído que demonstre que a maior parte do crescimento decorreu de expansão natural do setor e mudanças de mercado é a diferença entre partilhar muito e partilhar pouco.
+    </p>
+  </section>
+
+  <div class="divisor"><div class="divisor-sym">◆</div></div>
+
+  <section class="secao">
+    <span class="secao-n">03</span>
+    <h2 class="secao-titulo">Cenários práticos: como cada situação se resolve</h2>
+
+    <p class="p">
+      A análise de uma empresa em um divórcio raramente tem resposta binária. O resultado depende de quando a empresa foi criada, de qual era o regime de bens, de se havia pacto antenupcial e de como a empresa foi estruturada. Os cenários abaixo cobrem as situações mais comuns que chegam ao escritório.
+    </p>
+
+    <div class="casos">
+
+      <div class="caso-item" onclick="toggleCaso(this)">
+        <div class="caso-header">
+          <div class="caso-icone">🏢</div>
+          <div class="caso-titulo">Empresa anterior ao casamento em comunhão parcial, sem pacto antenupcial</div>
+          <div class="caso-seta">▾</div>
+        </div>
+        <div class="caso-corpo">
+          As cotas originais são <span class="sim">bens particulares</span> do sócio. Art. 1.659, I CC. O cônjuge não tem direito às cotas em si. O risco existe na valorização ativa durante o casamento, conforme o REsp 1.787.027/RS.<br><br>
+          <strong>Estratégia de defesa:</strong> prova pericial demonstrando que a valorização decorreu de fatores externos de mercado, não do esforço pessoal do sócio ou do suporte doméstico do cônjuge. Quanto mais técnico e documentado for o laudo, menor a exposição.
+        </div>
+      </div>
+
+      <div class="caso-item" onclick="toggleCaso(this)">
+        <div class="caso-header">
+          <div class="caso-icone">📋</div>
+          <div class="caso-titulo">Empresa criada durante o casamento em comunhão parcial</div>
+          <div class="caso-seta">▾</div>
+        </div>
+        <div class="caso-corpo">
+          As cotas são <span class="nao">bens comuns</span>. Art. 1.660, I CC. O cônjuge tem direito à meação sobre o valor das cotas. A disputa se desloca para quanto valem as cotas e qual método de avaliação será aplicado.<br><br>
+          <strong>Os três métodos de avaliação:</strong> valor patrimonial contábil, que é o menor e usa o balanço da empresa; valor patrimonial a mercado, que avalia os ativos pelo valor real; e fluxo de caixa descontado, que é o maior e considera a capacidade futura de geração de caixa. A diferença entre o primeiro e o terceiro pode ser de 3 a 5 vezes. <strong>O contrato social da empresa define o método. Sem previsão no contrato, o perito escolhe.</strong>
+        </div>
+      </div>
+
+      <div class="caso-item" onclick="toggleCaso(this)">
+        <div class="caso-header">
+          <div class="caso-icone">🏗</div>
+          <div class="caso-titulo">Holding familiar constituída durante o casamento em comunhão parcial</div>
+          <div class="caso-seta">▾</div>
+        </div>
+        <div class="caso-corpo">
+          As cotas da holding são <span class="nao">bens comuns</span> porque foram constituídas durante o casamento. O cônjuge tem direito à meação sobre o valor das cotas.<br><br>
+          <strong>O que as cláusulas protetivas do contrato social fazem:</strong> impedem o ingresso do cônjuge como sócio, mas não eliminam o direito ao valor. O cônjuge não entra na holding, porém recebe o equivalente em dinheiro. O Art. 1.027 CC e o REsp 1.536.819/MG do STJ confirmam isso. A proteção máxima para o próximo casamento seria: holding constituída antes do casamento, combinada com pacto antenupcial de separação total citando a holding pelo CNPJ.
+        </div>
+      </div>
+
+      <div class="caso-item" onclick="toggleCaso(this)">
+        <div class="caso-header">
+          <div class="caso-icone">📈</div>
+          <div class="caso-titulo">Stock options recebidas durante o casamento em comunhão parcial</div>
+          <div class="caso-seta">▾</div>
+        </div>
+        <div class="caso-corpo">
+          O STJ, no REsp 1.795.215/SP, estabeleceu que stock options com <span class="sim">natureza mercantil genuína</span> não comunicam. O critério é o risco assumido: se o beneficiário pagou pelo direito de compra e assumiu risco real de perda, o plano é mercantil e as ações não entram na partilha.<br><br>
+          Se o plano tem natureza <span class="nao">remuneratória disfarçada</span>, em que a empresa concede ações gratuitamente ou a preço simbólico sem risco real, vinculadas ao cumprimento de metas, o caráter pode ser remuneratório e as ações podem comunicar.<br><br>
+          <strong>A prova está no contrato do plano:</strong> se há pagamento de prêmio, risco real de mercado e possibilidade concreta de perda do investimento, o argumento mercantil é sólido.
+        </div>
+      </div>
+
+      <div class="caso-item" onclick="toggleCaso(this)">
+        <div class="caso-header">
+          <div class="caso-icone">💡</div>
+          <div class="caso-titulo">Lucros da empresa reinvestidos em bens pessoais durante o casamento</div>
+          <div class="caso-seta">▾</div>
+        </div>
+        <div class="caso-corpo">
+          Este é um dos pontos de maior controvérsia. Quando os lucros de uma empresa particular foram distribuídos ao sócio e usados para comprar bens pessoais, esses bens comunicam?<br><br>
+          Há duas posições em disputa. A primeira entende que lucros são <span class="dep">frutos do capital</span>, comunicando pelo Art. 1.660, V CC. A segunda entende que quando o sócio é também administrador, os lucros têm natureza de <span class="dep">proventos do trabalho</span>, excluídos da comunhão pelo Art. 1.659, VI CC.<br><br>
+          <strong>A consequência prática é relevante:</strong> imóvel comprado com lucros da empresa durante o casamento pode ser disputado como bem comum. A defesa passa pela prova de que o sócio exercia função gerencial ativa, caracterizando os lucros como remuneração pelo trabalho, não como rendimento passivo do capital.
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divisor"><div class="divisor-sym">◆</div></div>
+
+  <section class="secao">
+    <span class="secao-n">04</span>
+    <h2 class="secao-titulo">Como se defender e como atacar: a lógica de cada lado</h2>
+
+    <p class="p">
+      O divórcio com empresa envolvida é sempre uma disputa de duas narrativas simultâneas. Quem defende o empresário quer minimizar o patrimônio partilhável. Quem representa o cônjuge quer maximizá-lo. Entender a lógica de cada lado permite compreender onde a disputa vai se concentrar.
+    </p>
+
+    <div class="tl">
+
+      <div class="tl-item">
+        <div class="tl-dot ativo">A</div>
+        <div>
+          <span class="tl-tag">Lado do empresário</span>
+          <div class="tl-titulo">Minimizar o patrimônio partilhável</div>
+          <p class="tl-texto">
+            A estratégia central é provar que a valorização decorreu de fatores externos, não do esforço comum. Para isso, laudo pericial que isole crescimento de mercado do crescimento por trabalho pessoal. Também é importante argumentar que os lucros distribuídos têm natureza de proventos do trabalho, excluídos da comunhão pelo Art. 1.659, VI CC. Se houver holding, invocar o REsp 1.536.819/MG para afastar o ingresso do cônjuge como sócio e direcionar a disputa para a apuração de haveres pelo método mais favorável ao sócio. <strong>A prova da data de separação de fato também é arma relevante: quanto mais cedo a data, menor o período de valorização a ser partilhado.</strong>
+          </p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot">B</div>
+        <div>
+          <span class="tl-tag">Lado do cônjuge</span>
+          <div class="tl-titulo">Maximizar o patrimônio partilhável</div>
+          <p class="tl-texto">
+            A estratégia central é aplicar o REsp 1.787.027/RS para incluir a valorização ativa na partilha. Documentar a contribuição indireta do cônjuge para o crescimento empresarial: abdicação de carreira, gestão doméstica, suporte ao sócio. Requerer o fluxo de caixa descontado como método de avaliação. <strong>Se houver holding constituída durante o casamento, insistir na natureza de bem comum das cotas e no direito à meação sobre seu valor econômico integral.</strong>
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="cx ouro">
+      <span class="cx-tag">⚡ O campo de batalha real</span>
+      <div class="cx-titulo">O método de avaliação pode valer mais do que qualquer argumento jurídico</div>
+      <p class="cx-texto">
+        Em um divórcio com empresa valendo R$ 8 milhões pelo fluxo de caixa descontado e R$ 2 milhões pelo valor patrimonial contábil, a diferença entre os métodos representa R$ 3 milhões a mais ou a menos na meação. <strong>O contrato social que define o método de apuração de haveres é, literalmente, o documento mais valioso em um divórcio com empresa envolvida.</strong> Sem essa previsão no contrato, o perito escolhe com ampla margem de discricionariedade.
+      </p>
+    </div>
+  </section>
+
+  <div class="divisor"><div class="divisor-sym">◆</div></div>
+
+  <section class="secao">
+    <span class="secao-n">05</span>
+    <h2 class="secao-titulo">A proteção real: o que fazer antes do próximo casamento</h2>
+
+    <p class="p">
+      Quem chegou a este guia depois de um divórcio já sabe que a proteção ideal é preventiva. A proteção mais sólida para um empresário é a combinação de três elementos que precisam funcionar juntos, porque isolados cada um deles tem lacunas que a parte contrária pode explorar.
+    </p>
+
+    <div class="tl">
+
+      <div class="tl-item">
+        <div class="tl-dot ativo">1</div>
+        <div>
+          <span class="tl-tag">Primeira camada</span>
+          <div class="tl-titulo">Pacto antenupcial de separação total com cláusula específica</div>
+          <p class="tl-texto">
+            O pacto precisa ir além da separação total genérica. Ele precisa citar expressamente as cotas da empresa e da holding pelo nome e CNPJ, excluindo-as e sua valorização futura de qualquer partilha. <strong>Um pacto que menciona a empresa nominalmente é muito mais difícil de contestar do que um pacto que apenas declara separação total.</strong> O pacto precisa ser lavrado em cartório e registrado no Cartório de Registro de Imóveis para valer contra terceiros.
+          </p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot">2</div>
+        <div>
+          <span class="tl-tag">Segunda camada</span>
+          <div class="tl-titulo">Holding familiar constituída antes do casamento</div>
+          <p class="tl-texto">
+            A holding precisa existir antes do casamento. Cotas anteriores ao casamento são bens particulares na comunhão parcial. O contrato social precisa conter as quatro cláusulas protetivas: intransferibilidade, vedação de cônjuge como sócio, liquidação financeira em lugar de ingresso e saída compulsória com apuração de haveres. O método de apuração precisa estar definido no contrato, preferencialmente pelo valor patrimonial contábil.
+          </p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot">3</div>
+        <div>
+          <span class="tl-tag">Terceira camada</span>
+          <div class="tl-titulo">Documentação permanente da origem dos recursos</div>
+          <p class="tl-texto">
+            Toda movimentação financeira relevante precisa ter rastreabilidade. Lucros distribuídos precisam ser identificados como proventos do trabalho do sócio-administrador. Bens comprados com recursos pessoais precisam ter a origem documentada. <strong>Sem rastreabilidade documental, a melhor estrutura jurídica pode ser contestada com o argumento de que os recursos eram comuns.</strong>
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="cx verm">
+      <span class="cx-tag">🔴 O erro mais caro</span>
+      <div class="cx-titulo">Constituir a holding depois que a crise conjugal já começou</div>
+      <p class="cx-texto">
+        Holding constituída durante processo de divórcio já em curso, ou com bens transferidos para a estrutura após a separação de fato, pode ser anulada judicialmente por fraude à meação com base no Art. 1.722 CC e por fraude contra credores com base no Art. 158 CC. <strong>Quanto mais próxima a data de constituição da holding estiver da data do divórcio, mais forte é o argumento de fraude.</strong> A holding é instrumento de planejamento preventivo. Quem chega ao escritório com o processo já distribuído pedindo para transferir bens para uma holding está pedindo para criar um problema maior do que o que já existe.
+      </p>
+    </div>
+  </section>
+
+  <div class="divisor"><div class="divisor-sym">◆</div></div>
+
+  <div class="destaque">
+    <p class="dest-texto">
+      A empresa não protege o empresário no divórcio. <strong>A estrutura montada antes do casamento protege.</strong> A diferença entre os dois não é jurídica. É temporal.
+    </p>
+    <div class="dest-autor">Dr. Filipe Ferreira · OAB/ES 37.159</div>
+  </div>
+
+  <div class="grava">
+    <span class="grava-label">📌 Os 8 pontos essenciais</span>
+    <div class="grava-item">Empresa anterior ao casamento: <span>cotas particulares. Valorização ativa durante o casamento pode ser partilhada.</span></div>
+    <div class="grava-item">Empresa criada durante o casamento: <span>cotas comuns. Cônjuge tem direito à meação sobre o valor.</span></div>
+    <div class="grava-item">Valorização passiva: <span>mercado e fatores externos. Não comunica em regra.</span></div>
+    <div class="grava-item">Valorização ativa: <span>esforço do casal. Pode ser partilhada. REsp 1.787.027/RS.</span></div>
+    <div class="grava-item">Método de avaliação das cotas: <span>definido no contrato social. Sem previsão, o perito decide.</span></div>
+    <div class="grava-item">Stock options mercantis: <span>não comunicam. REsp 1.795.215/SP.</span></div>
+    <div class="grava-item">Holding durante o casamento em comunhão parcial: <span>cotas comuns. Proteção baixa.</span></div>
+    <div class="grava-item">Proteção real: <span>pacto antenupcial com CNPJ citado, holding anterior e documentação de origem dos recursos.</span></div>
+  </div>
+
+  <div class="cta-box">
+    <span class="cta-tag">Consultoria especializada</span>
+    <h2 class="cta-titulo">
+      Sua empresa está<br><em>protegida no divórcio?</em>
+    </h2>
+    <p class="cta-sub">Análise completa do seu cenário patrimonial. Atendimento online para todo o Brasil.</p>
+    <div class="cta-btns">
+      <a href="https://wa.me/5527995187279?text=Ol%C3%A1%2C+vim+pelo+guia+de+Div%C3%B3rcio+com+Empresa+e+gostaria+de+uma+orienta%C3%A7%C3%A3o." class="btn-p">
+        💬 WhatsApp — Falar Agora
+      </a>
+      <a href="mailto:escritorio@filipeeassociadosadvogado.com.br?subject=Consulta%20sobre%20Divórcio%20com%20Empresa" class="btn-s">
+        ✉️ Enviar E-mail
+      </a>
+    </div>
+    <div class="cta-oab">Filipe Ferreira · OAB/ES 37.159 · Direito de Família e Proteção Patrimonial</div>
+  </div>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-nome">Filipe Ferreira — Advogado e Associados</div>
+  <div class="footer-sub">OAB/ES 37.159 · Linhares, ES · Atendimento Online · Brasil</div>
+</footer>
+
+<script>
+  const respostas = {
+    a: { cls: 'amarelo', label: '⚠️ Risco real de partilha da valorização',
+      txt: 'Cotas anteriores ao casamento são bens particulares. Mas o STJ, no REsp 1.787.027/RS, permite a partilha da <strong>valorização ativa</strong> da empresa ocorrida durante o casamento quando comprovado esforço comum do casal. A defesa exige laudo pericial técnico que demonstre que o crescimento decorreu de fatores externos de mercado, não do esforço pessoal do sócio ou do suporte doméstico do cônjuge.' },
+    b: { cls: 'vermelho', label: '🔴 Cotas são bens comuns',
+      txt: 'Empresa criada durante o casamento em comunhão parcial resulta em <strong>cotas comuns</strong>. Art. 1.660, I CC. O cônjuge tem direito à meação sobre o valor das cotas. A disputa vai se concentrar no método de avaliação: valor patrimonial contábil, valor a mercado ou fluxo de caixa descontado. A diferença entre os métodos pode representar várias vezes o mesmo patrimônio.' },
+    c: { cls: 'amarelo', label: '⚠️ Depende do tipo de plano',
+      txt: 'Stock options com natureza mercantil genuína <strong>não comunicam</strong>, conforme o REsp 1.795.215/SP do STJ. O critério é o risco assumido: se você pagou pelo direito de compra e havia risco real de perda, o plano é mercantil. Se as ações foram concedidas gratuitamente como bônus de desempenho, o STJ pode requalificá-las como remuneração e aí comunicam. A prova está no contrato do plano.' },
+    d: { cls: 'verde', label: '✅ Cônjuge não entra como sócio',
+      txt: 'Com as cláusulas protetivas no contrato social, o cônjuge não pode se tornar sócio da holding, conforme o REsp 1.536.819/MG do STJ e o Art. 1.027 CC. O cônjuge receberá o equivalente em dinheiro. <strong>O campo de batalha passa a ser o método de apuração do valor das cotas.</strong> Se o contrato social define o método, ele prevalece. Sem definição, o perito decide com ampla margem.' },
+    e: { cls: 'vermelho', label: '🔴 Ação imediata necessária',
+      txt: 'Quando você suspeita que está sendo lesado na avaliação das cotas do cônjuge, o caminho é requerer ao juízo a <strong>nomeação de perito contábil independente</strong> para avaliação das cotas pelo método mais adequado. O fluxo de caixa descontado tende a ser o mais favorável a quem quer maximizar o valor. Requeira também a exibição dos balanços, demonstrativos financeiros e contratos sociais dos últimos 5 anos.' }
+  };
+
+  let ativo = null;
+  function marcar(el, id) {
+    document.querySelectorAll('.q-item').forEach(q => {
+      q.classList.remove('on');
+      q.querySelector('.q-box').textContent = '';
+    });
+    const res = document.getElementById('q-res');
+    if (ativo === id) { ativo = null; res.classList.remove('visivel'); return; }
+    ativo = id;
+    el.classList.add('on');
+    el.querySelector('.q-box').textContent = '✓';
+    const r = respostas[id];
+    res.className = `q-res visivel ${r.cls}`;
+    res.innerHTML = `<span class="q-res-label">${r.label}</span><p class="q-res-texto">${r.txt}</p>`;
+  }
+
+  function toggleCaso(el) {
+    const ab = el.classList.contains('aberto');
+    document.querySelectorAll('.caso-item').forEach(c => c.classList.remove('aberto'));
+    if (!ab) el.classList.add('aberto');
+  }
+</script>
+</body>
+</html>

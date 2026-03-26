@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Criptoativos no Divórcio e no Inventário · Dr. Filipe Ferreira</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:          #f7f5f0;
+    --bg2:         #edeae2;
+    --bg3:         #dedad0;
+    --ink:         #18100a;
+    --ink2:        #241808;
+    --ink3:        #302010;
+    --laranja:     #8a4010;
+    --laranja2:    #b05a18;
+    --laranja3:    #d8802a;
+    --lrj-dim:     rgba(138,64,16,0.08);
+    --lrj-brd:     rgba(138,64,16,0.2);
+    --btc:         #c07800;
+    --btc2:        #e09020;
+    --btc3:        #f8b840;
+    --btc-dim:     rgba(192,120,0,0.08);
+    --btc-brd:     rgba(192,120,0,0.2);
+    --verde:       #1e5a2a;
+    --verde-dim:   rgba(30,90,42,0.08);
+    --verde-brd:   rgba(30,90,42,0.2);
+    --verm:        #8a2020;
+    --verm-dim:    rgba(138,32,32,0.07);
+    --verm-brd:    rgba(138,32,32,0.2);
+    --text:        #2a1c10;
+    --text2:       #4a3c28;
+    --muted:       #9a8a70;
+    --branco:      #fdfcf8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 400;
+    line-height: 1.85;
+    font-size: 17px;
+  }
+
+  /* HERO */
+  .hero {
+    background: var(--ink);
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: 80px 28px 72px;
+    position: relative; overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 85% 55% at 50% -8%, rgba(192,120,0,0.2) 0%, transparent 65%),
+      radial-gradient(ellipse 40% 40% at 90% 85%, rgba(138,64,16,0.12) 0%, transparent 55%),
+      radial-gradient(ellipse 35% 35% at 5% 70%,  rgba(192,120,0,0.06) 0%, transparent 50%);
+  }
+
+  .hero-hex {
+    position: absolute; inset: 0; pointer-events: none; overflow: hidden;
+  }
+  .hero-hex svg {
+    position: absolute; width: 100%; height: 100%;
+    opacity: 0.04;
+  }
+
+  .hero-z { position: relative; z-index: 1; }
+
+  .hero-eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 5px; text-transform: uppercase;
+    color: var(--btc3); margin-bottom: 28px;
+    display: flex; align-items: center;
+    gap: 18px; justify-content: center;
+    animation: subir 0.7s ease forwards;
+  }
+  .hero-eyebrow::before, .hero-eyebrow::after {
+    content: ''; width: 40px; height: 1px;
+    background: rgba(248,184,64,0.3);
+  }
+
+  .hero-h1 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(32px, 6.5vw, 66px);
+    font-weight: 700;
+    color: var(--bg);
+    line-height: 1.05; margin-bottom: 6px;
+    animation: subir 0.8s ease forwards;
+  }
+  .hero-h1 .sub {
+    display: block;
+    font-family: 'Source Serif 4', serif;
+    font-style: italic; font-weight: 300;
+    color: var(--btc3); font-size: 0.55em;
+    line-height: 1.6; margin-top: 10px;
+    font-family: 'Source Serif 4', serif;
+  }
+
+  .hero-sep {
+    width: 60px; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--btc2), transparent);
+    margin: 28px auto;
+    animation: expandir 1s ease 0.3s both;
+    transform: scaleX(0); transform-origin: center;
+  }
+
+  .hero-desc {
+    font-size: clamp(15px, 2vw, 18px);
+    color: rgba(247,245,240,0.5); font-weight: 300;
+    max-width: 540px; margin: 0 auto 44px; line-height: 1.8;
+    animation: subir 0.9s ease 0.15s both; opacity: 0;
+  }
+  .hero-desc strong { color: rgba(247,245,240,0.88); font-weight: 600; }
+
+  .hero-pills {
+    display: flex; flex-wrap: wrap;
+    justify-content: center; gap: 10px;
+    animation: subir 1s ease 0.3s both; opacity: 0;
+  }
+  .pill {
+    background: rgba(192,120,0,0.16);
+    border: 1px solid rgba(248,184,64,0.25);
+    color: var(--btc3);
+    font-size: 12px; font-weight: 600;
+    padding: 7px 18px; border-radius: 100px;
+  }
+
+  /* MOEDAS NO HERO */
+  .hero-moedas {
+    display: flex; gap: 20px; margin-top: 52px;
+    justify-content: center; flex-wrap: wrap;
+    animation: subir 1.1s ease 0.4s both; opacity: 0;
+  }
+  .moeda-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(248,184,64,0.15);
+    border-radius: 12px; padding: 16px 20px;
+    text-align: center; min-width: 100px;
+  }
+  .moeda-simbolo {
+    font-family: 'Cinzel', serif;
+    font-size: 22px; font-weight: 700;
+    color: var(--btc3); display: block; margin-bottom: 4px;
+  }
+  .moeda-nome { font-size: 11px; color: rgba(247,245,240,0.35); font-weight: 500; }
+
+  /* DIAGNÓSTICO */
+  .diag-section {
+    background: var(--ink2); padding: 80px 28px;
+    border-top: 1px solid rgba(255,255,255,0.04);
+  }
+  .diag-inner { max-width: 700px; margin: 0 auto; text-align: center; }
+  .d-tag {
+    font-family: 'Cinzel', serif;
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 4px; text-transform: uppercase;
+    color: var(--btc3); margin-bottom: 14px; display: block;
+  }
+  .d-titulo {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(20px, 3.5vw, 30px);
+    font-weight: 700; color: var(--bg);
+    line-height: 1.2; margin-bottom: 10px;
+  }
+  .d-sub {
+    font-size: 16px; color: rgba(247,245,240,0.35);
+    font-weight: 300; margin-bottom: 36px;
+  }
+
+  .q-lista { text-align: left; display: flex; flex-direction: column; gap: 10px; }
+  .q-item {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 10px; padding: 16px 20px;
+    display: flex; align-items: flex-start; gap: 14px;
+    cursor: pointer; transition: all 0.25s; user-select: none;
+  }
+  .q-item:hover { background: var(--btc-dim); border-color: var(--btc-brd); }
+  .q-item.on { background: rgba(192,120,0,0.14); border-color: var(--btc2); }
+  .q-box {
+    width: 22px; height: 22px; border-radius: 5px;
+    border: 1.5px solid rgba(255,255,255,0.15);
+    flex-shrink: 0; margin-top: 2px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 700; transition: all 0.2s;
+  }
+  .q-item.on .q-box { background: var(--btc2); border-color: var(--btc2); }
+  .q-texto { font-size: 16px; color: rgba(247,245,240,0.6); line-height: 1.55; }
+  .q-item.on .q-texto { color: var(--bg); }
+
+  .q-res {
+    display: none; margin-top: 24px;
+    padding: 24px 28px; border-radius: 10px;
+    text-align: left; animation: subir 0.4s ease forwards;
+  }
+  .q-res.visivel { display: block; }
+  .q-res.btc     { background: var(--btc-dim);  border: 1.5px solid var(--btc-brd);  }
+  .q-res.amarelo { background: var(--lrj-dim);  border: 1.5px solid var(--lrj-brd);  }
+  .q-res.vermelho{ background: var(--verm-dim); border: 1.5px solid var(--verm-brd); }
+  .q-res.verde   { background: var(--verde-dim);border: 1.5px solid var(--verde-brd);}
+  .q-res-label {
+    font-family: 'Cinzel', serif;
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 3px; text-transform: uppercase;
+    margin-bottom: 8px; display: block;
+  }
+  .btc     .q-res-label { color: var(--btc3);  }
+  .amarelo .q-res-label { color: var(--laranja3); }
+  .vermelho .q-res-label{ color: #d06060; }
+  .verde   .q-res-label { color: #60c080; }
+  .q-res-texto { font-size: 16px; line-height: 1.8; }
+  .btc     .q-res-texto { color: #b08020; }
+  .amarelo .q-res-texto { color: #905020; }
+  .vermelho .q-res-texto{ color: #a05050; }
+  .verde   .q-res-texto { color: #408060; }
+  .q-res-texto strong { font-weight: 700; }
+
+  /* MAIN */
+  .main { max-width: 780px; margin: 0 auto; padding: 80px 28px 100px; }
+
+  .secao { margin-bottom: 80px; }
+  .secao-n {
+    font-family: 'Cinzel', serif;
+    font-size: 100px; color: var(--bg2);
+    line-height: 0.85; display: block;
+    margin-bottom: -8px; user-select: none;
+  }
+  .secao-titulo {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(20px, 3vw, 28px);
+    font-weight: 700; color: var(--ink);
+    line-height: 1.25;
+    padding-bottom: 16px; margin-bottom: 28px;
+    border-bottom: 1px solid var(--bg3); position: relative;
+  }
+  .secao-titulo::after {
+    content: ''; position: absolute;
+    left: 0; bottom: -1px; width: 48px; height: 2px;
+    background: var(--btc);
+  }
+
+  .p { font-size: 17px; color: var(--text2); line-height: 1.9; margin-bottom: 22px; }
+  .p strong { color: var(--ink); font-weight: 700; }
+
+  /* LEI */
+  .lei {
+    background: var(--ink); border-radius: 10px;
+    padding: 24px 30px; margin: 28px 0;
+    position: relative; overflow: hidden;
+  }
+  .lei::after {
+    content: '₿'; position: absolute;
+    right: 20px; top: 12px;
+    font-size: 72px; color: rgba(192,120,0,0.07);
+    line-height: 1; pointer-events: none; font-weight: 700;
+  }
+  .lei-ref {
+    font-family: 'Cinzel', serif;
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 3px; color: var(--btc3);
+    text-transform: uppercase; margin-bottom: 10px; display: block;
+  }
+  .lei-texto {
+    font-family: 'Source Serif 4', serif;
+    font-size: 17px; font-style: italic;
+    color: rgba(247,245,240,0.8); line-height: 1.85;
+  }
+  .lei-texto strong { color: var(--btc3); font-style: normal; font-weight: 600; }
+
+  /* CAIXAS */
+  .cx { border-radius: 10px; padding: 24px 28px; margin: 28px 0; }
+  .cx.btc    { background: var(--btc-dim);   border: 1.5px solid var(--btc-brd);   }
+  .cx.lrj    { background: var(--lrj-dim);   border: 1.5px solid var(--lrj-brd);   }
+  .cx.verde  { background: var(--verde-dim); border: 1.5px solid var(--verde-brd); }
+  .cx.verm   { background: var(--verm-dim);  border: 1.5px solid var(--verm-brd);  }
+  .cx-tag {
+    font-family: 'Cinzel', serif;
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 3px; text-transform: uppercase;
+    margin-bottom: 8px; display: block;
+  }
+  .btc   .cx-tag { color: var(--btc);   }
+  .lrj   .cx-tag { color: var(--laranja); }
+  .verde .cx-tag { color: var(--verde); }
+  .verm  .cx-tag { color: var(--verm);  }
+  .cx-titulo {
+    font-family: 'Source Serif 4', serif;
+    font-size: 19px; font-weight: 600; margin-bottom: 8px;
+  }
+  .btc   .cx-titulo { color: #9a7010; }
+  .lrj   .cx-titulo { color: #9a4810; }
+  .verde .cx-titulo { color: #1e5828; }
+  .verm  .cx-titulo { color: #aa3030; }
+  .cx-texto { font-size: 17px; line-height: 1.85; }
+  .btc   .cx-texto { color: #806018; }
+  .lrj   .cx-texto { color: #803818; }
+  .verde .cx-texto { color: #286038; }
+  .verm  .cx-texto { color: #8a3030; }
+  .cx-texto strong { font-weight: 700; }
+  .btc   .cx-texto strong { color: #9a7010; }
+  .lrj   .cx-texto strong { color: #9a4010; }
+  .verde .cx-texto strong { color: #1e5828; }
+  .verm  .cx-texto strong { color: #aa3030; }
+
+  /* TIMELINE */
+  .tl { margin: 28px 0; }
+  .tl-item { display: flex; gap: 20px; padding-bottom: 28px; position: relative; }
+  .tl-item:not(:last-child)::after {
+    content: ''; position: absolute;
+    left: 21px; top: 46px; bottom: 0; width: 2px;
+    background: linear-gradient(to bottom, rgba(192,120,0,0.3), transparent);
+  }
+  .tl-dot {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--ink); border: 2px solid var(--btc-brd);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cinzel', serif;
+    font-size: 16px; color: var(--btc3); flex-shrink: 0;
+    font-weight: 700;
+  }
+  .tl-dot.ativo { background: var(--btc); border-color: var(--btc); color: #fff; }
+  .tl-tag {
+    font-family: 'Cinzel', serif;
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 3px; color: var(--btc2);
+    text-transform: uppercase; margin-bottom: 4px; display: block;
+  }
+  .tl-titulo {
+    font-family: 'Source Serif 4', serif;
+    font-size: 18px; font-weight: 600; color: var(--ink); margin-bottom: 6px;
+  }
+  .tl-texto { font-size: 17px; color: var(--text2); line-height: 1.8; }
+  .tl-texto strong { color: var(--ink); font-weight: 700; }
+
+  /* ACCORDION */
+  .acc-lista { display: flex; flex-direction: column; gap: 10px; margin: 28px 0; }
+  .acc-item {
+    background: var(--branco); border: 1px solid var(--bg3);
+    border-radius: 10px; overflow: hidden; cursor: pointer;
+    transition: border-color 0.2s;
+  }
+  .acc-item:hover { border-color: var(--btc-brd); }
+  .acc-item.aberto { border-color: var(--btc2); }
+  .acc-header {
+    display: flex; align-items: flex-start;
+    gap: 14px; padding: 18px 22px;
+  }
+  .acc-icone {
+    width: 38px; height: 38px; border-radius: 8px;
+    background: var(--btc-dim); border: 1px solid var(--btc-brd);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 17px; flex-shrink: 0; margin-top: 1px;
+  }
+  .acc-titulo { font-size: 17px; font-weight: 700; color: var(--ink); line-height: 1.4; flex: 1; padding-top: 4px; }
+  .acc-seta { color: var(--muted); font-size: 12px; transition: transform 0.3s; flex-shrink: 0; padding-top: 8px; }
+  .acc-item.aberto .acc-seta { transform: rotate(180deg); }
+  .acc-corpo {
+    display: none;
+    padding: 0 22px 20px 74px;
+    font-size: 17px; color: var(--text2); line-height: 1.85;
+    border-top: 1px solid var(--bg2); padding-top: 18px;
+  }
+  .acc-item.aberto .acc-corpo { display: block; }
+  .acc-corpo strong { color: var(--ink); font-weight: 700; }
+  .acc-corpo .sim { color: var(--verde); font-weight: 700; }
+  .acc-corpo .nao { color: var(--verm); font-weight: 700; }
+  .acc-corpo .atc { color: var(--laranja); font-weight: 700; }
+
+  /* DOCUMENTOS */
+  .doc-lista { display: flex; flex-direction: column; gap: 10px; margin: 28px 0; }
+  .doc-item {
+    background: var(--branco);
+    border: 1px solid var(--bg3);
+    border-left: 3px solid var(--btc);
+    border-radius: 0 10px 10px 0;
+    padding: 18px 22px;
+    display: flex; gap: 14px; align-items: flex-start;
+  }
+  .doc-icone { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+  .doc-titulo { font-size: 17px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+  .doc-desc { font-size: 16px; color: var(--text2); line-height: 1.7; }
+
+  /* DESTAQUE */
+  .destaque {
+    background: var(--ink);
+    border-top: 3px solid var(--btc2);
+    border-radius: 0 0 10px 10px;
+    padding: 32px 36px; margin: 36px 0;
+    position: relative; overflow: hidden;
+  }
+  .destaque::before {
+    content: '₿'; font-weight: 700;
+    font-size: 140px; color: rgba(192,120,0,0.06);
+    position: absolute; top: -10px; right: 20px;
+    line-height: 1; pointer-events: none;
+  }
+  .dest-texto {
+    font-family: 'Source Serif 4', serif;
+    font-size: clamp(17px, 2.5vw, 21px);
+    font-style: italic; color: rgba(247,245,240,0.85);
+    line-height: 1.7; position: relative; z-index: 1;
+  }
+  .dest-texto strong { color: var(--btc3); font-style: normal; }
+  .dest-autor {
+    margin-top: 16px; font-family: 'Cinzel', serif;
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 2px; color: var(--btc2);
+    text-transform: uppercase; position: relative; z-index: 1;
+  }
+
+  /* DIVISOR */
+  .divisor {
+    display: flex; align-items: center; gap: 20px; margin: 64px 0;
+  }
+  .divisor::before, .divisor::after {
+    content: ''; flex: 1; height: 1px; background: var(--bg3);
+  }
+  .divisor-sym {
+    font-family: 'Cinzel', serif;
+    font-size: 18px; color: var(--btc); opacity: 0.4;
+  }
+
+  /* GRAVA */
+  .grava {
+    background: linear-gradient(135deg, var(--btc-dim), rgba(192,120,0,0.02));
+    border: 1px solid var(--btc-brd); border-radius: 10px;
+    padding: 32px 36px; margin: 48px 0; text-align: center;
+  }
+  .grava-label {
+    font-family: 'Cinzel', serif;
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 4px; color: var(--btc);
+    text-transform: uppercase; margin-bottom: 24px; display: block;
+  }
+  .grava-item {
+    font-size: 17px; font-weight: 700;
+    color: var(--btc2); margin-bottom: 10px; line-height: 1.6;
+  }
+  .grava-item span { color: var(--ink2); font-weight: 400; }
+
+  /* CTA */
+  .cta-box {
+    background: var(--ink); border-radius: 12px;
+    padding: 60px 40px; text-align: center;
+    margin-top: 72px; position: relative; overflow: hidden;
+  }
+  .cta-box::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 50% at 50% 110%, rgba(192,120,0,0.2) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .cta-tag {
+    font-family: 'Cinzel', serif;
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 4px; color: var(--btc3);
+    text-transform: uppercase; margin-bottom: 18px; display: block;
+    position: relative; z-index: 1;
+  }
+  .cta-titulo {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(22px, 4.5vw, 40px);
+    font-weight: 700; color: var(--bg);
+    line-height: 1.15; margin-bottom: 14px;
+    position: relative; z-index: 1;
+  }
+  .cta-titulo em {
+    font-family: 'Source Serif 4', serif;
+    color: var(--btc3); font-style: italic; font-weight: 400;
+  }
+  .cta-sub {
+    font-size: 17px; font-weight: 300;
+    color: rgba(247,245,240,0.4); max-width: 440px;
+    margin: 0 auto 36px; position: relative; z-index: 1; line-height: 1.7;
+  }
+  .cta-btns {
+    display: flex; flex-wrap: wrap;
+    justify-content: center; gap: 12px; position: relative; z-index: 1;
+  }
+  .btn-p {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--btc); color: #fff;
+    font-size: 14px; font-weight: 700;
+    letter-spacing: 1px; text-transform: uppercase;
+    padding: 16px 32px; border-radius: 100px;
+    text-decoration: none; transition: all 0.3s;
+  }
+  .btn-p:hover { background: var(--btc2); transform: translateY(-2px); }
+  .btn-s {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: transparent; color: var(--btc3);
+    font-size: 14px; font-weight: 600;
+    padding: 16px 28px; border-radius: 100px;
+    text-decoration: none; border: 1px solid var(--btc-brd); transition: all 0.3s;
+  }
+  .btn-s:hover { background: var(--btc-dim); border-color: var(--btc2); }
+  .cta-oab {
+    margin-top: 20px; font-size: 12px; letter-spacing: 2px;
+    color: rgba(247,245,240,0.15); text-transform: uppercase;
+    position: relative; z-index: 1;
+  }
+
+  .footer {
+    background: var(--ink2); text-align: center;
+    padding: 32px 24px; border-top: 1px solid rgba(192,120,0,0.12);
+  }
+  .footer-nome {
+    font-family: 'Cinzel', serif;
+    font-size: 17px; color: var(--bg); margin-bottom: 4px;
+  }
+  .footer-sub {
+    font-size: 12px; letter-spacing: 2px;
+    color: rgba(247,245,240,0.15); text-transform: uppercase;
+  }
+
+  @keyframes subir {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes expandir {
+    from { transform: scaleX(0); }
+    to   { transform: scaleX(1); }
+  }
+
+  @media (max-width: 600px) {
+    .hero-moedas { gap: 12px; }
+    .acc-corpo { padding-left: 22px; }
+    .cta-box { padding: 40px 22px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-hex">
+    <svg viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <pattern id="hex" x="0" y="0" width="60" height="52" patternUnits="userSpaceOnUse">
+          <polygon points="30,2 58,17 58,47 30,62 2,47 2,17" fill="none" stroke="#f8b840" stroke-width="0.8"/>
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#hex)"/>
+    </svg>
+  </div>
+  <div class="hero-z">
+
+    <div class="hero-eyebrow">Proteção Patrimonial</div>
+
+    <h1 class="hero-h1">
+      Criptoativos
+      no Divórcio e no Inventário
+      <span class="sub">O que a lei diz, o que o STJ decidiu e o que você precisa provar</span>
+    </h1>
+
+    <div class="hero-sep"></div>
+
+    <p class="hero-desc">
+      Bitcoin, Ethereum e outros criptoativos são patrimônio real com valor jurídico. <strong>No divórcio e no inventário, eles precisam ser declarados, avaliados e partilhados</strong> como qualquer outro bem. A diferença é que a prova é mais difícil e a ocultação é mais tentada.
+    </p>
+
+    <div class="hero-pills">
+      <span class="pill">Comunhão Parcial</span>
+      <span class="pill">Declaração de IR</span>
+      <span class="pill">Exchanges</span>
+      <span class="pill">Fraude à Meação</span>
+      <span class="pill">Rastreabilidade Blockchain</span>
+      <span class="pill">Inventário</span>
+    </div>
+
+    <div class="hero-moedas">
+      <div class="moeda-card">
+        <span class="moeda-simbolo">₿</span>
+        <span class="moeda-nome">Bitcoin</span>
+      </div>
+      <div class="moeda-card">
+        <span class="moeda-simbolo">Ξ</span>
+        <span class="moeda-nome">Ethereum</span>
+      </div>
+      <div class="moeda-card">
+        <span class="moeda-simbolo">◎</span>
+        <span class="moeda-nome">Stablecoins</span>
+      </div>
+      <div class="moeda-card">
+        <span class="moeda-simbolo">◈</span>
+        <span class="moeda-nome">NFTs e tokens</span>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- DIAGNÓSTICO -->
+<section class="diag-section">
+  <div class="diag-inner">
+    <span class="d-tag">Diagnóstico Imediato</span>
+    <h2 class="d-titulo">Qual é a sua situação com criptoativos?</h2>
+    <p class="d-sub">Selecione o cenário mais próximo da sua realidade e veja a análise.</p>
+
+    <div class="q-lista">
+      <div class="q-item" onclick="marcar(this,'a')">
+        <div class="q-box"></div>
+        <div class="q-texto">Tenho criptoativos adquiridos durante o casamento e estou em processo de divórcio</div>
+      </div>
+      <div class="q-item" onclick="marcar(this,'b')">
+        <div class="q-box"></div>
+        <div class="q-texto">Suspeito que meu cônjuge tem criptoativos que não declarou e que não apareceram na partilha</div>
+      </div>
+      <div class="q-item" onclick="marcar(this,'c')">
+        <div class="q-box"></div>
+        <div class="q-texto">Um familiar faleceu e acredito que ele tinha criptoativos, mas não sei onde nem como acessar</div>
+      </div>
+      <div class="q-item" onclick="marcar(this,'d')">
+        <div class="q-box"></div>
+        <div class="q-texto">Tenho criptoativos e quero saber como protegê-los e organizá-los antes de um eventual divórcio ou inventário</div>
+      </div>
+    </div>
+
+    <div class="q-res" id="q-res"></div>
+  </div>
+</section>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- SEÇÃO 1 -->
+  <section class="secao">
+    <span class="secao-n">01</span>
+    <h2 class="secao-titulo">Criptoativo é bem. Bem tem dono. Dono tem cônjuge ou herdeiros.</h2>
+
+    <p class="p">
+      O primeiro ponto que precisa estar absolutamente claro é que criptoativos são bens de valor econômico reconhecidos pelo ordenamento jurídico brasileiro. Não são uma categoria à parte, não são ativos invisíveis, não ficam de fora da partilha por serem digitais. Eles se enquadram no conceito amplo de bem patrimonial do Código Civil e seguem as mesmas regras dos demais bens na comunhão, no inventário e no divórcio.
+    </p>
+
+    <p class="p">
+      A Receita Federal brasileira exige a declaração de criptoativos no Imposto de Renda desde 2019, tratando-os como ativos equiparados a bens e direitos. O Banco Central os reconhece como "ativos virtuais" com regulamentação própria desde 2023. E o STJ, em precedentes recentes, aplicou as regras de partilha e inventário a criptoativos da mesma forma que aplicaria a imóveis ou investimentos financeiros tradicionais.
+    </p>
+
+    <div class="lei">
+      <span class="lei-ref">Resolução BCB 232/2023 — Banco Central do Brasil</span>
+      <p class="lei-texto">
+        "Ativo virtual é a representação digital de valor que pode ser negociada ou transferida por meios eletrônicos e utilizada para realização de pagamentos ou com propósito de investimento. Os prestadores de serviços de ativos virtuais devem <strong>identificar e registrar os titulares</strong> das operações."
+      </p>
+    </div>
+
+    <p class="p">
+      Isso tem uma consequência prática direta para o divórcio e o inventário: os criptoativos adquiridos durante o casamento em regime de Comunhão Parcial de Bens são bens comuns pelo Art. 1.660, I do Código Civil, exatamente como um imóvel ou uma conta de investimentos comprada com recursos do casal. A peculiaridade está na dificuldade de prova, não na regra jurídica aplicável.
+    </p>
+
+    <div class="cx btc">
+      <span class="cx-tag">📌 O ponto central</span>
+      <div class="cx-titulo">A regra jurídica é conhecida. O desafio é operacional.</div>
+      <p class="cx-texto">
+        Saber se um criptoativo é bem comum ou particular segue a mesma lógica de qualquer outro bem: quando foi adquirido, com qual recurso, e qual era o regime de bens na época. O que é diferente é <strong>como provar a existência do ativo, quanto ele vale e como transferi-lo ao herdeiro ou cônjuge</strong>. Esses três problemas operacionais são o núcleo técnico deste guia.
+      </p>
+    </div>
+  </section>
+
+  <div class="divisor"><div class="divisor-sym">◆</div></div>
+
+  <!-- SEÇÃO 2 -->
+  <section class="secao">
+    <span class="secao-n">02</span>
+    <h2 class="secao-titulo">No divórcio: quando o criptoativo comunica e quando não comunica</h2>
+
+    <p class="p">
+      A análise começa com a mesma pergunta de qualquer bem: quando foi adquirido em relação ao casamento e com qual recurso? A partir daí, a lógica do regime de bens se aplica integralmente.
+    </p>
+
+    <div class="tl">
+
+      <div class="tl-item">
+        <div class="tl-dot ativo">1</div>
+        <div>
+          <span class="tl-tag">Comunhão Parcial — Regra mais comum</span>
+          <div class="tl-titulo">Criptoativo adquirido durante o casamento com recursos comuns</div>
+          <p class="tl-texto">
+            É bem comum. Art. 1.660, I CC. O cônjuge tem direito à meação. O valor de referência para a partilha é a cotação na data da separação de fato, não na data do casamento nem na data da sentença. <strong>A volatilidade dos criptoativos torna a data de avaliação extremamente relevante</strong>: um Bitcoin que valia R$ 50 mil na separação de fato pode valer R$ 400 mil na data da sentença, ou vice-versa. A data correta é a separação de fato, e a prova dela é decisiva.
+          </p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot">2</div>
+        <div>
+          <span class="tl-tag">Comunhão Parcial — Ativo anterior ao casamento</span>
+          <div class="tl-titulo">Criptoativo adquirido antes do casamento com recursos próprios</div>
+          <p class="tl-texto">
+            É bem particular. Art. 1.659, I CC. Não entra na partilha. A prova é o histórico de transações na blockchain combinado com a data de aquisição nas exchanges ou com extratos bancários que rastreiem a compra antes do casamento. <strong>A blockchain registra permanentemente cada transação com data e hora</strong>, o que torna essa prova mais confiável do que a maioria dos documentos sobre outros tipos de bens.
+          </p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot">3</div>
+        <div>
+          <span class="tl-tag">A questão da valorização</span>
+          <div class="tl-titulo">Criptoativo anterior que se valorizou durante o casamento</div>
+          <p class="tl-texto">
+            Este ponto não está consolidado na jurisprudência brasileira. A valorização passiva de um bem particular, aquela que decorre naturalmente do mercado sem trabalho ou ação do titular, em princípio não comunica na comunhão parcial. A maior parte da valorização dos criptoativos é passiva, ou seja, o titular simplesmente manteve o ativo e o mercado se valorizou. <strong>Diferente do caso das empresas, onde a valorização ativa por esforço do sócio pode comunicar, nos criptoativos o argumento de esforço comum é muito mais difícil de sustentar</strong>, porque a posse passiva não é trabalho conjunto do casal.
+          </p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot">4</div>
+        <div>
+          <span class="tl-tag">A questão da separação total</span>
+          <div class="tl-titulo">Criptoativo com pacto antenupcial de separação total</div>
+          <p class="tl-texto">
+            No regime de separação total convencional, nenhum criptoativo comunica, independente de quando foi adquirido. O pacto antenupcial bem redigido deve mencionar expressamente os criptoativos como categoria excluída da partilha para fechar qualquer argumento de interpretação extensiva. <strong>Um pacto que lista "investimentos em ativos digitais, incluindo criptomoedas e tokens" tem proteção muito mais sólida do que um pacto genérico de separação total.</strong>
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divisor"><div class="divisor-sym">◆</div></div>
+
+  <!-- SEÇÃO 3 -->
+  <section class="secao">
+    <span class="secao-n">03</span>
+    <h2 class="secao-titulo">A tentativa de ocultação e como o blockchain derruba esse argumento</h2>
+
+    <p class="p">
+      Uma das situações mais frequentes nos divórcios com criptoativos envolvidos é a tentativa de ocultação pelo cônjuge que detém os ativos. A lógica parece atraente: diferente de um imóvel registrado em cartório, um criptoativo guardado em carteira própria não aparece em nenhum cadastro público imediatamente acessível. O cônjuge simplesmente não o menciona na partilha e espera que o outro lado não saiba da existência.
+    </p>
+
+    <p class="p">
+      O problema com essa estratégia é que ela subestima duas fontes de prova que são praticamente irrefutáveis. A primeira é a declaração de Imposto de Renda, que desde 2019 exige a informação de todos os criptoativos com valor acima de R$ 5 mil. Quem declarou corretamente durante o casamento criou um rastro documental que o cônjuge pode acessar via partilha de documentos no processo. A segunda fonte é a própria blockchain.
+    </p>
+
+    <div class="cx verm">
+      <span class="cx-tag">🔴 O paradoxo da blockchain</span>
+      <div class="cx-titulo">O ativo que parece invisível é, na verdade, o mais rastreável de todos</div>
+      <p class="cx-texto">
+        Cada transação em uma blockchain pública como Bitcoin ou Ethereum é permanente, imutável e visível para qualquer pessoa. Um perito especializado em análise forense de blockchain consegue reconstruir o histórico completo de movimentações de uma carteira, identificar quando os ativos foram adquiridos, qual era o saldo em determinada data e para onde foram transferidos. <strong>Transferir Bitcoin para uma carteira anônima antes do divórcio não esconde o ativo: cria uma trilha permanente e pública que demonstra exatamente o que foi feito e quando.</strong> Essa transferência, se feita com o propósito de subtrair o ativo da partilha, configura fraude à meação com base no Art. 1.722 CC.
+      </p>
+    </div>
+
+    <p class="p">
+      A ocultação via exchanges estrangeiras também tem limites crescentes. Tratados de cooperação internacional, a regulamentação de exchanges implementada pela Resolução BCB 232/2023 e o compartilhamento de informações entre a Receita Federal e as plataformas de criptoativos tornam cada vez mais difícil manter saldos significativos sem rastro documental.
+    </p>
+
+    <div class="cx lrj">
+      <span class="cx-tag">⚡ Estratégia para quem foi lesado</span>
+      <div class="cx-titulo">Como provar que o cônjuge tem criptoativos não declarados</div>
+      <p class="cx-texto">
+        O caminho processual tem três frentes que devem ser trabalhadas simultaneamente. A primeira é requerer ao juízo a exibição de todas as declarações de IR dos últimos cinco anos. A segunda é requerer ofício à Receita Federal para obter informações sobre ativos declarados pelo cônjuge. A terceira, e mais efetiva quando há suspeita de volume relevante, é <strong>requerer a nomeação de perito especializado em análise de blockchain e ativos digitais</strong>, que poderá rastrear endereços de carteira eventualmente identificados em extratos bancários, e-mails ou mensagens que apareçam no processo. Uma única transação identificada pode ser o fio que desfaz toda a ocultação.
+      </p>
+    </div>
+  </section>
+
+  <div class="divisor"><div class="divisor-sym">◆</div></div>
+
+  <!-- SEÇÃO 4 -->
+  <section class="secao">
+    <span class="secao-n">04</span>
+    <h2 class="secao-titulo">No inventário: como incluir criptoativos na herança</h2>
+
+    <p class="p">
+      Quando o titular de criptoativos falece, os ativos não desaparecem automaticamente nem se transferem sozinhos aos herdeiros. Eles precisam ser identificados, avaliados e formalmente incluídos no inventário para que a transmissão ocorra com segurança jurídica.
+    </p>
+
+    <p class="p">
+      O processo começa antes do inventário, com a localização dos ativos. Diferente de um imóvel que pode ser encontrado por pesquisa no CRI, ou de uma conta bancária que aparece em ofício ao Banco Central, os criptoativos não têm um cadastro centralizado. Os herdeiros precisam investigar.
+    </p>
+
+    <div class="acc-lista">
+
+      <div class="acc-item" onclick="toggleAcc(this)">
+        <div class="acc-header">
+          <div class="acc-icone">📋</div>
+          <div class="acc-titulo">Como localizar os criptoativos do falecido</div>
+          <div class="acc-seta">▾</div>
+        </div>
+        <div class="acc-corpo">
+          O primeiro passo é revisar as declarações de IR dos últimos anos, que devem listar os criptoativos declarados. O segundo é verificar os e-mails do falecido em busca de confirmações de cadastro em exchanges, extratos de saldo e comunicações de plataformas como Binance, Coinbase, Mercado Bitcoin e similares. O terceiro é procurar hardware wallets físicas nos pertences da pessoa, que geralmente se parecem com pendrives ou dispositivos eletrônicos pequenos. O quarto é verificar se há anotações com palavras que parecem aleatórias mas seguem um padrão de 12 a 24 termos, que pode ser uma seed phrase. <strong>Encontrar qualquer um desses elementos abre a porta para localizar os ativos e iniciar o processo de acesso.</strong>
+        </div>
+      </div>
+
+      <div class="acc-item" onclick="toggleAcc(this)">
+        <div class="acc-header">
+          <div class="acc-icone">🏦</div>
+          <div class="acc-titulo">Como acessar criptoativos em exchanges no inventário</div>
+          <div class="acc-seta">▾</div>
+        </div>
+        <div class="acc-corpo">
+          Cada exchange tem um processo próprio para transferência de ativos por morte do titular, mas todas exigem documentação formal. O conjunto básico inclui certidão de óbito, documento de identidade do inventariante ou do herdeiro, prova do vínculo com o falecido e, na maioria dos casos, um documento judicial que comprove a habilitação do herdeiro, seja um alvará de inventário extrajudicial, seja uma carta de adjudicação emitida no inventário judicial.<br><br>
+          <strong>Exchanges sediadas no exterior exigem atenção adicional</strong>: podem solicitar documentos apostilados ou traduzidos, o processo tende a ser mais lento e algumas podem bloquear o acesso definitivamente se o titular tiver deixado instruções específicas de segurança sem um plano de successão. Iniciar o contato com a exchange o quanto antes após o óbito é fundamental para evitar que a conta seja encerrada por inatividade prolongada.
+        </div>
+      </div>
+
+      <div class="acc-item" onclick="toggleAcc(this)">
+        <div class="acc-header">
+          <div class="acc-icone">🔑</div>
+          <div class="acc-titulo">Como acessar criptoativos em carteiras próprias no inventário</div>
+          <div class="acc-seta">▾</div>
+        </div>
+        <div class="acc-corpo">
+          Este é o cenário mais delicado. Se o falecido guardava os criptoativos em carteira própria sem ter documentado a seed phrase de forma acessível aos herdeiros, a situação pode ser irreversível. <strong>Não existe mecanismo jurídico ou técnico que permita acessar uma carteira sem a chave privada ou a seed phrase</strong>: nem inventário judicial, nem carta rogatória internacional, nem contato com desenvolvedores do software de carteira.<br><br>
+          Se a seed phrase for encontrada entre os pertences do falecido ou em local documentado, o processo é tecnicamente simples: o inventariante recupera a carteira em um dispositivo novo usando as palavras, e os ativos ficam acessíveis para transferência aos herdeiros conforme determinado no inventário. O problema jurídico surge quando há múltiplos herdeiros e não há consenso sobre quem guarda e administra a carteira durante o processo: uma medida cautelar pode ser necessária para preservar os ativos até a adjudicação final.
+        </div>
+      </div>
+
+      <div class="acc-item" onclick="toggleAcc(this)">
+        <div class="acc-header">
+          <div class="acc-icone">⚖️</div>
+          <div class="acc-titulo">Como avaliar o valor dos criptoativos para o inventário</div>
+          <div class="acc-seta">▾</div>
+        </div>
+        <div class="acc-corpo">
+          O valor de referência para inclusão no inventário é a cotação do ativo na data do óbito, convertida para reais. A fonte mais usada é a cotação do dia em exchanges de referência como Coinbase, Binance ou o índice publicado pela própria Receita Federal. A volatilidade dos criptoativos cria uma situação peculiar: o valor na data do óbito pode ser muito diferente do valor na data da homologação do inventário, meses ou anos depois.<br><br>
+          <strong>A melhor prática é registrar o valor na data do óbito com documentação formal</strong>, como um print do saldo da exchange com data e hora verificáveis, e congelar o ativo até a adjudicação para evitar disputas sobre variações de valor entre os herdeiros. Em inventários com valores relevantes, a nomeação de perito especializado para avaliação é recomendável.
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divisor"><div class="divisor-sym">◆</div></div>
+
+  <!-- SEÇÃO 5 -->
+  <section class="secao">
+    <span class="secao-n">05</span>
+    <h2 class="secao-titulo">Os documentos que provam a existência e o valor do ativo</h2>
+
+    <p class="p">
+      Em um processo judicial, seja de divórcio ou de inventário, os ativos só existem se puderem ser provados. A produção de prova sobre criptoativos tem características próprias que diferem dos documentos usados para imóveis ou contas bancárias tradicionais, mas é plenamente possível e cada vez mais aceita pelos juízos brasileiros.
+    </p>
+
+    <div class="doc-lista">
+
+      <div class="doc-item">
+        <div class="doc-icone">📄</div>
+        <div>
+          <div class="doc-titulo">Declaração de Imposto de Renda</div>
+          <div class="doc-desc">É o documento principal. Obrigatória para quem detém criptoativos acima de R$ 5 mil desde 2019. A ficha de Bens e Direitos, código 89, lista cada ativo com seu CNPJ da exchange e o custo de aquisição. Três a cinco anos de declarações criam um histórico robusto de quando e quanto foi adquirido.</div>
+        </div>
+      </div>
+
+      <div class="doc-item">
+        <div class="doc-icone">🖥️</div>
+        <div>
+          <div class="doc-titulo">Extrato da exchange com certificação</div>
+          <div class="doc-desc">As exchanges emitem extratos de histórico de transações que podem ser exportados em PDF. Para ter validade probatória mais robusta, o ideal é uma ata notarial em que o tabelião acessa o sistema da exchange na presença das partes e certifica o saldo e o histórico. Esse documento tem fé pública e é muito difícil de contestar.</div>
+        </div>
+      </div>
+
+      <div class="doc-item">
+        <div class="doc-icone">⛓️</div>
+        <div>
+          <div class="doc-titulo">Histórico de transações na blockchain</div>
+          <div class="doc-desc">Para carteiras próprias, exploradores de blockchain como Blockchain.com para Bitcoin ou Etherscan para Ethereum permitem visualizar e exportar o histórico completo de qualquer endereço público. Esse histórico é imutável e pode ser apresentado como prova do saldo em qualquer data passada.</div>
+        </div>
+      </div>
+
+      <div class="doc-item">
+        <div class="doc-icone">🏦</div>
+        <div>
+          <div class="doc-titulo">Extratos bancários das compras</div>
+          <div class="doc-desc">Transferências bancárias para exchanges registradas no Brasil aparecem nos extratos bancários com identificação do destinatário. Esses extratos provam quando o dinheiro saiu para comprar criptoativos e, combinados com o histórico da exchange, permitem rastrear a origem dos recursos e definir se eram particulares ou comuns.</div>
+        </div>
+      </div>
+
+      <div class="doc-item">
+        <div class="doc-icone">🔍</div>
+        <div>
+          <div class="doc-titulo">Laudo de perito especializado em blockchain</div>
+          <div class="doc-desc">Em casos de alto valor ou de suspeita de ocultação, o laudo pericial é o instrumento mais robusto. O perito analisa endereços de carteira, rastreia movimentações, identifica transferências suspeitas no período anterior ao divórcio e estima o valor dos ativos em datas específicas. É o equivalente ao laudo de avaliação imobiliária, aplicado ao universo digital.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divisor"><div class="divisor-sym">◆</div></div>
+
+  <!-- SEÇÃO 6 -->
+  <section class="secao">
+    <span class="secao-n">06</span>
+    <h2 class="secao-titulo">Como organizar seus criptoativos antes de precisar</h2>
+
+    <p class="p">
+      Quem tem criptoativos com valor relevante e está em um relacionamento formal tem duas responsabilidades simultâneas que muitas vezes são negligenciadas. A primeira é garantir que, em vida, os ativos estejam organizados de forma que o cônjuge ou os herdeiros possam acessá-los caso necessário. A segunda é garantir que a estrutura de posse reflita corretamente a natureza jurídica de cada ativo, para evitar disputas desnecessárias em um eventual divórcio.
+    </p>
+
+    <div class="tl">
+
+      <div class="tl-item">
+        <div class="tl-dot ativo">1</div>
+        <div>
+          <span class="tl-tag">Clareza documental</span>
+          <div class="tl-titulo">Declare corretamente no Imposto de Renda</div>
+          <p class="tl-texto">
+            Parece óbvio, mas a declaração correta e completa no IR é o ato mais importante para quem quer que haja transparência sobre seus criptoativos. Cada ativo precisa estar listado com o custo de aquisição e o CNPJ da plataforma onde está custodiado. <strong>Quem não declarou e quer regularizar a situação pode fazê-lo com declaração retificadora</strong>, o que cria um histórico a partir da data da retificação. Não declarar e depois tentar provar que o ativo é particular no divórcio é uma posição processual muito frágil.
+          </p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot">2</div>
+        <div>
+          <span class="tl-tag">Segregação patrimonial</span>
+          <div class="tl-titulo">Separe os recursos de origem particular dos recursos comuns</div>
+          <p class="tl-texto">
+            Se você quer proteger criptoativos adquiridos antes do casamento como bens particulares, mantenha-os em contas de exchange separadas dos criptoativos adquiridos com recursos comuns durante o casamento. <strong>Misturar tudo em uma mesma conta de exchange cria a contaminação de recursos</strong> que dificulta provar a origem particular de parte dos ativos. Contas separadas com histórico de depósito rastreável é a forma mais simples e eficaz de manter a segregação.
+          </p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot">3</div>
+        <div>
+          <span class="tl-tag">Proteção no casamento</span>
+          <div class="tl-titulo">Inclua criptoativos expressamente no pacto antenupcial</div>
+          <p class="tl-texto">
+            Um pacto antenupcial de separação total que menciona expressamente "investimentos em ativos digitais e criptoativos" como categoria excluída da partilha é significativamente mais robusto do que um pacto genérico. <strong>A especificidade da linguagem dificulta a interpretação contrária</strong> e demonstra que ambas as partes tinham consciência clara do que estava sendo excluído da comunhão. Isso é especialmente relevante quando um dos cônjuges já possui portfólio relevante antes do casamento.
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="cx verde">
+      <span class="cx-tag">✅ O ponto mais subestimado</span>
+      <div class="cx-titulo">Informe ao menos uma pessoa de confiança sobre seus criptoativos</div>
+      <p class="cx-texto">
+        Independente de qualquer estrutura jurídica, o ato mais simples e mais eficaz de planejamento é garantir que pelo menos uma pessoa próxima saiba que você tem criptoativos, em quais plataformas e onde está a informação de acesso. <strong>Um patrimônio em criptoativos bem organizado juridicamente mas desconhecido pelos herdeiros pode ser perdido para sempre</strong>, como discutimos no guia de herança digital. A transparência dentro da família, ou ao menos com o advogado responsável pelo planejamento sucessório, é a proteção mais básica e mais negligenciada.
+      </p>
+    </div>
+  </section>
+
+  <div class="divisor"><div class="divisor-sym">◆</div></div>
+
+  <div class="destaque">
+    <p class="dest-texto">
+      A blockchain não perdoa a falta de planejamento. <strong>O ativo que parece invisível no divórcio é o mesmo que some para sempre no inventário</strong> se as chaves não forem documentadas. Transparência jurídica e organização técnica precisam andar juntas.
+    </p>
+    <div class="dest-autor">Dr. Filipe Ferreira · OAB/ES 37.159</div>
+  </div>
+
+  <div class="grava">
+    <span class="grava-label">Os 8 Pontos Essenciais</span>
+    <div class="grava-item">Criptoativo adquirido durante o casamento em comunhão parcial: <span>bem comum. Entra na partilha.</span></div>
+    <div class="grava-item">Criptoativo adquirido antes do casamento: <span>bem particular. Blockchain prova a data.</span></div>
+    <div class="grava-item">Valorização passiva de criptoativo particular: <span>em regra não comunica na comunhão parcial.</span></div>
+    <div class="grava-item">Ocultação via transferência para carteira anônima: <span>fraude à meação rastreável na blockchain. Art. 1.722 CC.</span></div>
+    <div class="grava-item">Data de avaliação no divórcio: <span>cotação na data da separação de fato, não da sentença.</span></div>
+    <div class="grava-item">Inventário em exchange: <span>certidão de óbito, habilitação judicial, documentação do herdeiro.</span></div>
+    <div class="grava-item">Carteira própria sem seed phrase: <span>acesso impossível. Não há solução jurídica ou técnica.</span></div>
+    <div class="grava-item">Prova mais robusta: <span>declaração de IR, extrato de exchange com ata notarial e laudo de perito especializado.</span></div>
+  </div>
+
+  <div class="cta-box">
+    <span class="cta-tag">Consultoria Especializada</span>
+    <h2 class="cta-titulo">
+      Seus criptoativos estão
+      <em>protegidos juridicamente?</em>
+    </h2>
+    <p class="cta-sub">Planejamento patrimonial com ativos digitais. Divórcio e inventário com criptoativos. Atendimento online para todo o Brasil.</p>
+    <div class="cta-btns">
+      <a href="https://wa.me/5527995187279?text=Ol%C3%A1%2C+vim+pelo+guia+de+Criptoativos+no+Div%C3%B3rcio+e+gostaria+de+uma+orienta%C3%A7%C3%A3o." class="btn-p">
+        💬 WhatsApp — Falar Agora
+      </a>
+      <a href="mailto:escritorio@filipeeassociadosadvogado.com.br?subject=Consulta%20sobre%20Criptoativos" class="btn-s">
+        ✉️ Enviar E-mail
+      </a>
+    </div>
+    <div class="cta-oab">Filipe Ferreira · OAB/ES 37.159 · Direito de Família e Proteção Patrimonial</div>
+  </div>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-nome">Filipe Ferreira — Advogado e Associados</div>
+  <div class="footer-sub">OAB/ES 37.159 · Linhares, ES · Atendimento Online · Brasil</div>
+</footer>
+
+<script>
+  const respostas = {
+    a: { cls: 'btc', label: 'Análise do Seu Cenário',
+      txt: 'Criptoativos adquiridos durante o casamento em comunhão parcial são <strong>bens comuns</strong>. O cônjuge tem direito à meação sobre o valor na data da separação de fato. A volatilidade torna essa data crítica: documente a cotação do dia da separação de fato com extrato da exchange ou ata notarial. Se você tem ativos anteriores ao casamento misturados com ativos adquiridos durante, separe a documentação de origem de cada parte para proteger o que é particular.' },
+    b: { cls: 'vermelho', label: 'Risco Identificado — Ação Necessária',
+      txt: 'A ocultação de criptoativos é <strong>fraude à meação</strong> nos termos do Art. 1.722 CC. Mas o caminho para provar é específico. Requeira ao juízo a exibição das declarações de IR dos últimos cinco anos, pois quem declarou corretamente criou um rastro. Requeira ofício à Receita Federal. Em casos relevantes, nomeie perito especializado em blockchain que possa rastrear endereços de carteira identificados em qualquer documento do processo. A blockchain é pública e permanente: transferências feitas para ocultar ativos ficam registradas para sempre.' },
+    c: { cls: 'amarelo', label: 'Inventário com Criptoativos',
+      txt: 'O primeiro passo é localizar as plataformas onde os ativos estavam custodiados. Revise as declarações de IR dos últimos anos, verifique os e-mails em busca de confirmações de exchange e procure hardware wallets entre os pertences. Para ativos em exchanges, o processo de habilitação requer documentação formal. Para carteiras próprias, a seed phrase é indispensável. <strong>Cada dia conta: inicie o contato com as exchanges imediatamente após identificá-las</strong>, antes que inatividade prolongada gere complicações adicionais.' },
+    d: { cls: 'verde', label: 'Planejamento Preventivo',
+      txt: 'Você está no momento ideal. As três ações mais importantes são: declarar corretamente todos os ativos no IR com o custo de aquisição real, manter contas de exchange separadas para ativos particulares e ativos comuns, e incluir uma cláusula específica sobre criptoativos no pacto antenupcial se você for se casar. <strong>Documentar a seed phrase de forma segura e acessível para herdeiros de confiança</strong> é a proteção mais negligenciada e mais crítica. Um testamento que menciona os ativos digitais e indica onde está a documentação de acesso resolve em um documento a maior parte dos riscos.' }
+  };
+
+  let ativo = null;
+  function marcar(el, id) {
+    document.querySelectorAll('.q-item').forEach(q => {
+      q.classList.remove('on'); q.querySelector('.q-box').textContent = '';
+    });
+    const res = document.getElementById('q-res');
+    if (ativo === id) { ativo = null; res.classList.remove('visivel'); return; }
+    ativo = id;
+    el.classList.add('on'); el.querySelector('.q-box').textContent = '✓';
+    const r = respostas[id];
+    res.className = `q-res visivel ${r.cls}`;
+    res.innerHTML = `<span class="q-res-label">${r.label}</span><p class="q-res-texto">${r.txt}</p>`;
+  }
+
+  function toggleAcc(el) {
+    const ab = el.classList.contains('aberto');
+    document.querySelectorAll('.acc-item').forEach(a => a.classList.remove('aberto'));
+    if (!ab) el.classList.add('aberto');
+  }
+</script>
+
+</body>
+</html>

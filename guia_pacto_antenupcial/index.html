@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pacto Antenupcial — Guia Completo · Dr. Filipe Ferreira</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0d0d0d;
+    --ink2: #1a1a1a;
+    --ink3: #252525;
+    --gold: #b8922a;
+    --gold2: #d4aa4a;
+    --gold-light: #f0d080;
+    --gold-dim: rgba(184,146,42,0.1);
+    --gold-border: rgba(184,146,42,0.25);
+    --cream: #f5f0e8;
+    --cream2: #ede6d6;
+    --text: #2a2a2a;
+    --text2: #4a4a4a;
+    --muted: #888878;
+    --white: #fdfaf4;
+    --red-soft: #c0392b;
+    --green-soft: #1e7e4a;
+    --radius: 4px;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    background: var(--white);
+    color: var(--text);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 400;
+    line-height: 1.8;
+    font-size: 16px;
+  }
+
+  /* HERO */
+  .hero {
+    background: var(--ink);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 24px 64px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* FUNDO TEXTURA */
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 60px,
+        rgba(184,146,42,0.04) 60px,
+        rgba(184,146,42,0.04) 61px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 60px,
+        rgba(184,146,42,0.04) 60px,
+        rgba(184,146,42,0.04) 61px
+      );
+    pointer-events: none;
+  }
+
+  /* ORNAMENTO CENTRAL */
+  .hero::after {
+    content: '';
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    border: 1px solid rgba(184,146,42,0.08);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--gold2);
+    margin-bottom: 28px;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    animation: fadeIn 0.8s ease forwards;
+  }
+  .hero-eyebrow::before,
+  .hero-eyebrow::after {
+    content: '';
+    width: 48px;
+    height: 1px;
+    background: var(--gold-border);
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(40px, 8vw, 80px);
+    font-weight: 900;
+    color: var(--cream);
+    line-height: 1.05;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 6px;
+    animation: fadeIn 0.9s ease forwards;
+  }
+
+  .hero-title .gold-line {
+    color: var(--gold2);
+    display: block;
+    font-style: italic;
+    font-weight: 700;
+  }
+
+  .hero-divider {
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold2), transparent);
+    margin: 28px auto;
+    position: relative;
+    z-index: 1;
+    animation: expandW 1s ease 0.3s forwards;
+    transform-origin: center;
+  }
+
+  .hero-sub {
+    font-size: clamp(14px, 2vw, 17px);
+    color: rgba(245,240,232,0.6);
+    max-width: 520px;
+    margin: 0 auto 48px;
+    position: relative;
+    z-index: 1;
+    font-weight: 300;
+    animation: fadeIn 1s ease 0.2s forwards;
+    opacity: 0;
+  }
+
+  .hero-badge-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    position: relative;
+    z-index: 1;
+    animation: fadeIn 1s ease 0.4s forwards;
+    opacity: 0;
+  }
+
+  .hero-badge {
+    background: rgba(184,146,42,0.12);
+    border: 1px solid var(--gold-border);
+    color: var(--gold-light);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    padding: 7px 18px;
+    border-radius: 100px;
+  }
+
+  .scroll-cta {
+    position: relative;
+    z-index: 1;
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    color: rgba(245,240,232,0.3);
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    animation: fadeIn 1.2s ease 0.6s forwards;
+    opacity: 0;
+  }
+  .scroll-line {
+    width: 1px;
+    height: 48px;
+    background: linear-gradient(to bottom, var(--gold-border), transparent);
+    animation: growDown 1.5s ease infinite;
+  }
+
+  /* MAIN */
+  .main { max-width: 780px; margin: 0 auto; padding: 80px 24px 100px; }
+
+  /* INTRO */
+  .intro {
+    text-align: center;
+    padding: 64px 0 56px;
+    border-bottom: 1px solid var(--cream2);
+    margin-bottom: 64px;
+  }
+  .intro-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    display: block;
+  }
+  .intro-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 5vw, 42px);
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+  .intro-title em { color: var(--gold); font-style: italic; }
+  .intro-text {
+    font-size: 16px;
+    color: var(--text2);
+    max-width: 580px;
+    margin: 0 auto;
+    line-height: 1.85;
+  }
+
+  /* SEÇÕES */
+  .secao { margin-bottom: 72px; }
+  .secao-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 80px;
+    font-weight: 900;
+    color: var(--cream2);
+    line-height: 1;
+    margin-bottom: -16px;
+    display: block;
+  }
+  .secao-titulo {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(22px, 4vw, 32px);
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 20px;
+    line-height: 1.25;
+    border-bottom: 2px solid var(--cream2);
+    padding-bottom: 16px;
+    position: relative;
+  }
+  .secao-titulo::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 48px;
+    height: 2px;
+    background: var(--gold);
+  }
+  .secao-texto {
+    font-size: 16px;
+    color: var(--text2);
+    line-height: 1.85;
+    margin-bottom: 20px;
+  }
+  .secao-texto strong { color: var(--ink); font-weight: 600; }
+
+  /* CITAÇÃO DE LEI */
+  .lei-box {
+    background: var(--ink);
+    color: var(--cream);
+    border-radius: 8px;
+    padding: 28px 32px;
+    margin: 28px 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .lei-box::before {
+    content: '§';
+    position: absolute;
+    right: 24px;
+    top: 16px;
+    font-family: 'Playfair Display', serif;
+    font-size: 80px;
+    color: rgba(184,146,42,0.12);
+    line-height: 1;
+  }
+  .lei-ref {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    color: var(--gold2);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    display: block;
+  }
+  .lei-texto {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-style: italic;
+    color: rgba(245,240,232,0.85);
+    line-height: 1.8;
+  }
+  .lei-texto strong { color: var(--gold2); font-style: normal; font-weight: 700; }
+
+  /* CARDS COMPARATIVO */
+  .comp-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 28px 0;
+  }
+  .comp-card {
+    border-radius: 8px;
+    padding: 24px;
+    border: 1.5px solid;
+  }
+  .comp-card.sim {
+    background: rgba(30,126,74,0.04);
+    border-color: rgba(30,126,74,0.2);
+  }
+  .comp-card.nao {
+    background: rgba(192,57,43,0.04);
+    border-color: rgba(192,57,43,0.2);
+  }
+  .comp-card-header {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .comp-card.sim .comp-card-header { color: var(--green-soft); }
+  .comp-card.nao .comp-card-header { color: var(--red-soft); }
+  .comp-item {
+    font-size: 13px;
+    color: var(--text2);
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    line-height: 1.5;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .comp-item:last-child { border-bottom: none; }
+  .comp-item .ci { flex-shrink: 0; font-size: 12px; margin-top: 2px; }
+
+  /* DESTAQUE DOURADO */
+  .destaque-box {
+    background: linear-gradient(135deg, var(--ink) 0%, var(--ink3) 100%);
+    border: 1px solid var(--gold-border);
+    border-radius: 8px;
+    padding: 32px;
+    margin: 28px 0;
+    position: relative;
+  }
+  .destaque-box::before {
+    content: '"';
+    font-family: 'Playfair Display', serif;
+    font-size: 120px;
+    color: rgba(184,146,42,0.08);
+    position: absolute;
+    top: -10px;
+    left: 16px;
+    line-height: 1;
+  }
+  .destaque-texto {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(16px, 2.5vw, 20px);
+    font-style: italic;
+    color: var(--cream);
+    line-height: 1.65;
+    position: relative;
+    z-index: 1;
+  }
+  .destaque-texto strong { color: var(--gold2); font-style: normal; }
+  .destaque-autor {
+    margin-top: 16px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: var(--gold);
+    text-transform: uppercase;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* LINHA DO TEMPO */
+  .timeline { margin: 32px 0; }
+  .tl-item {
+    display: flex;
+    gap: 20px;
+    padding-bottom: 28px;
+    position: relative;
+  }
+  .tl-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 19px;
+    top: 40px;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--gold-border), transparent);
+  }
+  .tl-dot {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--ink);
+    border: 2px solid var(--gold-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    flex-shrink: 0;
+  }
+  .tl-content {}
+  .tl-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .tl-titulo {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  .tl-texto { font-size: 14px; color: var(--text2); line-height: 1.7; }
+  .tl-texto strong { color: var(--ink); font-weight: 600; }
+
+  /* MITOS */
+  .mito-item {
+    background: var(--white);
+    border: 1px solid var(--cream2);
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 14px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .mito-item:hover { border-color: var(--gold-border); }
+  .mito-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .mito-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+    background: rgba(192,57,43,0.08);
+  }
+  .mito-pergunta {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.4;
+    flex: 1;
+    padding-top: 6px;
+  }
+  .mito-seta {
+    font-size: 14px;
+    color: var(--muted);
+    transition: transform 0.3s;
+    padding-top: 8px;
+    flex-shrink: 0;
+  }
+  .mito-item.aberto .mito-seta { transform: rotate(180deg); }
+  .mito-resposta {
+    display: none;
+    padding-top: 14px;
+    margin-top: 14px;
+    border-top: 1px solid var(--cream2);
+    font-size: 14px;
+    color: var(--text2);
+    line-height: 1.75;
+  }
+  .mito-resposta strong { color: var(--green-soft); font-weight: 600; }
+  .mito-item.aberto .mito-resposta { display: block; }
+
+  /* CHECKLIST QUANDO USAR */
+  .quando-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 28px 0;
+  }
+  .quando-item {
+    background: var(--cream);
+    border-radius: 8px;
+    padding: 20px;
+    border-left: 3px solid var(--gold);
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .quando-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 900;
+    color: var(--gold);
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  .quando-texto { font-size: 13px; color: var(--text2); line-height: 1.6; }
+  .quando-texto strong { color: var(--ink); font-weight: 600; display: block; margin-bottom: 2px; }
+
+  /* ALERTA */
+  .alerta-box {
+    background: rgba(192,57,43,0.05);
+    border: 1.5px solid rgba(192,57,43,0.2);
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin: 28px 0;
+  }
+  .alerta-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: var(--red-soft);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .alerta-titulo {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: #8b1a1a;
+    margin-bottom: 8px;
+  }
+  .alerta-texto { font-size: 14px; color: #6b3030; line-height: 1.75; }
+  .alerta-texto strong { color: #8b1a1a; font-weight: 700; }
+
+  /* CTA FINAL */
+  .cta-section {
+    background: var(--ink);
+    border-radius: 12px;
+    padding: 56px 40px;
+    text-align: center;
+    margin-top: 72px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 60% at 50% 100%, rgba(184,146,42,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .cta-eyebrow {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    color: var(--gold2);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+    display: block;
+  }
+  .cta-titulo {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(26px, 5vw, 40px);
+    font-weight: 900;
+    color: var(--cream);
+    line-height: 1.15;
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 1;
+  }
+  .cta-titulo em { color: var(--gold2); font-style: italic; }
+  .cta-sub {
+    font-size: 15px;
+    color: rgba(245,240,232,0.55);
+    max-width: 440px;
+    margin: 0 auto 36px;
+    position: relative;
+    z-index: 1;
+    font-weight: 300;
+  }
+  .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--gold);
+    color: var(--ink);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 16px 36px;
+    border-radius: 100px;
+    text-decoration: none;
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s;
+  }
+  .cta-btn:hover { background: var(--gold2); transform: translateY(-2px); }
+  .cta-oab {
+    margin-top: 20px;
+    font-size: 11px;
+    color: rgba(245,240,232,0.25);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* FOOTER */
+  .footer {
+    background: var(--ink2);
+    text-align: center;
+    padding: 32px 24px;
+    border-top: 1px solid rgba(184,146,42,0.1);
+  }
+  .footer-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    color: var(--cream);
+    margin-bottom: 4px;
+  }
+  .footer-sub { font-size: 11px; color: rgba(245,240,232,0.25); letter-spacing: 2px; text-transform: uppercase; }
+
+  /* DIVIDER ORNAMENTAL */
+  .divider-ornamento {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 56px 0;
+    color: var(--gold-border);
+  }
+  .divider-ornamento::before,
+  .divider-ornamento::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--cream2);
+  }
+  .divider-ornamento-symbol {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: var(--gold);
+    opacity: 0.6;
+  }
+
+  /* ANIMAÇÕES */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes expandW {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+  @keyframes growDown {
+    0% { height: 0; opacity: 1; }
+    100% { height: 48px; opacity: 0; }
+  }
+
+  @media (max-width: 620px) {
+    .comp-grid { grid-template-columns: 1fr; }
+    .quando-grid { grid-template-columns: 1fr; }
+    .cta-section { padding: 40px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-eyebrow">Direito de Família</div>
+  <h1 class="hero-title">
+    Pacto
+    <span class="gold-line">Antenupcial</span>
+  </h1>
+  <div class="hero-divider"></div>
+  <p class="hero-sub">
+    Tudo o que você precisa saber antes de casar — sem juridiquês, sem omissões, com a profundidade que o tema merece.
+  </p>
+  <div class="hero-badge-row">
+    <span class="hero-badge">Arts. 1.653 a 1.657 CC</span>
+    <span class="hero-badge">Escritura Pública</span>
+    <span class="hero-badge">Proteção Patrimonial</span>
+    <span class="hero-badge">Planejamento Sucessório</span>
+  </div>
+  <div class="scroll-cta">
+    <span>Leia o guia</span>
+    <div class="scroll-line"></div>
+  </div>
+</header>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- INTRO -->
+  <div class="intro">
+    <span class="intro-label">Sobre este guia</span>
+    <h2 class="intro-title">O instrumento que protege o que você <em>construiu</em> — e o que você ainda vai construir</h2>
+    <p class="intro-text">
+      O pacto antenupcial é um dos documentos mais estratégicos que existem no Direito de Família. Mal compreendido por muitos e subestimado por quase todos — inclusive por pessoas com patrimônio relevante. Este guia foi criado para mudar isso.
+    </p>
+  </div>
+
+  <!-- SEÇÃO 1: O QUE É -->
+  <section class="secao">
+    <span class="secao-num">01</span>
+    <h2 class="secao-titulo">O que é o Pacto Antenupcial</h2>
+    <p class="secao-texto">
+      O pacto antenupcial é um contrato formal celebrado <strong>antes do casamento</strong>, por meio de escritura pública lavrada em cartório, no qual os noivos escolhem o regime de bens que vai reger o patrimônio do casal — e podem estabelecer regras específicas sobre o que comunica, o que não comunica e como serão tratadas situações que a lei não previu.
+    </p>
+    <p class="secao-texto">
+      Sem o pacto, o casamento segue automaticamente o regime de <strong>Comunhão Parcial de Bens</strong> — o chamado regime legal, imposto pelo Código Civil por padrão. Isso significa que tudo o que for adquirido a título oneroso durante o casamento será dividido igualmente na dissolução, independente de quem pagou ou de qual foi a contribuição de cada cônjuge.
+    </p>
+
+    <div class="lei-box">
+      <span class="lei-ref">Art. 1.653 — Código Civil</span>
+      <p class="lei-texto">
+        "É nulo o pacto antenupcial se não for feito por <strong>escritura pública</strong>, e ineficaz se o casamento não se realizar."
+      </p>
+    </div>
+
+    <p class="secao-texto">
+      Dois pontos técnicos essenciais decorrem desse artigo. O primeiro: <strong>não existe pacto antenupcial verbal ou por documento particular</strong>. A escritura pública é requisito de validade, não de prova. O segundo: o pacto só produz efeitos se o casamento se realizar. Se os noivos se separarem antes de casar, o instrumento perde toda a eficácia automaticamente.
+    </p>
+  </section>
+
+  <div class="divider-ornamento">
+    <span class="divider-ornamento-symbol">✦</span>
+  </div>
+
+  <!-- SEÇÃO 2: OS 4 REGIMES -->
+  <section class="secao">
+    <span class="secao-num">02</span>
+    <h2 class="secao-titulo">Os quatro regimes disponíveis</h2>
+    <p class="secao-texto">
+      O pacto antenupcial é o instrumento para escolher o regime. Mas a escolha precede a assinatura — e ela precisa ser informada. Cada regime tem uma lógica distinta para o patrimônio presente e futuro do casal.
+    </p>
+
+    <div class="timeline">
+
+      <div class="tl-item">
+        <div class="tl-dot">🔄</div>
+        <div class="tl-content">
+          <div class="tl-label">Regime Legal — Padrão sem pacto</div>
+          <div class="tl-titulo">Comunhão Parcial de Bens</div>
+          <div class="tl-texto">
+            O que cada cônjuge tinha antes de casar continua sendo dele. O que for adquirido onerosamente durante o casamento pertence aos dois igualmente. <strong>Herança e doação não comunicam</strong>, mesmo que recebidas durante o casamento. É o regime mais usado no Brasil por ser o padrão automático.
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot">🌐</div>
+        <div class="tl-content">
+          <div class="tl-label">Via pacto antenupcial</div>
+          <div class="tl-titulo">Comunhão Universal de Bens</div>
+          <div class="tl-texto">
+            Tudo comunica: o que existia antes, o que for adquirido durante, inclusive herança e doação — <strong>salvo cláusula de incomunicabilidade</strong> imposta pelo doador ou testador. É o regime da fusão total. Recomendável apenas em situações muito específicas, pois também une os passivos.
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot">🔒</div>
+        <div class="tl-content">
+          <div class="tl-label">Via pacto antenupcial</div>
+          <div class="tl-titulo">Separação Total de Bens</div>
+          <div class="tl-texto">
+            Cada cônjuge mantém patrimônio inteiramente próprio. O que existia antes é seu. O que for adquirido durante também continua sendo exclusivamente de quem adquiriu. <strong>Nada comunica.</strong> Exige pacto formal e, para valer contra terceiros, o pacto precisa ser registrado no Cartório de Registro de Imóveis.
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot">⚖️</div>
+        <div class="tl-content">
+          <div class="tl-label">Via pacto antenupcial</div>
+          <div class="tl-titulo">Participação Final nos Aquestos</div>
+          <div class="tl-texto">
+            O regime híbrido. <strong>Durante o casamento funciona como separação total</strong> — cada um administra o próprio patrimônio com plena autonomia. Na dissolução funciona como comunhão parcial — os bens adquiridos durante o casamento são calculados e o cônjuge que acumulou mais compensa o outro com metade da diferença. Muito usado por empresários, mas tem riscos que precisam ser gerenciados.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider-ornamento">
+    <span class="divider-ornamento-symbol">✦</span>
+  </div>
+
+  <!-- SEÇÃO 3: O QUE O PACTO PODE E NÃO PODE -->
+  <section class="secao">
+    <span class="secao-num">03</span>
+    <h2 class="secao-titulo">O que o pacto pode — e o que ele não pode</h2>
+    <p class="secao-texto">
+      O pacto antenupcial tem ampla liberdade de conteúdo, mas não é ilimitado. Existem disposições que a lei permite expressamente e outras que a lei proíbe, mesmo que as partes concordem. Conhecer essa fronteira é essencial para não redigir um pacto que será parcialmente nulo sem que ninguém perceba.
+    </p>
+
+    <div class="comp-grid">
+      <div class="comp-card sim">
+        <div class="comp-card-header">✅ O pacto pode</div>
+        <div class="comp-item"><span class="ci">→</span> Escolher qualquer dos quatro regimes de bens</div>
+        <div class="comp-item"><span class="ci">→</span> Estabelecer regras específicas sobre bens individuais</div>
+        <div class="comp-item"><span class="ci">→</span> Excluir nominalmente ativos da partilha futura</div>
+        <div class="comp-item"><span class="ci">→</span> Prever a não comunicação de valorizações de empresas preexistentes</div>
+        <div class="comp-item"><span class="ci">→</span> Definir critérios de administração do patrimônio comum</div>
+        <div class="comp-item"><span class="ci">→</span> Estabelecer regras sobre o uso do nome após o divórcio</div>
+        <div class="comp-item"><span class="ci">→</span> Dispor sobre doações entre cônjuges</div>
+      </div>
+      <div class="comp-card nao">
+        <div class="comp-card-header">✗ O pacto não pode</div>
+        <div class="comp-item"><span class="ci">→</span> Afastar a obrigação de alimentos entre cônjuges</div>
+        <div class="comp-item"><span class="ci">→</span> Renunciar antecipadamente à herança do outro cônjuge</div>
+        <div class="comp-item"><span class="ci">→</span> Alterar as regras de guarda dos filhos</div>
+        <div class="comp-item"><span class="ci">→</span> Estabelecer penalidades financeiras por infidelidade</div>
+        <div class="comp-item"><span class="ci">→</span> Contrariar as disposições protetivas do Direito de Família</div>
+        <div class="comp-item"><span class="ci">→</span> Prejudicar direitos de terceiros credores</div>
+        <div class="comp-item"><span class="ci">→</span> Ser modificado depois do casamento sem processo judicial</div>
+      </div>
+    </div>
+
+    <div class="lei-box">
+      <span class="lei-ref">Art. 1.655 — Código Civil</span>
+      <p class="lei-texto">
+        "É nula a convenção ou cláusula dela que <strong>contravenha disposição absoluta de lei</strong>."
+      </p>
+    </div>
+  </section>
+
+  <div class="divider-ornamento">
+    <span class="divider-ornamento-symbol">✦</span>
+  </div>
+
+  <!-- SEÇÃO 4: QUANDO FAZER -->
+  <section class="secao">
+    <span class="secao-num">04</span>
+    <h2 class="secao-titulo">Quando o pacto é especialmente recomendado</h2>
+    <p class="secao-texto">
+      O pacto não é exclusividade de pessoas ricas. Ele é recomendado em qualquer situação em que a clareza patrimonial protege não apenas o patrimônio, mas a própria relação — evitando conflitos futuros que surgem não da má-fé, mas da falta de acordos prévios.
+    </p>
+
+    <div class="quando-grid">
+      <div class="quando-item">
+        <div class="quando-num">01</div>
+        <div class="quando-texto">
+          <strong>Empresários e sócios</strong>
+          Quando um dos cônjuges tem participação em empresa, o pacto protege a empresa de ser objeto de partilha, evitando que um divórcio force a dissolução ou a entrada de um estranho na sociedade.
+        </div>
+      </div>
+      <div class="quando-item">
+        <div class="quando-num">02</div>
+        <div class="quando-texto">
+          <strong>Segundo casamento com filhos</strong>
+          Protege o patrimônio que será transmitido aos filhos do primeiro casamento, impedindo que o novo cônjuge herde bens destinados a eles.
+        </div>
+      </div>
+      <div class="quando-item">
+        <div class="quando-num">03</div>
+        <div class="quando-texto">
+          <strong>Patrimônio preexistente significativo</strong>
+          Quem entra no casamento com imóveis, investimentos ou negócios consolidados tem interesse em blindar esse patrimônio da lógica automática da comunhão.
+        </div>
+      </div>
+      <div class="quando-item">
+        <div class="quando-num">04</div>
+        <div class="quando-texto">
+          <strong>Diferença de renda expressiva</strong>
+          Quando um cônjuge tem renda muito superior ao outro, o pacto permite definir regras que equilibrem proteção mútua sem expor desproporcionalmente quem tem mais.
+        </div>
+      </div>
+      <div class="quando-item">
+        <div class="quando-num">05</div>
+        <div class="quando-texto">
+          <strong>Herança futura prevista</strong>
+          Quando um dos noivos tem perspectiva concreta de receber herança significativa, o pacto pode prever expressamente que esse patrimônio não integrará a comunhão.
+        </div>
+      </div>
+      <div class="quando-item">
+        <div class="quando-num">06</div>
+        <div class="quando-texto">
+          <strong>Autonomia e clareza como valor</strong>
+          Mesmo sem patrimônio volumoso, casais que valorizam transparência e preferem regras claras desde o início encontram no pacto uma forma de evitar conflitos futuros.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider-ornamento">
+    <span class="divider-ornamento-symbol">✦</span>
+  </div>
+
+  <!-- SEÇÃO 5: MITOS -->
+  <section class="secao">
+    <span class="secao-num">05</span>
+    <h2 class="secao-titulo">Os mitos mais comuns — respondidos</h2>
+    <p class="secao-texto">
+      O pacto antenupcial carrega mais mitos do que quase qualquer outro instrumento jurídico. Parte deles vem de filmes e séries americanas. Parte vem de informação incompleta. Todos eles precisam ser desmontados antes que influenciem uma decisão importante.
+    </p>
+
+    <div id="mitos">
+
+      <div class="mito-item" onclick="toggleMito(this)">
+        <div class="mito-header">
+          <div class="mito-icon">🚫</div>
+          <div class="mito-pergunta">"Fazer pacto antenupcial significa que o casamento já começa desconfiando."</div>
+          <div class="mito-seta">▾</div>
+        </div>
+        <div class="mito-resposta">
+          <strong>Falso.</strong> Fazer um pacto antenupcial é exatamente o oposto: é uma conversa madura e honesta sobre como cada um enxerga o patrimônio e o futuro. Casais que têm essa conversa antes do casamento demonstram respeito mútuo e maturidade. A desconfiança surge quando não há regras claras — não quando elas existem.
+        </div>
+      </div>
+
+      <div class="mito-item" onclick="toggleMito(this)">
+        <div class="mito-header">
+          <div class="mito-icon">🚫</div>
+          <div class="mito-pergunta">"O pacto só serve para quem tem muito dinheiro."</div>
+          <div class="mito-seta">▾</div>
+        </div>
+        <div class="mito-resposta">
+          <strong>Falso.</strong> O pacto serve para qualquer casal que queira definir regras patrimoniais com clareza. Um jovem casal que começa sem nada mas vai construir patrimônio ao longo do casamento tem tanto interesse em regras claras quanto um empresário consolidado. O patrimônio que ainda será construído também merece planejamento.
+        </div>
+      </div>
+
+      <div class="mito-item" onclick="toggleMito(this)">
+        <div class="mito-header">
+          <div class="mito-icon">🚫</div>
+          <div class="mito-pergunta">"Com o pacto de separação total, nada do que eu construir durante o casamento pode ser discutido."</div>
+          <div class="mito-seta">▾</div>
+        </div>
+        <div class="mito-resposta">
+          <strong>Parcialmente falso.</strong> No caso da <strong>separação obrigatória</strong> (imposta pela lei, como no caso de maiores de 70 anos), a Súmula 377 do STF permite que bens adquiridos com esforço comum durante o casamento sejam partilhados. Na separação <strong>convencional</strong> (por pacto livremente escolhido), essa proteção é mais sólida — mas a documentação da origem exclusiva dos recursos ainda é importante.
+        </div>
+      </div>
+
+      <div class="mito-item" onclick="toggleMito(this)">
+        <div class="mito-header">
+          <div class="mito-icon">🚫</div>
+          <div class="mito-pergunta">"Posso fazer o pacto antenupcial depois de casar se mudar de ideia."</div>
+          <div class="mito-seta">▾</div>
+        </div>
+        <div class="mito-resposta">
+          <strong>Falso.</strong> O pacto precisa ser feito <strong>obrigatoriamente antes do casamento</strong>. Depois de casado, a alteração do regime de bens é possível, mas exige ação judicial com pedido de autorização ao juiz, participação do Ministério Público e publicação para proteger terceiros. É um processo mais lento, mais caro e com requisitos mais exigentes do que o pacto preventivo.
+        </div>
+      </div>
+
+      <div class="mito-item" onclick="toggleMito(this)">
+        <div class="mito-header">
+          <div class="mito-icon">🚫</div>
+          <div class="mito-pergunta">"O pacto antenupcial não precisa de advogado, basta ir ao cartório."</div>
+          <div class="mito-seta">▾</div>
+        </div>
+        <div class="mito-resposta">
+          <strong>Tecnicamente possível, mas praticamente arriscado.</strong> O cartório lavra a escritura, mas não analisa os interesses das partes, não identifica os riscos específicos de cada situação e não redige cláusulas personalizadas. Um pacto genérico pode deixar brechas que só aparecem anos depois, em um divórcio. O advogado especializado transforma o pacto em um instrumento realmente eficaz para a realidade específica do casal.
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider-ornamento">
+    <span class="divider-ornamento-symbol">✦</span>
+  </div>
+
+  <!-- SEÇÃO 6: COMO FUNCIONA -->
+  <section class="secao">
+    <span class="secao-num">06</span>
+    <h2 class="secao-titulo">Como é feito na prática — do escritório ao cartório</h2>
+    <p class="secao-texto">
+      O processo de elaboração de um pacto antenupcial bem feito tem quatro etapas claras. A ordem importa tanto quanto o conteúdo.
+    </p>
+
+    <div class="timeline">
+
+      <div class="tl-item">
+        <div class="tl-dot">1</div>
+        <div class="tl-content">
+          <div class="tl-label">Etapa 1</div>
+          <div class="tl-titulo">Diagnóstico patrimonial com o advogado</div>
+          <div class="tl-texto">
+            Antes de qualquer cláusula, o advogado precisa conhecer a realidade dos dois: <strong>quais bens cada um possui hoje</strong>, quais são as perspectivas de crescimento patrimonial, se há empresa, herança esperada, dívidas preexistentes ou filhos de relacionamento anterior. O diagnóstico define o que precisa estar no pacto.
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot">2</div>
+        <div class="tl-content">
+          <div class="tl-label">Etapa 2</div>
+          <div class="tl-titulo">Redação das cláusulas personalizadas</div>
+          <div class="tl-texto">
+            Com o diagnóstico em mãos, o advogado redige o pacto com cláusulas específicas para a realidade do casal. Um bom pacto não é um modelo preenchido — é um documento que prevê as situações concretas daquelas duas pessoas: a empresa que ele tem, a herança que ela espera, os imóveis que serão comprados juntos.
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot">3</div>
+        <div class="tl-content">
+          <div class="tl-label">Etapa 3</div>
+          <div class="tl-titulo">Lavratura da escritura em cartório</div>
+          <div class="tl-texto">
+            Com o texto aprovado por ambas as partes, os noivos comparecem ao cartório de notas para a lavratura da escritura pública. <strong>Ambos precisam estar presentes</strong> ou representados por procurador com poderes específicos. O tabelião lê, as partes assinam, e o pacto passa a existir juridicamente.
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot">4</div>
+        <div class="tl-content">
+          <div class="tl-label">Etapa 4 — Crucial e frequentemente esquecida</div>
+          <div class="tl-titulo">Registro no Cartório de Imóveis</div>
+          <div class="tl-texto">
+            O pacto lavrado em cartório de notas vale entre os cônjuges. Mas para valer contra terceiros — credores, compradores de imóveis, herdeiros — ele precisa ser <strong>averbado no Cartório de Registro de Imóveis</strong> da comarca onde estão os bens imóveis do casal. Pacto não registrado pode ser ignorado por credores. Esta é a etapa que mais pessoas esquecem.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider-ornamento">
+    <span class="divider-ornamento-symbol">✦</span>
+  </div>
+
+  <!-- SEÇÃO 7: ALERTA -->
+  <section class="secao">
+    <span class="secao-num">07</span>
+    <h2 class="secao-titulo">O detalhe que pode anular toda a proteção</h2>
+
+    <div class="alerta-box">
+      <div class="alerta-label">⚠️ Atenção obrigatória</div>
+      <div class="alerta-titulo">Pacto sem registro no CRI não vale contra terceiros</div>
+      <div class="alerta-texto">
+        Imagine que o casal fez um pacto de separação total, assinou no cartório, mas nunca registrou no Cartório de Registro de Imóveis. Anos depois, o marido contrai uma dívida. O credor pode alegar que <strong>desconhecia o regime de bens</strong> e tentar penhorar bens da esposa. O pacto não registrado é inoponível a terceiros de boa-fé.<br><br>
+        <strong>A proteção real exige duas assinaturas: a do cartório de notas e a do registro de imóveis.</strong> Uma sem a outra é proteção incompleta.
+      </div>
+    </div>
+
+    <div class="destaque-box">
+      <p class="destaque-texto">
+        O pacto antenupcial não é um produto jurídico de prateleira. É um <strong>instrumento de planejamento de vida</strong>. Bem feito, protege décadas de trabalho e evita conflitos que destroem famílias. Mal feito, ou não feito, deixa o patrimônio exposto a regras que ninguém escolheu conscientemente.
+      </p>
+      <div class="destaque-autor">Dr. Filipe Ferreira · OAB/ES 37.159</div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <span class="cta-eyebrow">Consultoria especializada</span>
+    <h2 class="cta-titulo">Pronto para proteger o que <em>realmente importa?</em></h2>
+    <p class="cta-sub">Atendimento online para todo o Brasil. Consulta inicial para analisar sua situação e orientar o caminho certo.</p>
+    <a href="https://wa.me/5527XXXXXXXX?text=Ol%C3%A1%2C+vim+pelo+guia+de+pacto+antenupcial+e+gostaria+de+uma+orienta%C3%A7%C3%A3o." class="cta-btn">
+      💬 Falar com o Dr. Filipe
+    </a>
+    <div class="cta-oab">Filipe Ferreira · OAB/ES 37.159 · Direito de Família e Proteção Patrimonial</div>
+  </div>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-brand">Filipe Ferreira — Advogado e Associados</div>
+  <div class="footer-sub">OAB/ES 37.159 · Linhares, ES · Atendimento Online · Brasil</div>
+</footer>
+
+<script>
+  function toggleMito(el) {
+    const aberto = el.classList.contains('aberto');
+    document.querySelectorAll('.mito-item').forEach(m => m.classList.remove('aberto'));
+    if (!aberto) el.classList.add('aberto');
+  }
+</script>
+
+</body>
+</html>

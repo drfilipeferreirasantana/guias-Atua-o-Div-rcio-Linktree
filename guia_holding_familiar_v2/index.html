@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Holding Familiar: Como Funciona e Quando Montar · Dr. Filipe Ferreira</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:          #f3f0e8;
+    --bg2:         #e8e4d8;
+    --bg3:         #d8d2c4;
+    --ink:         #100e08;
+    --ink2:        #1a1810;
+    --ink3:        #242018;
+    --ouro:        #6a4e18;
+    --ouro2:       #8a6828;
+    --ouro3:       #b08a40;
+    --ouro4:       #d4aa60;
+    --ouro-dim:    rgba(106,78,24,0.09);
+    --ouro-brd:    rgba(106,78,24,0.22);
+    --verde:       #1c5c34;
+    --verde-dim:   rgba(28,92,52,0.08);
+    --verde-brd:   rgba(28,92,52,0.22);
+    --verm:        #8c2020;
+    --verm-dim:    rgba(140,32,32,0.07);
+    --verm-brd:    rgba(140,32,32,0.2);
+    --aviso:       #7a5800;
+    --aviso-dim:   rgba(122,88,0,0.08);
+    --aviso-brd:   rgba(122,88,0,0.22);
+    --text:        #2a2418;
+    --text2:       #4a4030;
+    --muted:       #9a9080;
+    --branco:      #fdfcf8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 400;
+    line-height: 1.85;
+    font-size: 17px;
+  }
+
+  /* HERO */
+  .hero {
+    background: var(--ink);
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: 80px 28px 72px;
+    position: relative; overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 85% 55% at 50% -8%, rgba(106,78,24,0.42) 0%, transparent 62%),
+      radial-gradient(ellipse 40% 40% at 8%  82%, rgba(106,78,24,0.1)  0%, transparent 55%),
+      radial-gradient(ellipse 35% 35% at 94% 72%, rgba(176,138,64,0.08) 0%, transparent 50%);
+  }
+
+  /* Textura de escudo/brasão sutil */
+  .hero-brasao {
+    position: absolute; inset: 0; pointer-events: none; overflow: hidden;
+  }
+  .hero-brasao svg {
+    position: absolute; right: -60px; bottom: -60px;
+    width: 420px; height: 420px;
+    opacity: 0.035;
+  }
+
+  .hero-z { position: relative; z-index: 1; }
+
+  .hero-eyebrow {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 5px; text-transform: uppercase;
+    color: var(--ouro4); margin-bottom: 28px;
+    display: flex; align-items: center;
+    gap: 18px; justify-content: center;
+    animation: surgir 0.7s ease forwards;
+  }
+  .hero-eyebrow::before, .hero-eyebrow::after {
+    content: ''; width: 40px; height: 1px;
+    background: rgba(212,170,96,0.35);
+  }
+
+  .hero-h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(38px, 7.5vw, 78px);
+    font-weight: 700; color: var(--bg);
+    line-height: 1.03; margin-bottom: 6px;
+    animation: surgir 0.8s ease forwards;
+  }
+  .hero-h1 .sub {
+    display: block; font-style: italic;
+    font-weight: 400; color: var(--ouro4);
+    font-size: 0.5em; line-height: 1.65; margin-top: 10px;
+  }
+
+  .hero-sep {
+    width: 60px; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--ouro3), var(--ouro4), transparent);
+    margin: 28px auto;
+    animation: expandir 1s ease 0.3s both;
+    transform: scaleX(0); transform-origin: center;
+  }
+
+  .hero-desc {
+    font-size: clamp(15px, 2vw, 18px);
+    color: rgba(243,240,232,0.5); font-weight: 300;
+    max-width: 540px; margin: 0 auto 44px; line-height: 1.8;
+    animation: surgir 0.9s ease 0.15s both; opacity: 0;
+  }
+  .hero-desc strong { color: rgba(243,240,232,0.88); font-weight: 700; }
+
+  .hero-pills {
+    display: flex; flex-wrap: wrap;
+    justify-content: center; gap: 10px;
+    animation: surgir 1s ease 0.3s both; opacity: 0;
+  }
+  .pill {
+    background: rgba(106,78,24,0.2);
+    border: 1px solid rgba(176,138,64,0.3);
+    color: var(--ouro4);
+    font-size: 12px; font-weight: 700;
+    padding: 7px 18px; border-radius: 100px;
+  }
+
+  /* DIAGRAMA ESTRUTURAL DO HERO */
+  .hero-diagrama {
+    margin-top: 52px;
+    animation: surgir 1.1s ease 0.4s both; opacity: 0;
+    width: 100%; max-width: 460px;
+  }
+
+  /* DIAGNÓSTICO */
+  .diag-section {
+    background: var(--ink2); padding: 80px 28px;
+    border-top: 1px solid rgba(255,255,255,0.04);
+  }
+  .diag-inner { max-width: 700px; margin: 0 auto; text-align: center; }
+  .d-tag {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 4px; text-transform: uppercase;
+    color: var(--ouro4); margin-bottom: 14px; display: block;
+  }
+  .d-titulo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(22px, 4vw, 36px);
+    font-weight: 700; color: var(--bg);
+    line-height: 1.2; margin-bottom: 10px;
+  }
+  .d-sub {
+    font-size: 16px; color: rgba(243,240,232,0.35);
+    font-weight: 300; margin-bottom: 36px;
+  }
+
+  .q-lista { text-align: left; display: flex; flex-direction: column; gap: 10px; }
+  .q-item {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 10px; padding: 16px 20px;
+    display: flex; align-items: flex-start; gap: 14px;
+    cursor: pointer; transition: all 0.25s; user-select: none;
+  }
+  .q-item:hover { background: var(--ouro-dim); border-color: var(--ouro-brd); }
+  .q-item.on { background: rgba(106,78,24,0.16); border-color: var(--ouro3); }
+  .q-box {
+    width: 22px; height: 22px; border-radius: 5px;
+    border: 1.5px solid rgba(255,255,255,0.15);
+    flex-shrink: 0; margin-top: 2px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 700; transition: all 0.2s;
+  }
+  .q-item.on .q-box { background: var(--ouro3); border-color: var(--ouro3); }
+  .q-texto { font-size: 16px; color: rgba(243,240,232,0.6); line-height: 1.55; }
+  .q-item.on .q-texto { color: var(--bg); }
+
+  .q-res {
+    display: none; margin-top: 24px;
+    padding: 24px 28px; border-radius: 10px;
+    text-align: left; animation: surgir 0.4s ease forwards;
+  }
+  .q-res.visivel { display: block; }
+  .q-res.ouro    { background: var(--ouro-dim);  border: 1.5px solid var(--ouro-brd);  }
+  .q-res.verde   { background: var(--verde-dim); border: 1.5px solid var(--verde-brd); }
+  .q-res.vermelho{ background: var(--verm-dim);  border: 1.5px solid var(--verm-brd);  }
+  .q-res.aviso   { background: var(--aviso-dim); border: 1.5px solid var(--aviso-brd); }
+  .q-res-label {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 3px; text-transform: uppercase;
+    margin-bottom: 8px; display: block;
+  }
+  .ouro    .q-res-label { color: var(--ouro4); }
+  .verde   .q-res-label { color: #50b870; }
+  .vermelho .q-res-label { color: #d06060; }
+  .aviso   .q-res-label { color: #c0a030; }
+  .q-res-texto { font-size: 16px; line-height: 1.8; }
+  .ouro    .q-res-texto { color: #a08030; }
+  .verde   .q-res-texto { color: #3a8858; }
+  .vermelho .q-res-texto { color: #a05050; }
+  .aviso   .q-res-texto { color: #907020; }
+  .q-res-texto strong { font-weight: 700; }
+
+  /* MAIN */
+  .main { max-width: 780px; margin: 0 auto; padding: 80px 28px 100px; }
+
+  .secao { margin-bottom: 80px; }
+  .secao-n {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 110px; font-weight: 700; color: var(--bg2);
+    line-height: 0.85; display: block;
+    margin-bottom: -8px; user-select: none;
+  }
+  .secao-titulo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(22px, 3.5vw, 32px);
+    font-weight: 700; color: var(--ink); line-height: 1.2;
+    padding-bottom: 16px; margin-bottom: 28px;
+    border-bottom: 1px solid var(--bg3); position: relative;
+  }
+  .secao-titulo::after {
+    content: ''; position: absolute;
+    left: 0; bottom: -1px; width: 48px; height: 2px;
+    background: linear-gradient(90deg, var(--ouro), var(--ouro4));
+  }
+
+  .p { font-size: 17px; color: var(--text2); line-height: 1.9; margin-bottom: 22px; }
+  .p strong { color: var(--ink); font-weight: 700; }
+
+  /* LEI */
+  .lei {
+    background: var(--ink); border-radius: 10px;
+    padding: 24px 30px; margin: 28px 0;
+    position: relative; overflow: hidden;
+  }
+  .lei::after {
+    content: '§'; position: absolute; right: 20px; top: 8px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 72px; color: rgba(106,78,24,0.1);
+    line-height: 1; pointer-events: none;
+  }
+  .lei-ref {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 3px; color: var(--ouro4);
+    text-transform: uppercase; margin-bottom: 10px; display: block;
+  }
+  .lei-texto {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px; font-style: italic;
+    color: rgba(243,240,232,0.8); line-height: 1.85;
+  }
+  .lei-texto strong { color: var(--ouro4); font-style: normal; font-weight: 700; }
+
+  /* CAIXAS */
+  .cx { border-radius: 10px; padding: 24px 28px; margin: 28px 0; }
+  .cx.ouro  { background: var(--ouro-dim);  border: 1.5px solid var(--ouro-brd);  }
+  .cx.verde { background: var(--verde-dim); border: 1.5px solid var(--verde-brd); }
+  .cx.verm  { background: var(--verm-dim);  border: 1.5px solid var(--verm-brd);  }
+  .cx.aviso { background: var(--aviso-dim); border: 1.5px solid var(--aviso-brd); }
+  .cx-tag {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 3px; text-transform: uppercase;
+    margin-bottom: 8px; display: block;
+  }
+  .ouro  .cx-tag { color: var(--ouro2); }
+  .verde .cx-tag { color: var(--verde); }
+  .verm  .cx-tag { color: var(--verm);  }
+  .aviso .cx-tag { color: var(--aviso); }
+  .cx-titulo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px; font-weight: 700; margin-bottom: 8px;
+  }
+  .ouro  .cx-titulo { color: #7a5820; }
+  .verde .cx-titulo { color: #1c5e34; }
+  .verm  .cx-titulo { color: #aa3030; }
+  .aviso .cx-titulo { color: #8a6010; }
+  .cx-texto { font-size: 17px; line-height: 1.85; }
+  .ouro  .cx-texto { color: #6a4820; }
+  .verde .cx-texto { color: #286040; }
+  .verm  .cx-texto { color: #8a3030; }
+  .aviso .cx-texto { color: #806010; }
+  .cx-texto strong { font-weight: 700; }
+  .ouro  .cx-texto strong { color: #7a5820; }
+  .verde .cx-texto strong { color: #1c5e34; }
+  .verm  .cx-texto strong { color: #aa3030; }
+  .aviso .cx-texto strong { color: #8a6010; }
+
+  /* DIAGRAMA SVG DE ESTRUTURA */
+  .diagrama-wrap {
+    background: var(--ink);
+    border-radius: 12px;
+    padding: 36px 24px;
+    margin: 36px 0;
+    overflow-x: auto;
+  }
+  .diagrama-label {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 4px; color: var(--ouro4);
+    text-transform: uppercase; margin-bottom: 24px;
+    display: block; text-align: center;
+  }
+  .diagrama-svg { width: 100%; max-width: 680px; display: block; margin: 0 auto; }
+
+  /* QUADRO COMPARATIVO CUSTO X BENEFÍCIO */
+  .comparativo {
+    background: var(--branco);
+    border: 1px solid var(--bg3);
+    border-radius: 12px; overflow: hidden; margin: 28px 0;
+  }
+  .comp-header {
+    display: grid; grid-template-columns: 1fr 1fr;
+    background: var(--ink);
+  }
+  .comp-col-titulo {
+    padding: 14px 20px;
+    font-size: 12px; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase;
+    text-align: center;
+    border-right: 1px solid rgba(255,255,255,0.06);
+  }
+  .comp-col-titulo:first-child { color: #50c880; }
+  .comp-col-titulo:last-child  { color: #e08080; border-right: none; }
+  .comp-row {
+    display: grid; grid-template-columns: 1fr 1fr;
+    border-bottom: 1px solid var(--bg2);
+  }
+  .comp-row:last-child { border-bottom: none; }
+  .comp-cell {
+    padding: 14px 20px;
+    font-size: 16px; color: var(--text2); line-height: 1.6;
+    border-right: 1px solid var(--bg2);
+  }
+  .comp-cell:last-child { border-right: none; }
+  .comp-cell strong { color: var(--ink); font-weight: 700; }
+  .comp-cell.ok { color: var(--verde); }
+  .comp-cell.no { color: var(--verm); }
+
+  /* QUANDO FIZER SENTIDO */
+  .criterios { display: flex; flex-direction: column; gap: 14px; margin: 28px 0; }
+  .criterio {
+    background: var(--branco);
+    border: 1px solid var(--bg3);
+    border-left: 3px solid var(--ouro3);
+    border-radius: 0 10px 10px 0;
+    padding: 20px 24px;
+    display: flex; gap: 16px; align-items: flex-start;
+  }
+  .criterio-icone {
+    font-size: 26px; flex-shrink: 0; line-height: 1; margin-top: 2px;
+  }
+  .criterio-titulo { font-size: 17px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+  .criterio-desc { font-size: 16px; color: var(--text2); line-height: 1.75; }
+  .criterio-desc strong { color: var(--ink); font-weight: 700; }
+
+  /* ACCORDION CLÁUSULAS */
+  .acc-lista { display: flex; flex-direction: column; gap: 10px; margin: 28px 0; }
+  .acc-item {
+    background: var(--branco); border: 1px solid var(--bg3);
+    border-radius: 10px; overflow: hidden; cursor: pointer;
+    transition: border-color 0.2s;
+  }
+  .acc-item:hover { border-color: var(--ouro-brd); }
+  .acc-item.aberto { border-color: var(--ouro3); }
+  .acc-header { display: flex; align-items: flex-start; gap: 14px; padding: 18px 22px; }
+  .acc-icone {
+    width: 38px; height: 38px; border-radius: 8px;
+    background: var(--ouro-dim); border: 1px solid var(--ouro-brd);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 17px; flex-shrink: 0; margin-top: 1px;
+  }
+  .acc-titulo { font-size: 17px; font-weight: 700; color: var(--ink); line-height: 1.4; flex: 1; padding-top: 4px; }
+  .acc-seta { color: var(--muted); font-size: 12px; transition: transform 0.3s; flex-shrink: 0; padding-top: 8px; }
+  .acc-item.aberto .acc-seta { transform: rotate(180deg); }
+  .acc-corpo {
+    display: none; padding: 0 22px 20px 74px;
+    font-size: 17px; color: var(--text2); line-height: 1.85;
+    border-top: 1px solid var(--bg2); padding-top: 18px;
+  }
+  .acc-item.aberto .acc-corpo { display: block; }
+  .acc-corpo strong { color: var(--ink); font-weight: 700; }
+  .acc-corpo .sim { color: var(--verde); font-weight: 700; }
+  .acc-corpo .nao { color: var(--verm); font-weight: 700; }
+  .acc-corpo .atc { color: var(--aviso); font-weight: 700; }
+
+  /* ETAPAS */
+  .tl { margin: 28px 0; }
+  .tl-item { display: flex; gap: 20px; padding-bottom: 28px; position: relative; }
+  .tl-item:not(:last-child)::after {
+    content: ''; position: absolute;
+    left: 21px; top: 46px; bottom: 0; width: 2px;
+    background: linear-gradient(to bottom, rgba(138,104,40,0.35), transparent);
+  }
+  .tl-dot {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--ink); border: 2px solid var(--ouro-brd);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px; font-weight: 700;
+    color: var(--ouro4); flex-shrink: 0;
+  }
+  .tl-dot.ativo { background: var(--ouro2); border-color: var(--ouro2); color: #fff; }
+  .tl-tag {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 3px; color: var(--ouro3);
+    text-transform: uppercase; margin-bottom: 4px; display: block;
+  }
+  .tl-titulo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px; font-weight: 700; color: var(--ink); margin-bottom: 6px;
+  }
+  .tl-texto { font-size: 17px; color: var(--text2); line-height: 1.8; }
+  .tl-texto strong { color: var(--ink); font-weight: 700; }
+
+  /* DESTAQUE */
+  .destaque {
+    background: var(--ink);
+    border-top: 3px solid transparent;
+    border-image: linear-gradient(90deg, var(--ouro2), var(--ouro4)) 1;
+    border-radius: 0 0 10px 10px;
+    padding: 32px 36px; margin: 36px 0;
+    position: relative; overflow: hidden;
+  }
+  .destaque::before {
+    content: '"'; font-family: 'Cormorant Garamond', serif;
+    font-size: 130px; color: rgba(106,78,24,0.09);
+    position: absolute; top: -20px; left: 12px;
+    line-height: 1; pointer-events: none;
+  }
+  .dest-texto {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(18px, 2.5vw, 22px);
+    font-style: italic; color: rgba(243,240,232,0.85);
+    line-height: 1.7; position: relative; z-index: 1;
+  }
+  .dest-texto strong { color: var(--ouro4); font-style: normal; }
+  .dest-autor {
+    margin-top: 16px; font-size: 11px; font-weight: 700;
+    letter-spacing: 2px; color: var(--ouro3);
+    text-transform: uppercase; position: relative; z-index: 1;
+  }
+
+  /* DIVISOR */
+  .divisor {
+    display: flex; align-items: center; gap: 20px; margin: 64px 0;
+  }
+  .divisor::before, .divisor::after {
+    content: ''; flex: 1; height: 1px; background: var(--bg3);
+  }
+  .divisor-sym {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px; color: var(--ouro2); opacity: 0.4;
+  }
+
+  /* GRAVA */
+  .grava {
+    background: linear-gradient(135deg, var(--ouro-dim), rgba(106,78,24,0.02));
+    border: 1px solid var(--ouro-brd); border-radius: 10px;
+    padding: 32px 36px; margin: 48px 0; text-align: center;
+  }
+  .grava-label {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 4px; color: var(--ouro2);
+    text-transform: uppercase; margin-bottom: 24px; display: block;
+  }
+  .grava-item {
+    font-size: 17px; font-weight: 700;
+    color: var(--ouro3); margin-bottom: 10px; line-height: 1.6;
+  }
+  .grava-item span { color: var(--ink2); font-weight: 400; }
+
+  /* CTA */
+  .cta-box {
+    background: var(--ink); border-radius: 12px;
+    padding: 60px 40px; text-align: center;
+    margin-top: 72px; position: relative; overflow: hidden;
+  }
+  .cta-box::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 50% at 50% 110%, rgba(106,78,24,0.28) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .cta-tag {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 4px; color: var(--ouro4);
+    text-transform: uppercase; margin-bottom: 18px; display: block;
+    position: relative; z-index: 1;
+  }
+  .cta-titulo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: 700; color: var(--bg);
+    line-height: 1.1; margin-bottom: 14px;
+    position: relative; z-index: 1;
+  }
+  .cta-titulo em { color: var(--ouro4); font-style: italic; }
+  .cta-sub {
+    font-size: 17px; font-weight: 300;
+    color: rgba(243,240,232,0.4); max-width: 440px;
+    margin: 0 auto 36px; position: relative; z-index: 1; line-height: 1.7;
+  }
+  .cta-btns {
+    display: flex; flex-wrap: wrap;
+    justify-content: center; gap: 12px; position: relative; z-index: 1;
+  }
+  .btn-p {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--ouro2); color: #fff;
+    font-size: 14px; font-weight: 700;
+    letter-spacing: 1px; text-transform: uppercase;
+    padding: 16px 32px; border-radius: 100px;
+    text-decoration: none; transition: all 0.3s;
+  }
+  .btn-p:hover { background: var(--ouro3); transform: translateY(-2px); }
+  .btn-s {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: transparent; color: var(--ouro4);
+    font-size: 14px; font-weight: 600;
+    padding: 16px 28px; border-radius: 100px;
+    text-decoration: none; border: 1px solid var(--ouro-brd); transition: all 0.3s;
+  }
+  .btn-s:hover { background: var(--ouro-dim); border-color: var(--ouro3); }
+  .cta-oab {
+    margin-top: 20px; font-size: 12px; letter-spacing: 2px;
+    color: rgba(243,240,232,0.15); text-transform: uppercase;
+    position: relative; z-index: 1;
+  }
+
+  .footer {
+    background: var(--ink2); text-align: center;
+    padding: 32px 24px; border-top: 1px solid rgba(106,78,24,0.16);
+  }
+  .footer-nome {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px; color: var(--bg); margin-bottom: 4px;
+  }
+  .footer-sub {
+    font-size: 12px; letter-spacing: 2px;
+    color: rgba(243,240,232,0.15); text-transform: uppercase;
+  }
+
+  @keyframes surgir {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes expandir {
+    from { transform: scaleX(0); }
+    to   { transform: scaleX(1); }
+  }
+
+  @media (max-width: 600px) {
+    .comp-header, .comp-row { grid-template-columns: 1fr; }
+    .comp-cell { border-right: none; border-bottom: 1px solid var(--bg2); }
+    .acc-corpo { padding-left: 22px; }
+    .cta-box { padding: 40px 22px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-brasao">
+    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <path d="M100 10 L180 40 L180 110 C180 150 140 180 100 190 C60 180 20 150 20 110 L20 40 Z" stroke="#d4aa60" stroke-width="1.5"/>
+      <path d="M100 30 L165 55 L165 110 C165 142 132 166 100 175 C68 166 35 142 35 110 L35 55 Z" stroke="#d4aa60" stroke-width="0.8"/>
+      <line x1="100" y1="30" x2="100" y2="175" stroke="#d4aa60" stroke-width="0.6"/>
+      <line x1="35" y1="100" x2="165" y2="100" stroke="#d4aa60" stroke-width="0.6"/>
+    </svg>
+  </div>
+  <div class="hero-z">
+
+    <div class="hero-eyebrow">Proteção Patrimonial</div>
+
+    <h1 class="hero-h1">
+      Holding Familiar
+      <span class="sub">Como funciona, o que protege e quando realmente vale montar</span>
+    </h1>
+
+    <div class="hero-sep"></div>
+
+    <p class="hero-desc">
+      A holding familiar é o instrumento mais poderoso de proteção patrimonial disponível para famílias brasileiras. <strong>Mas só funciona quando montada corretamente, no momento certo, com as cláusulas certas.</strong>
+    </p>
+
+    <div class="hero-pills">
+      <span class="pill">Proteção no Divórcio</span>
+      <span class="pill">Planejamento Sucessório</span>
+      <span class="pill">Redução de ITBI e ITCMD</span>
+      <span class="pill">Cláusulas Protetivas</span>
+      <span class="pill">Quando Montar</span>
+    </div>
+
+    <!-- DIAGRAMA HERO -->
+    <div class="hero-diagrama">
+      <svg viewBox="0 0 460 160" xmlns="http://www.w3.org/2000/svg">
+        <!-- Holding central -->
+        <rect x="170" y="10" width="120" height="44" rx="8" fill="rgba(106,78,24,0.25)" stroke="rgba(212,170,96,0.5)" stroke-width="1.5"/>
+        <text x="230" y="28" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="13" font-weight="700" fill="rgba(243,240,232,0.9)">HOLDING</text>
+        <text x="230" y="44" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-size="10" fill="rgba(212,170,96,0.7)">Família Ferreira LTDA</text>
+        <!-- Linhas para filhos -->
+        <line x1="190" y1="54" x2="70"  y2="108" stroke="rgba(212,170,96,0.3)" stroke-width="1" stroke-dasharray="4,3"/>
+        <line x1="230" y1="54" x2="230" y2="108" stroke="rgba(212,170,96,0.3)" stroke-width="1" stroke-dasharray="4,3"/>
+        <line x1="270" y1="54" x2="390" y2="108" stroke="rgba(212,170,96,0.3)" stroke-width="1" stroke-dasharray="4,3"/>
+        <!-- Ativo 1 -->
+        <rect x="20"  y="108" width="100" height="38" rx="6" fill="rgba(28,92,52,0.2)" stroke="rgba(80,180,120,0.35)" stroke-width="1"/>
+        <text x="70"  y="124" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-size="10" font-weight="700" fill="rgba(243,240,232,0.7)">🏢 Imóveis</text>
+        <text x="70"  y="138" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-size="9" fill="rgba(80,180,120,0.6)">Protegidos</text>
+        <!-- Ativo 2 -->
+        <rect x="178" y="108" width="104" height="38" rx="6" fill="rgba(28,92,52,0.2)" stroke="rgba(80,180,120,0.35)" stroke-width="1"/>
+        <text x="230" y="124" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-size="10" font-weight="700" fill="rgba(243,240,232,0.7)">📈 Empresa</text>
+        <text x="230" y="138" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-size="9" fill="rgba(80,180,120,0.6)">Cotas protegidas</text>
+        <!-- Ativo 3 -->
+        <rect x="340" y="108" width="100" height="38" rx="6" fill="rgba(28,92,52,0.2)" stroke="rgba(80,180,120,0.35)" stroke-width="1"/>
+        <text x="390" y="124" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-size="10" font-weight="700" fill="rgba(243,240,232,0.7)">💰 Investimentos</text>
+        <text x="390" y="138" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-size="9" fill="rgba(80,180,120,0.6)">Centralizados</text>
+      </svg>
+    </div>
+
+  </div>
+</header>
+
+<!-- DIAGNÓSTICO -->
+<section class="diag-section">
+  <div class="diag-inner">
+    <span class="d-tag">🔍 Diagnóstico inicial</span>
+    <h2 class="d-titulo">Qual é a sua principal motivação?</h2>
+    <p class="d-sub">Selecione e veja se a holding é o instrumento certo para o seu caso.</p>
+
+    <div class="q-lista">
+      <div class="q-item" onclick="marcar(this,'a')">
+        <div class="q-box"></div>
+        <div class="q-texto">Quero proteger meu patrimônio em caso de divórcio e garantir que meu cônjuge não entre como sócio</div>
+      </div>
+      <div class="q-item" onclick="marcar(this,'b')">
+        <div class="q-box"></div>
+        <div class="q-texto">Quero facilitar a transmissão do patrimônio para os filhos sem inventário demorado</div>
+      </div>
+      <div class="q-item" onclick="marcar(this,'c')">
+        <div class="q-box"></div>
+        <div class="q-texto">Ouvi falar que holding economiza imposto. Quero entender se isso se aplica ao meu caso</div>
+      </div>
+      <div class="q-item" onclick="marcar(this,'d')">
+        <div class="q-box"></div>
+        <div class="q-texto">Já estou em processo de divórcio. Quero saber se ainda vale montar uma holding agora</div>
+      </div>
+    </div>
+
+    <div class="q-res" id="q-res"></div>
+  </div>
+</section>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- SEÇÃO 1 -->
+  <section class="secao">
+    <span class="secao-n">01</span>
+    <h2 class="secao-titulo">O que é uma holding familiar: a analogia que explica tudo</h2>
+
+    <p class="p">
+      Imagine que o seu patrimônio familiar, imóveis, cotas de empresa, investimentos, é um conjunto de apartamentos que você possui. Hoje cada apartamento tem seu próprio endereço, seu próprio registro e qualquer problema em um deles afeta diretamente você como pessoa física. Se alguém quiser te acionar judicialmente, vai atrás de cada um separadamente. Se você falecer, todos entram em inventário simultaneamente. Se você se divorciar, todos são listados um por um na partilha.
+    </p>
+
+    <p class="p">
+      A holding familiar é como construir um condomínio que centraliza todos esses apartamentos sob uma única administração. Você transfere a propriedade dos apartamentos para o condomínio, que é a empresa holding, e passa a ser dono das cotas desse condomínio, não mais dos apartamentos diretamente. O resultado prático é que disputas, inventários e partilhas passam a lidar com as cotas do condomínio, e não com cada imóvel individualmente. E o contrato social do condomínio pode ter cláusulas muito mais sofisticadas de proteção do que qualquer registro individual de imóvel permite.
+    </p>
+
+    <div class="cx ouro">
+      <span class="cx-tag">📌 A definição técnica</span>
+      <div class="cx-titulo">Holding familiar é uma pessoa jurídica criada para deter e administrar o patrimônio de uma família</div>
+      <p class="cx-texto">
+        Juridicamente, é uma sociedade limitada ou anônima constituída com a finalidade principal de controlar participações em outras empresas ou de centralizar a propriedade de bens e ativos da família. Os membros da família são os sócios da holding, e a holding é a proprietária dos ativos. <strong>O instrumento fundamental é o contrato social, onde estão as cláusulas que definem como as cotas podem ou não ser transferidas, quem pode ser sócio, como é feita a avaliação das cotas e o que acontece em caso de morte, divórcio ou exclusão de um sócio.</strong>
+      </p>
+    </div>
+
+    <p class="p">
+      A holding familiar não é um instrumento exclusivo de grandes fortunas. No Brasil, ela passou a fazer sentido para famílias com patrimônio a partir de um determinado nível porque os custos de constituição e manutenção passam a ser compensados pelas economias tributárias e pela simplificação da gestão patrimonial. Esse ponto de equilíbrio é diferente para cada família, e identificá-lo é uma das primeiras tarefas de um planejamento patrimonial bem feito.
+    </p>
+  </section>
+
+  <div class="divisor"><div class="divisor-sym">◆</div></div>
+
+  <!-- SEÇÃO 2 -->
+  <section class="secao">
+    <span class="secao-n">02</span>
+    <h2 class="secao-titulo">As quatro proteções reais que a holding oferece</h2>
+
+    <p class="p">
+      A holding familiar costuma ser apresentada como se fosse uma solução única para todos os problemas patrimoniais de uma família. Isso é um exagero que leva a expectativas frustradas. A holding oferece proteções reais e documentadas em quatro áreas específicas, e cada uma delas tem limites que precisam ser compreendidos com clareza.
+    </p>
+
+    <div class="acc-lista">
+
+      <div class="acc-item" onclick="toggleAcc(this)">
+        <div class="acc-header">
+          <div class="acc-icone">⚖️</div>
+          <div class="acc-titulo">Proteção no divórcio: o cônjuge recebe valor, não cotas</div>
+          <div class="acc-seta">▾</div>
+        </div>
+        <div class="acc-corpo">
+          Quando a holding é constituída antes do casamento e seu contrato social contém as cláusulas certas de intransferibilidade e vedação de ingresso de cônjuge como sócio, o resultado em um eventual divórcio é que o cônjuge não pode se tornar sócio da holding. O que ele pode receber, se as cotas forem bens comuns, é o equivalente financeiro ao valor das cotas, não as próprias cotas.<br><br>
+          Isso é o que o STJ consolidou no REsp 1.536.819/MG: o cônjuge do sócio não tem direito ao ingresso na sociedade, mas tem direito à meação do valor econômico das cotas. <strong>O contrato social que define o método de avaliação das cotas é decisivo aqui: valor patrimonial contábil, valor a mercado ou fluxo de caixa descontado podem resultar em valores radicalmente diferentes</strong>. Sem previsão no contrato, o perito escolhe o método com ampla margem.<br><br>
+          <span class="atc">Limite importante:</span> se a holding foi constituída durante o casamento em Comunhão Parcial, as cotas são bens comuns e o cônjuge tem direito à meação do valor delas independente das cláusulas protetivas. A proteção máxima só existe quando a holding é anterior ao casamento.
+        </div>
+      </div>
+
+      <div class="acc-item" onclick="toggleAcc(this)">
+        <div class="acc-header">
+          <div class="acc-icone">📋</div>
+          <div class="acc-titulo">Planejamento sucessório: inventário simplificado e transmissão programada</div>
+          <div class="acc-seta">▾</div>
+        </div>
+        <div class="acc-corpo">
+          Quando o patrimônio está centralizado em uma holding, o inventário do sócio que falecer lida apenas com as cotas da empresa, não com cada imóvel e cada ativo individualmente. Isso pode reduzir significativamente o tempo e o custo do inventário, especialmente quando há imóveis em diferentes estados ou municípios, que em um inventário tradicional exigiriam habilitação em cada comarca.<br><br>
+          Além disso, a holding permite a doação de cotas em vida para os filhos, com reserva de usufruto para os pais, o que é uma forma de transmitir o patrimônio gradualmente e reduzir a base tributária de ITCMD na herança futura. <strong>Cada doação de cotas, quando bem estruturada, pode reduzir o valor total do espólio sujeito à alíquota de ITCMD no momento do falecimento.</strong><br><br>
+          <span class="atc">Limite importante:</span> a holding não elimina o inventário. Ela o simplifica. Se há herdeiros menores ou se há conflito entre herdeiros, o inventário judicial pode ser necessário mesmo com a holding.
+        </div>
+      </div>
+
+      <div class="acc-item" onclick="toggleAcc(this)">
+        <div class="acc-header">
+          <div class="acc-icone">💰</div>
+          <div class="acc-titulo">Eficiência tributária: os três ganhos principais e suas condições</div>
+          <div class="acc-seta">▾</div>
+        </div>
+        <div class="acc-corpo">
+          A holding pode gerar economia tributária em três situações específicas, e cada uma depende de condições que precisam ser verificadas caso a caso com um contador especializado.<br><br>
+          O primeiro ganho é a <strong>redução do ITBI na transferência de imóveis para a holding</strong>: quando a integralização de imóveis ao capital social da holding é feita nos termos do Art. 156, §2º, I da Constituição Federal, ela pode ser isenta de ITBI, o que gera economia relevante dependendo do número e do valor dos imóveis. O segundo ganho é a <strong>possível redução do ITCMD na transmissão das cotas</strong> em comparação com a transmissão direta dos imóveis, dependendo da legislação do estado. O terceiro ganho é a <strong>tributação dos rendimentos</strong>: imóveis alugados por pessoa física sofrem tributação de até 27,5% pelo IRPF, enquanto os mesmos aluguéis recebidos pela holding podem ser tributados a alíquotas menores pelo lucro presumido ou pelo Simples Nacional dependendo das circunstâncias.<br><br>
+          <span class="atc">Limite importante:</span> a eficiência tributária depende do regime tributário adotado pela holding, do tipo de ativo e do perfil de receitas. Nem toda holding gera economia tributária significativa, e o custo de manutenção contábil e jurídica precisa ser subtraído para calcular o benefício real.
+        </div>
+      </div>
+
+      <div class="acc-item" onclick="toggleAcc(this)">
+        <div class="acc-header">
+          <div class="acc-icone">🛡️</div>
+          <div class="acc-titulo">Proteção contra credores: o que a holding faz e o que não faz</div>
+          <div class="acc-seta">▾</div>
+        </div>
+        <div class="acc-corpo">
+          A separação patrimonial entre a pessoa física do sócio e os ativos da holding cria uma camada de proteção que dificulta, mas não impede, que credores pessoais do sócio alcancem os bens da empresa. Um credor que tem uma dívida pessoal do sócio não pode penhorar diretamente os imóveis da holding. Ele pode, em certas circunstâncias, penhorar as cotas do sócio na holding, e depois, com as cotas penhoradas, requerer a liquidação ou a apuração de haveres.<br><br>
+          <strong>Essa proteção tem limites claros:</strong> quando a holding é criada após o surgimento da dívida ou em fraude a credores, o juiz pode desconsiderar a personalidade jurídica da empresa e alcançar os ativos diretamente. Art. 50 do Código Civil. A blindagem patrimonial pela holding funciona como proteção preventiva para dívidas futuras, não como solução para dívidas já existentes.<br><br>
+          <span class="nao">O que a holding não faz:</span> proteger ativos de execuções fiscais relevantes, dívidas alimentares, responsabilidades por atos ilícitos e situações em que a desconsideração da personalidade jurídica for cabível.
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divisor"><div class="divisor-sym">◆</div></div>
+
+  <!-- SEÇÃO 3 -->
+  <section class="secao">
+    <span class="secao-n">03</span>
+    <h2 class="secao-titulo">Quando vale a pena montar: os critérios reais</h2>
+
+    <p class="p">
+      A holding familiar tem custos reais de constituição e manutenção que precisam ser honestamente avaliados antes de qualquer decisão. Abertura de empresa, escrituração contábil mensal, declarações fiscais anuais, honorários do contador e do advogado, e eventuais custos de transferência de imóveis são despesas que continuam existindo independente de o patrimônio estar sendo movimentado ou não. Para que a holding faça sentido financeiro, os benefícios precisam superar esses custos com margem.
+    </p>
+
+    <div class="criterios">
+
+      <div class="criterio">
+        <div class="criterio-icone">🏠</div>
+        <div>
+          <div class="criterio-titulo">Patrimônio imobiliário relevante com múltiplos imóveis</div>
+          <div class="criterio-desc">A partir de dois ou três imóveis com valor total acima de R$ 1,5 milhão a R$ 2 milhões, os benefícios tributários e a simplificação do inventário costumam superar os custos de manutenção. <strong>Um único imóvel de alto valor pode justificar a holding pelo benefício de planejamento sucessório</strong>, dependendo da composição familiar e dos objetivos específicos.</div>
+        </div>
+      </div>
+
+      <div class="criterio">
+        <div class="criterio-icone">👨‍👩‍👧‍👦</div>
+        <div>
+          <div class="criterio-titulo">Família com herdeiros múltiplos e risco de conflito</div>
+          <div class="criterio-desc">Quanto mais herdeiros e mais complexa a composição familiar, maior o valor da holding como instrumento de governança. O contrato social pode estabelecer regras claras de administração, votação, distribuição de lucros e exclusão de sócios que previnem conflitos que seriam muito mais caros de resolver judicialmente. <strong>Uma holding bem estruturada é, entre outras coisas, um contrato de paz preventivo entre herdeiros.</strong></div>
+        </div>
+      </div>
+
+      <div class="criterio">
+        <div class="criterio-icone">💼</div>
+        <div>
+          <div class="criterio-titulo">Empresário com patrimônio pessoal exposto a riscos empresariais</div>
+          <div class="criterio-desc">Quando o empresário tem o patrimônio pessoal misturado com o patrimônio da operação, qualquer problema empresarial pode contaminar tudo. Separar o patrimônio pessoal em uma holding, mantendo o negócio operacional em empresa separada, cria uma camada de proteção real e documentada. <strong>A holding que detém os imóveis e investimentos não responde pelas dívidas da empresa operacional</strong>, desde que a estrutura seja mantida com rigor.</div>
+        </div>
+      </div>
+
+      <div class="criterio">
+        <div class="criterio-icone">💍</div>
+        <div>
+          <div class="criterio-titulo">Antes de um novo casamento ou de uma união estável relevante</div>
+          <div class="criterio-desc">A holding constituída antes do casamento, combinada com pacto antenupcial que menciona as cotas pelo CNPJ da empresa, é a proteção patrimonial mais sólida disponível para quem vai se casar e tem patrimônio relevante. <strong>É a combinação que o guia de Divórcio com Empresa Envolvida chama de proteção em camadas.</strong> O custo de estruturar isso antes do casamento é uma fração do custo de disputar a partilha das cotas depois.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="cx verm">
+      <span class="cx-tag">🔴 Quando não vale a pena</span>
+      <div class="cx-titulo">Três situações em que a holding não é a resposta</div>
+      <p class="cx-texto">
+        A holding não vale a pena quando o patrimônio total é inferior ao ponto de equilíbrio entre custos e benefícios, que varia mas raramente se justifica abaixo de R$ 800 mil a R$ 1 milhão em ativos consolidados. Também não vale quando o objetivo principal é proteger ativos de dívidas já existentes ou de processos em andamento, porque a constituição nessa circunstância pode ser questionada como fraude a credores. E definitivamente não vale quando montada às vésperas de um divórcio já em curso: além de ser anulável judicialmente, cria uma posição processual extremamente desfavorável que transforma a holding em evidência de má-fé.
+      </p>
+    </div>
+  </section>
+
+  <div class="divisor"><div class="divisor-sym">◆</div></div>
+
+  <!-- SEÇÃO 4 -->
+  <section class="secao">
+    <span class="secao-n">04</span>
+    <h2 class="secao-titulo">As cláusulas que fazem a diferença: o que o contrato social precisa ter</h2>
+
+    <p class="p">
+      Uma holding sem as cláusulas certas no contrato social é como uma armadura com as juntas abertas: parece sólida mas falha exatamente nos pontos onde mais importa. A proteção real não está no CNPJ da empresa. Está nas disposições contratuais que definem o que acontece em cada cenário crítico.
+    </p>
+
+    <div class="tl">
+
+      <div class="tl-item">
+        <div class="tl-dot ativo">1</div>
+        <div>
+          <span class="tl-tag">Cláusula essencial</span>
+          <div class="tl-titulo">Intransferibilidade das cotas sem anuência dos demais sócios</div>
+          <p class="tl-texto">
+            Impede que um sócio transfira suas cotas para terceiros sem a aprovação dos demais. Em um contexto familiar, isso garante que um filho não possa vender suas cotas para um estranho, e que um cônjuge não possa receber cotas em uma partilha sem que os outros membros da família consintam. <strong>É a cláusula mais básica e, sem ela, toda a estrutura de controle familiar da holding é frágil.</strong>
+          </p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot">2</div>
+        <div>
+          <span class="tl-tag">Cláusula essencial</span>
+          <div class="tl-titulo">Vedação de ingresso de cônjuge ou companheiro como sócio</div>
+          <p class="tl-texto">
+            Define expressamente que cônjuges e companheiros dos sócios não podem ingressar na sociedade, nem por partilha de divórcio, nem por herança, nem por qualquer outra causa. Em caso de meação ou herança de cotas, o cônjuge ou herdeiro recebe o valor em dinheiro, apurado pelo método definido no próprio contrato, mas não se torna sócio. <strong>É o fundamento legal do REsp 1.536.819/MG do STJ aplicado preventivamente no contrato.</strong>
+          </p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot">3</div>
+        <div>
+          <span class="tl-tag">Cláusula estratégica</span>
+          <div class="tl-titulo">Método de avaliação das cotas definido no contrato</div>
+          <p class="tl-texto">
+            Define qual critério será usado para calcular o valor das cotas em caso de saída, exclusão, morte ou partilha. O valor patrimonial contábil, que usa os números do balanço, tende a ser o mais favorável ao sócio que permanece na empresa, porque geralmente é inferior ao valor real de mercado. O fluxo de caixa descontado é o mais favorável a quem está saindo. <strong>Sem essa cláusula, o perito escolhe o método em um eventual litígio, e essa escolha pode representar diferenças de milhões de reais no valor final a ser pago.</strong>
+          </p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot">4</div>
+        <div>
+          <span class="tl-tag">Cláusula protetiva</span>
+          <div class="tl-titulo">Exclusão compulsória com apuração de haveres em caso de risco</div>
+          <p class="tl-texto">
+            Define as situações em que um sócio pode ser excluído da holding, como condenação por crime, insolvência declarada ou conduta gravemente prejudicial à sociedade, e o procedimento de apuração e pagamento dos haveres do sócio excluído. Em estruturas familiares com múltiplos herdeiros, essa cláusula é o mecanismo de resolução de conflitos que evita que uma desavença entre dois filhos paralise toda a estrutura patrimonial da família.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divisor"><div class="divisor-sym">◆</div></div>
+
+  <!-- SEÇÃO 5 -->
+  <section class="secao">
+    <span class="secao-n">05</span>
+    <h2 class="secao-titulo">Como montar: as etapas e o que cada profissional faz</h2>
+
+    <p class="p">
+      A constituição de uma holding familiar não é um ato isolado. É um processo que envolve pelo menos três profissionais com funções complementares e que, quando bem coordenado, transforma um patrimônio disperso e vulnerável em uma estrutura organizada, protegida e com governança definida.
+    </p>
+
+    <div class="comparativo">
+      <div class="comp-header">
+        <div class="comp-col-titulo">✅ Vantagens reais</div>
+        <div class="comp-col-titulo">❌ Limitações reais</div>
+      </div>
+      <div class="comp-row">
+        <div class="comp-cell ok">Cônjuge não ingresa como sócio no divórcio</div>
+        <div class="comp-cell no">Cotas constituídas durante o casamento em CP são bens comuns</div>
+      </div>
+      <div class="comp-row">
+        <div class="comp-cell ok">Inventário simplificado: lida com cotas, não com cada ativo</div>
+        <div class="comp-cell no">Não elimina o inventário quando há conflito entre herdeiros</div>
+      </div>
+      <div class="comp-row">
+        <div class="comp-cell ok">Possível isenção de ITBI na integralização de imóveis</div>
+        <div class="comp-cell no">Benefício varia por município e depende de análise caso a caso</div>
+      </div>
+      <div class="comp-row">
+        <div class="comp-cell ok">Redução tributária sobre aluguéis em determinados regimes</div>
+        <div class="comp-cell no">Custo contábil e fiscal mensal pode superar o benefício em patrimônios menores</div>
+      </div>
+      <div class="comp-row">
+        <div class="comp-cell ok">Proteção preventiva contra credores pessoais futuros</div>
+        <div class="comp-cell no">Não protege contra dívidas existentes nem contra desconsideração da personalidade jurídica</div>
+      </div>
+      <div class="comp-row">
+        <div class="comp-cell ok">Governança familiar com regras claras de administração e votação</div>
+        <div class="comp-cell no">Montagem às vésperas de divórcio pode ser anulada como fraude à meação</div>
+      </div>
+    </div>
+
+    <p class="p">
+      O advogado de família e direito empresarial é responsável pela estrutura jurídica: redigir o contrato social com as cláusulas protetivas, definir a composição societária, estruturar as doações de cotas com reserva de usufruto e garantir que o pacto antenupcial, quando houver, cite a holding expressamente. O contador especializado em planejamento tributário é responsável pela análise fiscal: verificar o regime tributário mais vantajoso, calcular a economia real com ITBI, ITCMD e IR e dimensionar o custo de manutenção. O cartório de registro de imóveis é responsável pela transferência formal dos ativos para a holding, que precisa ser feita corretamente para que as proteções jurídicas e tributárias sejam válidas.
+    </p>
+
+    <div class="cx verde">
+      <span class="cx-tag">✅ A sequência correta</span>
+      <div class="cx-titulo">Diagnóstico patrimonial antes de qualquer ato</div>
+      <p class="cx-texto">
+        Antes de abrir a empresa, o primeiro passo é um diagnóstico completo do patrimônio atual: quais bens existem, como estão registrados, qual é o regime de bens do casamento, quem são os herdeiros, quais são os riscos específicos dessa família e quais são os objetivos de curto, médio e longo prazo. <strong>Uma holding montada sem diagnóstico pode resolver um problema e criar outro.</strong> O instrumento é poderoso exatamente quando é calibrado para as necessidades reais de cada família, não quando é uma solução genérica aplicada a qualquer situação.
+      </p>
+    </div>
+  </section>
+
+  <div class="divisor"><div class="divisor-sym">◆</div></div>
+
+  <div class="destaque">
+    <p class="dest-texto">
+      A holding não é um cofre que protege tudo automaticamente. É uma estrutura jurídica que <strong>protege o que foi explicitamente incluído, na forma correta, no momento certo.</strong> O que foi deixado de fora, feito errado ou feito tarde demais fica desprotegido.
+    </p>
+    <div class="dest-autor">Dr. Filipe Ferreira · OAB/ES 37.159</div>
+  </div>
+
+  <div class="grava">
+    <span class="grava-label">📌 Os 8 pontos essenciais</span>
+    <div class="grava-item">Holding anterior ao casamento: <span>cotas são bens particulares. Proteção máxima no divórcio.</span></div>
+    <div class="grava-item">Holding durante o casamento em comunhão parcial: <span>cotas são bens comuns. Proteção baixa na partilha.</span></div>
+    <div class="grava-item">Cônjuge no divórcio: <span>não entra como sócio com as cláusulas certas. Mas recebe o valor financeiro das cotas.</span></div>
+    <div class="grava-item">Método de avaliação no contrato social: <span>o documento mais estratégico da holding. Define quanto o cônjuge recebe.</span></div>
+    <div class="grava-item">ITBI na integralização: <span>pode ser isento nos termos da Constituição Federal. Verificar município a município.</span></div>
+    <div class="grava-item">Holding às vésperas de divórcio: <span>anulável como fraude à meação. Art. 1.722 CC. Não montar.</span></div>
+    <div class="grava-item">Custo de manutenção: <span>contabilidade, declarações e honorários são despesas reais que precisam ser comparadas com o benefício líquido.</span></div>
+    <div class="grava-item">Diagnóstico antes de qualquer ato: <span>o instrumento é poderoso quando calibrado para cada família. Genérico, pode criar mais problemas do que resolve.</span></div>
+  </div>
+
+  <div class="cta-box">
+    <span class="cta-tag">Consultoria especializada</span>
+    <h2 class="cta-titulo">
+      A holding familiar é o instrumento
+      <em>certo para o seu patrimônio?</em>
+    </h2>
+    <p class="cta-sub">Diagnóstico patrimonial completo. Planejamento sucessório e proteção no divórcio. Atendimento online para todo o Brasil.</p>
+    <div class="cta-btns">
+      <a href="https://wa.me/5527995187279?text=Ol%C3%A1%2C+vim+pelo+guia+de+Holding+Familiar+e+gostaria+de+um+diagn%C3%B3stico." class="btn-p">
+        💬 WhatsApp — Falar Agora
+      </a>
+      <a href="mailto:escritorio@filipeeassociadosadvogado.com.br?subject=Consulta%20sobre%20Holding%20Familiar" class="btn-s">
+        ✉️ Enviar E-mail
+      </a>
+    </div>
+    <div class="cta-oab">Filipe Ferreira · OAB/ES 37.159 · Direito de Família e Proteção Patrimonial</div>
+  </div>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-nome">Filipe Ferreira — Advogado e Associados</div>
+  <div class="footer-sub">OAB/ES 37.159 · Linhares, ES · Atendimento Online · Brasil</div>
+</footer>
+
+<script>
+  const respostas = {
+    a: { cls: 'ouro', label: '📋 Proteção no divórcio: funciona com condições',
+      txt: 'A holding protege no divórcio quando constituída <strong>antes do casamento</strong> e com o contrato social contendo as cláusulas certas de vedação de ingresso do cônjuge e de método de avaliação das cotas. Nesse cenário, o cônjuge não entra como sócio, mas recebe o equivalente financeiro das cotas comuns. Se a holding for criada durante o casamento em Comunhão Parcial, as cotas são bens comuns e a proteção é limitada à questão do ingresso societário. A combinação mais sólida é: holding anterior ao casamento, combinada com pacto antenupcial que menciona o CNPJ da empresa expressamente.' },
+    b: { cls: 'verde', label: '✅ Holding é o instrumento ideal para isso',
+      txt: 'O planejamento sucessório é o benefício mais consolidado e menos controverso da holding familiar. Com o patrimônio centralizado na empresa, o inventário lida com cotas, não com cada ativo individualmente. A doação de cotas em vida com reserva de usufruto para os pais permite transmitir o patrimônio gradualmente, reduzindo a base de ITCMD no momento do falecimento. <strong>Quanto mais complexo o patrimônio e mais numerosos os herdeiros, maior o valor desse instrumento.</strong> Um diagnóstico patrimonial completo é o ponto de partida para dimensionar os benefícios reais no seu caso específico.' },
+    c: { cls: 'aviso', label: '⚠️ Eficiência tributária: depende do caso',
+      txt: 'A economia tributária com holding é real mas não é universal. Os três benefícios mais comuns são a possível isenção de ITBI na integralização de imóveis, a redução do ITCMD na transmissão de cotas e a tributação mais favorável sobre aluguéis dependendo do regime tributário adotado. <strong>Mas cada um desses benefícios depende de condições específicas</strong> que precisam ser verificadas com um contador especializado. O custo mensal de manutenção contábil e fiscal precisa ser subtraído para calcular o benefício líquido real. Para patrimônios menores, o custo pode superar o benefício, tornando a holding financeiramente ineficiente.' },
+    d: { cls: 'vermelho', label: '🔴 Holding durante o divórcio: alto risco',
+      txt: 'Constituir ou transferir bens para uma holding durante um processo de divórcio já em curso é um dos erros patrimoniais mais graves que um cliente pode cometer. A operação pode ser enquadrada como fraude à meação pelo Art. 1.722 CC e como fraude contra credores pelo Art. 158 CC. O resultado prático é que o ato pode ser anulado judicialmente, os bens retornam à discussão da partilha e a holding passa a ser evidência de má-fé no processo. <strong>Se o processo ainda não foi distribuído</strong>, a análise muda e uma consulta urgente com um advogado especialista é o caminho para entender as opções disponíveis no seu caso específico.' }
+  };
+
+  let ativo = null;
+  function marcar(el, id) {
+    document.querySelectorAll('.q-item').forEach(q => {
+      q.classList.remove('on'); q.querySelector('.q-box').textContent = '';
+    });
+    const res = document.getElementById('q-res');
+    if (ativo === id) { ativo = null; res.classList.remove('visivel'); return; }
+    ativo = id;
+    el.classList.add('on'); el.querySelector('.q-box').textContent = '✓';
+    const r = respostas[id];
+    res.className = `q-res visivel ${r.cls}`;
+    res.innerHTML = `<span class="q-res-label">${r.label}</span><p class="q-res-texto">${r.txt}</p>`;
+  }
+
+  function toggleAcc(el) {
+    const ab = el.classList.contains('aberto');
+    document.querySelectorAll('.acc-item').forEach(a => a.classList.remove('aberto'));
+    if (!ab) el.classList.add('aberto');
+  }
+</script>
+
+</body>
+</html>

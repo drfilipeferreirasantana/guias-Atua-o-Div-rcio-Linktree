@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Separação de Fato: Seus Direitos e os Riscos que Você Não Conhece · Dr. Filipe Ferreira</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Nunito+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:          #f2f0f5;
+    --bg2:         #e6e2ed;
+    --bg3:         #d8d2e6;
+    --ink:         #120c1e;
+    --ink2:        #1c1430;
+    --ink3:        #281c40;
+    --chumbo:      #2e3a5a;
+    --chumbo2:     #3e4e78;
+    --chumbo3:     #5870a0;
+    --chm-dim:     rgba(46,58,90,0.09);
+    --chm-brd:     rgba(46,58,90,0.22);
+    --prata:       #8090b0;
+    --prata2:      #a0b0d0;
+    --prata3:      #c0d0e8;
+    --verde:       #1a5e36;
+    --verde-dim:   rgba(26,94,54,0.08);
+    --verde-brd:   rgba(26,94,54,0.22);
+    --verm:        #8c2020;
+    --verm-dim:    rgba(140,32,32,0.07);
+    --verm-brd:    rgba(140,32,32,0.2);
+    --aviso:       #7a5a00;
+    --aviso-dim:   rgba(122,90,0,0.08);
+    --aviso-brd:   rgba(122,90,0,0.22);
+    --text:        #1e1830;
+    --text2:       #3a3050;
+    --muted:       #8a88a0;
+    --branco:      #faf9fc;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 400;
+    line-height: 1.85;
+    font-size: 17px;
+  }
+
+  /* HERO */
+  .hero {
+    background: var(--ink);
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: 80px 28px 72px;
+    position: relative; overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 80% 55% at 50% -8%, rgba(46,58,90,0.55) 0%, transparent 62%),
+      radial-gradient(ellipse 40% 40% at 5% 80%,  rgba(46,58,90,0.12) 0%, transparent 55%),
+      radial-gradient(ellipse 35% 35% at 95% 70%, rgba(88,112,160,0.1) 0%, transparent 50%);
+  }
+
+  .hero-linhas {
+    position: absolute; inset: 0; pointer-events: none;
+    background-image:
+      linear-gradient(rgba(88,112,160,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(88,112,160,0.04) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+
+  /* Linha do tempo decorativa */
+  .hero-tl-deco {
+    position: absolute; left: 50%; top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent 5%, rgba(88,112,160,0.15) 30%, rgba(88,112,160,0.15) 70%, transparent 95%);
+    pointer-events: none;
+  }
+
+  .hero-z { position: relative; z-index: 1; }
+
+  .hero-eyebrow {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 5px; text-transform: uppercase;
+    color: var(--prata2); margin-bottom: 28px;
+    display: flex; align-items: center;
+    gap: 18px; justify-content: center;
+    animation: subir 0.7s ease forwards;
+  }
+  .hero-eyebrow::before, .hero-eyebrow::after {
+    content: ''; width: 40px; height: 1px;
+    background: rgba(160,176,208,0.35);
+  }
+
+  .hero-h1 {
+    font-family: 'Lora', serif;
+    font-size: clamp(34px, 7vw, 70px);
+    font-weight: 700; color: var(--bg);
+    line-height: 1.05; margin-bottom: 6px;
+    animation: subir 0.8s ease forwards;
+  }
+  .hero-h1 .sub {
+    display: block; font-style: italic;
+    font-weight: 400; color: var(--prata2);
+    font-size: 0.52em; line-height: 1.6; margin-top: 10px;
+  }
+
+  .hero-sep {
+    width: 60px; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--chumbo3), var(--prata2), transparent);
+    margin: 28px auto;
+    animation: expandir 1s ease 0.3s both;
+    transform: scaleX(0); transform-origin: center;
+  }
+
+  .hero-desc {
+    font-size: clamp(15px, 2vw, 18px);
+    color: rgba(242,240,245,0.5); font-weight: 300;
+    max-width: 540px; margin: 0 auto 44px; line-height: 1.8;
+    animation: subir 0.9s ease 0.15s both; opacity: 0;
+  }
+  .hero-desc strong { color: rgba(242,240,245,0.88); font-weight: 700; }
+
+  .hero-pills {
+    display: flex; flex-wrap: wrap;
+    justify-content: center; gap: 10px;
+    animation: subir 1s ease 0.3s both; opacity: 0;
+  }
+  .pill {
+    background: rgba(46,58,90,0.22);
+    border: 1px solid rgba(88,112,160,0.3);
+    color: var(--prata2);
+    font-size: 12px; font-weight: 700;
+    padding: 7px 18px; border-radius: 100px;
+  }
+
+  /* MARCADOR TEMPORAL DO HERO */
+  .hero-timeline {
+    display: flex; align-items: center;
+    gap: 0; margin-top: 52px;
+    max-width: 480px; width: 100%;
+    animation: subir 1.1s ease 0.4s both; opacity: 0;
+  }
+  .htl-item { flex: 1; text-align: center; position: relative; }
+  .htl-item:not(:last-child)::after {
+    content: ''; position: absolute;
+    right: 0; top: 18px;
+    width: 100%; height: 2px;
+    background: linear-gradient(90deg, rgba(88,112,160,0.4), rgba(140,32,32,0.4));
+    z-index: 0;
+  }
+  .htl-dot {
+    width: 36px; height: 36px; border-radius: 50%;
+    margin: 0 auto 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; position: relative; z-index: 1;
+  }
+  .htl-dot.azul { background: rgba(88,112,160,0.2); border: 2px solid rgba(88,112,160,0.5); }
+  .htl-dot.verm { background: rgba(140,32,32,0.2); border: 2px solid rgba(140,32,32,0.5); }
+  .htl-dot.verde { background: rgba(26,94,54,0.2); border: 2px solid rgba(26,94,54,0.4); }
+  .htl-label {
+    font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1px;
+    line-height: 1.3;
+  }
+  .htl-dot.azul + .htl-label  { color: rgba(160,176,208,0.7); }
+  .htl-dot.verm + .htl-label  { color: rgba(200,100,100,0.7); }
+  .htl-dot.verde + .htl-label { color: rgba(80,180,120,0.7); }
+
+  /* DIAGNÓSTICO */
+  .diag-section {
+    background: var(--ink2); padding: 80px 28px;
+    border-top: 1px solid rgba(255,255,255,0.04);
+  }
+  .diag-inner { max-width: 700px; margin: 0 auto; text-align: center; }
+  .d-tag {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 4px; text-transform: uppercase;
+    color: var(--prata2); margin-bottom: 14px; display: block;
+  }
+  .d-titulo {
+    font-family: 'Lora', serif;
+    font-size: clamp(22px, 4vw, 34px);
+    font-weight: 700; color: var(--bg);
+    line-height: 1.2; margin-bottom: 10px;
+  }
+  .d-sub {
+    font-size: 16px; color: rgba(242,240,245,0.35);
+    font-weight: 300; margin-bottom: 36px;
+  }
+
+  .q-lista { text-align: left; display: flex; flex-direction: column; gap: 10px; }
+  .q-item {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 10px; padding: 16px 20px;
+    display: flex; align-items: flex-start; gap: 14px;
+    cursor: pointer; transition: all 0.25s; user-select: none;
+  }
+  .q-item:hover { background: var(--chm-dim); border-color: var(--chm-brd); }
+  .q-item.on { background: rgba(46,58,90,0.16); border-color: var(--chumbo2); }
+  .q-box {
+    width: 22px; height: 22px; border-radius: 5px;
+    border: 1.5px solid rgba(255,255,255,0.15);
+    flex-shrink: 0; margin-top: 2px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 700; transition: all 0.2s;
+  }
+  .q-item.on .q-box { background: var(--chumbo2); border-color: var(--chumbo2); }
+  .q-texto { font-size: 16px; color: rgba(242,240,245,0.6); line-height: 1.55; }
+  .q-item.on .q-texto { color: var(--bg); }
+
+  .q-res {
+    display: none; margin-top: 24px;
+    padding: 24px 28px; border-radius: 10px;
+    text-align: left; animation: subir 0.4s ease forwards;
+  }
+  .q-res.visivel { display: block; }
+  .q-res.azul    { background: var(--chm-dim);  border: 1.5px solid var(--chm-brd);   }
+  .q-res.verde   { background: var(--verde-dim); border: 1.5px solid var(--verde-brd); }
+  .q-res.vermelho{ background: var(--verm-dim);  border: 1.5px solid var(--verm-brd);  }
+  .q-res.aviso   { background: var(--aviso-dim); border: 1.5px solid var(--aviso-brd); }
+  .q-res-label {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 3px; text-transform: uppercase;
+    margin-bottom: 8px; display: block;
+  }
+  .azul    .q-res-label { color: var(--prata2); }
+  .verde   .q-res-label { color: #50b870; }
+  .vermelho .q-res-label { color: #d06060; }
+  .aviso   .q-res-label { color: #c0a030; }
+  .q-res-texto { font-size: 16px; line-height: 1.8; }
+  .azul    .q-res-texto { color: #7080a8; }
+  .verde   .q-res-texto { color: #3a8858; }
+  .vermelho .q-res-texto { color: #a05050; }
+  .aviso   .q-res-texto { color: #907020; }
+  .q-res-texto strong { font-weight: 700; }
+
+  /* MAIN */
+  .main { max-width: 780px; margin: 0 auto; padding: 80px 28px 100px; }
+
+  .secao { margin-bottom: 80px; }
+  .secao-n {
+    font-family: 'Lora', serif;
+    font-size: 110px; font-weight: 700; color: var(--bg2);
+    line-height: 0.85; display: block;
+    margin-bottom: -8px; user-select: none;
+  }
+  .secao-titulo {
+    font-family: 'Lora', serif;
+    font-size: clamp(22px, 3.5vw, 30px);
+    font-weight: 700; color: var(--ink); line-height: 1.2;
+    padding-bottom: 16px; margin-bottom: 28px;
+    border-bottom: 1px solid var(--bg3); position: relative;
+  }
+  .secao-titulo::after {
+    content: ''; position: absolute;
+    left: 0; bottom: -1px; width: 48px; height: 2px;
+    background: linear-gradient(90deg, var(--chumbo), var(--prata));
+  }
+
+  .p { font-size: 17px; color: var(--text2); line-height: 1.9; margin-bottom: 22px; }
+  .p strong { color: var(--ink); font-weight: 700; }
+
+  /* LEI */
+  .lei {
+    background: var(--ink); border-radius: 10px;
+    padding: 24px 30px; margin: 28px 0;
+    position: relative; overflow: hidden;
+  }
+  .lei::after {
+    content: '§'; position: absolute; right: 20px; top: 8px;
+    font-family: 'Lora', serif;
+    font-size: 72px; color: rgba(46,58,90,0.12);
+    line-height: 1; pointer-events: none;
+  }
+  .lei-ref {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 3px; color: var(--prata2);
+    text-transform: uppercase; margin-bottom: 10px; display: block;
+  }
+  .lei-texto {
+    font-family: 'Lora', serif;
+    font-size: 17px; font-style: italic;
+    color: rgba(242,240,245,0.8); line-height: 1.85;
+  }
+  .lei-texto strong { color: var(--prata2); font-style: normal; font-weight: 700; }
+
+  /* CAIXAS */
+  .cx { border-radius: 10px; padding: 24px 28px; margin: 28px 0; }
+  .cx.azul   { background: var(--chm-dim);  border: 1.5px solid var(--chm-brd);   }
+  .cx.verde  { background: var(--verde-dim); border: 1.5px solid var(--verde-brd); }
+  .cx.verm   { background: var(--verm-dim);  border: 1.5px solid var(--verm-brd);  }
+  .cx.aviso  { background: var(--aviso-dim); border: 1.5px solid var(--aviso-brd); }
+  .cx-tag {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 3px; text-transform: uppercase;
+    margin-bottom: 8px; display: block;
+  }
+  .azul  .cx-tag { color: var(--chumbo2); }
+  .verde .cx-tag { color: var(--verde); }
+  .verm  .cx-tag { color: var(--verm); }
+  .aviso .cx-tag { color: var(--aviso); }
+  .cx-titulo {
+    font-family: 'Lora', serif;
+    font-size: 19px; font-weight: 700; margin-bottom: 8px;
+  }
+  .azul  .cx-titulo { color: #2e3e68; }
+  .verde .cx-titulo { color: #1a5e34; }
+  .verm  .cx-titulo { color: #aa3030; }
+  .aviso .cx-titulo { color: #8a6010; }
+  .cx-texto { font-size: 17px; line-height: 1.85; }
+  .azul  .cx-texto { color: #384870; }
+  .verde .cx-texto { color: #286040; }
+  .verm  .cx-texto { color: #8a3030; }
+  .aviso .cx-texto { color: #806010; }
+  .cx-texto strong { font-weight: 700; }
+  .azul  .cx-texto strong { color: #2e3e68; }
+  .verde .cx-texto strong { color: #1a5e34; }
+  .verm  .cx-texto strong { color: #aa3030; }
+  .aviso .cx-texto strong { color: #8a6010; }
+
+  /* LINHA DO TEMPO VERTICAL */
+  .tl { margin: 28px 0; }
+  .tl-item { display: flex; gap: 20px; padding-bottom: 28px; position: relative; }
+  .tl-item:not(:last-child)::after {
+    content: ''; position: absolute;
+    left: 21px; top: 46px; bottom: 0; width: 2px;
+    background: linear-gradient(to bottom, rgba(62,78,120,0.3), transparent);
+  }
+  .tl-dot {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--ink); border: 2px solid var(--chm-brd);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Lora', serif;
+    font-size: 17px; font-weight: 700;
+    color: var(--prata2); flex-shrink: 0;
+  }
+  .tl-dot.ativo { background: var(--chumbo2); border-color: var(--chumbo2); color: #fff; }
+  .tl-dot.vermelho { background: rgba(140,32,32,0.15); border-color: rgba(140,32,32,0.4); color: #d06060; }
+  .tl-dot.verde { background: rgba(26,94,54,0.15); border-color: rgba(26,94,54,0.4); color: #50b870; }
+  .tl-tag {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 3px; color: var(--chumbo3);
+    text-transform: uppercase; margin-bottom: 4px; display: block;
+  }
+  .tl-titulo {
+    font-family: 'Lora', serif;
+    font-size: 18px; font-weight: 700; color: var(--ink); margin-bottom: 6px;
+  }
+  .tl-texto { font-size: 17px; color: var(--text2); line-height: 1.8; }
+  .tl-texto strong { color: var(--ink); font-weight: 700; }
+
+  /* PROVA VISUAL */
+  .provas { display: flex; flex-direction: column; gap: 12px; margin: 28px 0; }
+  .prova-item {
+    background: var(--branco); border: 1px solid var(--bg3);
+    border-left: 3px solid var(--chumbo2);
+    border-radius: 0 10px 10px 0;
+    padding: 18px 22px;
+    display: flex; gap: 14px; align-items: flex-start;
+  }
+  .prova-num {
+    font-family: 'Lora', serif;
+    font-size: 22px; font-weight: 700;
+    color: var(--chumbo2); opacity: 0.5;
+    line-height: 1; flex-shrink: 0; padding-top: 2px;
+  }
+  .prova-titulo { font-size: 17px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+  .prova-desc { font-size: 16px; color: var(--text2); line-height: 1.7; }
+  .prova-desc strong { color: var(--ink); font-weight: 700; }
+
+  /* ACCORDION */
+  .acc-lista { display: flex; flex-direction: column; gap: 10px; margin: 28px 0; }
+  .acc-item {
+    background: var(--branco); border: 1px solid var(--bg3);
+    border-radius: 10px; overflow: hidden; cursor: pointer;
+    transition: border-color 0.2s;
+  }
+  .acc-item:hover { border-color: var(--chm-brd); }
+  .acc-item.aberto { border-color: var(--chumbo2); }
+  .acc-header { display: flex; align-items: flex-start; gap: 14px; padding: 18px 22px; }
+  .acc-icone {
+    width: 38px; height: 38px; border-radius: 8px;
+    background: var(--chm-dim); border: 1px solid var(--chm-brd);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 17px; flex-shrink: 0; margin-top: 1px;
+  }
+  .acc-titulo { font-size: 17px; font-weight: 700; color: var(--ink); line-height: 1.4; flex: 1; padding-top: 4px; }
+  .acc-seta { color: var(--muted); font-size: 12px; transition: transform 0.3s; flex-shrink: 0; padding-top: 8px; }
+  .acc-item.aberto .acc-seta { transform: rotate(180deg); }
+  .acc-corpo {
+    display: none; padding: 0 22px 20px 74px;
+    font-size: 17px; color: var(--text2); line-height: 1.85;
+    border-top: 1px solid var(--bg2); padding-top: 18px;
+  }
+  .acc-item.aberto .acc-corpo { display: block; }
+  .acc-corpo strong { color: var(--ink); font-weight: 700; }
+  .acc-corpo .sim { color: var(--verde); font-weight: 700; }
+  .acc-corpo .nao { color: var(--verm); font-weight: 700; }
+  .acc-corpo .atc { color: var(--aviso); font-weight: 700; }
+
+  /* DESTAQUE */
+  .destaque {
+    background: var(--ink);
+    border-top: 3px solid transparent;
+    border-image: linear-gradient(90deg, var(--chumbo2), var(--prata)) 1;
+    border-radius: 0 0 10px 10px;
+    padding: 32px 36px; margin: 36px 0;
+    position: relative; overflow: hidden;
+  }
+  .destaque::before {
+    content: '"'; font-family: 'Lora', serif;
+    font-size: 130px; color: rgba(46,58,90,0.1);
+    position: absolute; top: -20px; left: 12px;
+    line-height: 1; pointer-events: none;
+  }
+  .dest-texto {
+    font-family: 'Lora', serif;
+    font-size: clamp(17px, 2.5vw, 21px);
+    font-style: italic; color: rgba(242,240,245,0.85);
+    line-height: 1.7; position: relative; z-index: 1;
+  }
+  .dest-texto strong { color: var(--prata2); font-style: normal; }
+  .dest-autor {
+    margin-top: 16px; font-size: 11px; font-weight: 700;
+    letter-spacing: 2px; color: var(--chumbo3);
+    text-transform: uppercase; position: relative; z-index: 1;
+  }
+
+  /* DIVISOR */
+  .divisor {
+    display: flex; align-items: center; gap: 20px; margin: 64px 0;
+  }
+  .divisor::before, .divisor::after {
+    content: ''; flex: 1; height: 1px; background: var(--bg3);
+  }
+  .divisor-sym {
+    font-family: 'Lora', serif;
+    font-size: 18px; color: var(--chumbo2); opacity: 0.4;
+  }
+
+  /* GRAVA */
+  .grava {
+    background: linear-gradient(135deg, var(--chm-dim), rgba(46,58,90,0.02));
+    border: 1px solid var(--chm-brd); border-radius: 10px;
+    padding: 32px 36px; margin: 48px 0; text-align: center;
+  }
+  .grava-label {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 4px; color: var(--chumbo2);
+    text-transform: uppercase; margin-bottom: 24px; display: block;
+  }
+  .grava-item {
+    font-size: 17px; font-weight: 700;
+    color: var(--chumbo3); margin-bottom: 10px; line-height: 1.6;
+  }
+  .grava-item span { color: var(--ink2); font-weight: 400; }
+
+  /* CTA */
+  .cta-box {
+    background: var(--ink); border-radius: 12px;
+    padding: 60px 40px; text-align: center;
+    margin-top: 72px; position: relative; overflow: hidden;
+  }
+  .cta-box::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 50% at 50% 110%, rgba(46,58,90,0.35) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .cta-tag {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 4px; color: var(--prata2);
+    text-transform: uppercase; margin-bottom: 18px; display: block;
+    position: relative; z-index: 1;
+  }
+  .cta-titulo {
+    font-family: 'Lora', serif;
+    font-size: clamp(26px, 5vw, 44px);
+    font-weight: 700; color: var(--bg);
+    line-height: 1.1; margin-bottom: 14px;
+    position: relative; z-index: 1;
+  }
+  .cta-titulo em { color: var(--prata2); font-style: italic; }
+  .cta-sub {
+    font-size: 17px; font-weight: 300;
+    color: rgba(242,240,245,0.4); max-width: 440px;
+    margin: 0 auto 36px; position: relative; z-index: 1; line-height: 1.7;
+  }
+  .cta-btns {
+    display: flex; flex-wrap: wrap;
+    justify-content: center; gap: 12px; position: relative; z-index: 1;
+  }
+  .btn-p {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--chumbo2); color: #fff;
+    font-size: 14px; font-weight: 700;
+    letter-spacing: 1px; text-transform: uppercase;
+    padding: 16px 32px; border-radius: 100px;
+    text-decoration: none; transition: all 0.3s;
+  }
+  .btn-p:hover { background: var(--chumbo3); transform: translateY(-2px); }
+  .btn-s {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: transparent; color: var(--prata2);
+    font-size: 14px; font-weight: 600;
+    padding: 16px 28px; border-radius: 100px;
+    text-decoration: none; border: 1px solid var(--chm-brd); transition: all 0.3s;
+  }
+  .btn-s:hover { background: var(--chm-dim); border-color: var(--chumbo2); }
+  .cta-oab {
+    margin-top: 20px; font-size: 12px; letter-spacing: 2px;
+    color: rgba(242,240,245,0.15); text-transform: uppercase;
+    position: relative; z-index: 1;
+  }
+
+  .footer {
+    background: var(--ink2); text-align: center;
+    padding: 32px 24px; border-top: 1px solid rgba(46,58,90,0.18);
+  }
+  .footer-nome {
+    font-family: 'Lora', serif;
+    font-size: 17px; color: var(--bg); margin-bottom: 4px;
+  }
+  .footer-sub {
+    font-size: 12px; letter-spacing: 2px;
+    color: rgba(242,240,245,0.15); text-transform: uppercase;
+  }
+
+  @keyframes subir {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes expandir {
+    from { transform: scaleX(0); }
+    to   { transform: scaleX(1); }
+  }
+
+  @media (max-width: 600px) {
+    .acc-corpo { padding-left: 22px; }
+    .cta-box { padding: 40px 22px; }
+    .hero-timeline { gap: 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-linhas"></div>
+  <div class="hero-tl-deco"></div>
+  <div class="hero-z">
+
+    <div class="hero-eyebrow">Direito de Família</div>
+
+    <h1 class="hero-h1">
+      Separação de Fato
+      <span class="sub">Seus direitos e os riscos que você não conhece</span>
+    </h1>
+
+    <div class="hero-sep"></div>
+
+    <p class="hero-desc">
+      O casamento pode ter terminado na prática. Mas <strong>enquanto o divórcio não é formalizado, o relógio patrimonial continua correndo</strong> e os riscos jurídicos permanecem abertos. Entenda o que está em jogo enquanto você espera.
+    </p>
+
+    <div class="hero-pills">
+      <span class="pill">Marco Patrimonial</span>
+      <span class="pill">Prova da Data</span>
+      <span class="pill">Alimentos</span>
+      <span class="pill">Bens Adquiridos Após</span>
+      <span class="pill">Jurisprudência STJ</span>
+      <span class="pill">Nova União Estável</span>
+    </div>
+
+    <!-- LINHA DO TEMPO DECORATIVA -->
+    <div class="hero-timeline">
+      <div class="htl-item">
+        <div class="htl-dot azul">📅</div>
+        <div class="htl-label" style="color:rgba(160,176,208,0.7)">Separação<br>de Fato</div>
+      </div>
+      <div class="htl-item">
+        <div class="htl-dot verm">⚠️</div>
+        <div class="htl-label" style="color:rgba(200,100,100,0.7)">Zona de<br>Risco</div>
+      </div>
+      <div class="htl-item">
+        <div class="htl-dot verde">✓</div>
+        <div class="htl-label" style="color:rgba(80,180,120,0.7)">Divórcio<br>Formal</div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- DIAGNÓSTICO -->
+<section class="diag-section">
+  <div class="diag-inner">
+    <span class="d-tag">🔍 Diagnóstico rápido</span>
+    <h2 class="d-titulo">Em qual situação você está agora?</h2>
+    <p class="d-sub">Selecione e veja a análise específica para o seu caso.</p>
+
+    <div class="q-lista">
+      <div class="q-item" onclick="marcar(this,'a')">
+        <div class="q-box"></div>
+        <div class="q-texto">Paramos de conviver há algum tempo, mas nenhum dos dois entrou com o divórcio ainda</div>
+      </div>
+      <div class="q-item" onclick="marcar(this,'b')">
+        <div class="q-box"></div>
+        <div class="q-texto">Depois que nos separamos, comprei bens com dinheiro próprio. Quero saber se entram na partilha</div>
+      </div>
+      <div class="q-item" onclick="marcar(this,'c')">
+        <div class="q-box"></div>
+        <div class="q-texto">Não tenho nenhuma prova de quando a separação de fato aconteceu</div>
+      </div>
+      <div class="q-item" onclick="marcar(this,'d')">
+        <div class="q-box"></div>
+        <div class="q-texto">Dependo financeiramente do cônjuge e estou sem suporte desde a separação</div>
+      </div>
+      <div class="q-item" onclick="marcar(this,'e')">
+        <div class="q-box"></div>
+        <div class="q-texto">Estou em nova relação após a separação de fato e quero entender as implicações jurídicas</div>
+      </div>
+    </div>
+
+    <div class="q-res" id="q-res"></div>
+  </div>
+</section>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- SEÇÃO 1 -->
+  <section class="secao">
+    <span class="secao-n">01</span>
+    <h2 class="secao-titulo">O que é separação de fato e por que ela importa juridicamente</h2>
+
+    <p class="p">
+      Separação de fato é o momento em que o casal, na prática, encerra a vida conjugal em comum. Não há escritura, não há cartório, não há sentença. É um fato da vida que o Direito reconhece com consequências patrimoniais concretas e imediatas, mesmo sem qualquer formalização.
+    </p>
+
+    <p class="p">
+      A importância jurídica desse marco é direta: o STJ consolidou que <strong>a comunhão patrimonial encerra no momento da separação de fato</strong>, e não quando o divórcio é decretado. Isso significa que bens comprados com recursos exclusivos de cada um após essa data não entram na partilha, desde que a data seja provada. Por outro lado, enquanto o divórcio formal não ocorre, diversas obrigações do casamento continuam existindo e criando riscos que muitos não percebem.
+    </p>
+
+    <div class="lei">
+      <span class="lei-ref">STJ — Posição Consolidada</span>
+      <p class="lei-texto">
+        "A separação de fato encerra a <strong>comunicabilidade dos bens do casal</strong>, de modo que os bens adquiridos após esse marco não se incluem na partilha do divórcio, independentemente de ainda não ter sido prolatada a sentença de divórcio."
+      </p>
+    </div>
+
+    <p class="p">
+      Aqui está a tensão processual que define a maioria dos litígios de partilha: o cônjuge que quer ampliar o patrimônio partilhável vai tentar empurrar a data de separação de fato para o mais tarde possível, enquanto o cônjuge que quer proteger o que construiu depois vai querer provar que a data foi mais cedo. A batalha sobre essa data é, frequentemente, mais decisiva do que a batalha sobre os bens em si.
+    </p>
+
+    <div class="cx verm">
+      <span class="cx-tag">🔴 O risco que ninguém calcula</span>
+      <div class="cx-titulo">Cada mês sem formalizar é um mês de vulnerabilidade real</div>
+      <p class="cx-texto">
+        Enquanto o divórcio formal não é decretado, você ainda é legalmente casado. Isso significa que algumas obrigações e alguns riscos permanecem ativos mesmo que a convivência tenha cessado há meses ou anos. <strong>A separação de fato protege o patrimônio futuro, mas não dissolve o vínculo jurídico do casamento</strong>, que continua produzindo efeitos enquanto não for formalmente extinto.
+      </p>
+    </div>
+  </section>
+
+  <div class="divisor"><div class="divisor-sym">◆</div></div>
+
+  <!-- SEÇÃO 2 -->
+  <section class="secao">
+    <span class="secao-n">02</span>
+    <h2 class="secao-titulo">O que a separação de fato encerra e o que ela não encerra</h2>
+
+    <p class="p">
+      Entender essa distinção é o núcleo técnico deste guia. Muitas pessoas saem da relação acreditando que estão completamente livres de obrigações desde o dia em que pararam de conviver. A realidade jurídica é mais complexa: algumas coisas encerram com a separação de fato, outras só encerram com o divórcio formal, e algumas podem continuar existindo mesmo depois do divórcio.
+    </p>
+
+    <div class="tl">
+
+      <div class="tl-item">
+        <div class="tl-dot verde">✓</div>
+        <div>
+          <span class="tl-tag">Encerra com a separação de fato</span>
+          <div class="tl-titulo">Comunicação de bens adquiridos onerosamente</div>
+          <p class="tl-texto">
+            A partir da separação de fato comprovada, bens comprados com recursos exclusivos de cada cônjuge não entram na partilha. Art. 1.660, I CC combinado com a jurisprudência do STJ. A comunhão patrimonial prática encerra nesse marco, mesmo que o vínculo formal ainda exista.
+          </p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot verde">✓</div>
+        <div>
+          <span class="tl-tag">Encerra com a separação de fato</span>
+          <div class="tl-titulo">Direito à herança recíproca em algumas situações</div>
+          <p class="tl-texto">
+            O STJ consolidou que o cônjuge separado de fato, em certas circunstâncias, perde o direito sucessório, ainda que o divórcio formal não tenha ocorrido. <strong>Se um dos cônjuges falecer durante o período de separação de fato</strong>, o direito do outro à herança pode ser afastado dependendo das provas de que a separação efetiva já havia ocorrido.
+          </p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot vermelho">!</div>
+        <div>
+          <span class="tl-tag">Permanece até o divórcio formal</span>
+          <div class="tl-titulo">Obrigação de alimentos entre cônjuges</div>
+          <p class="tl-texto">
+            A separação de fato <strong>não extingue automaticamente a obrigação alimentar</strong>. Se havia dependência econômica durante o casamento, o cônjuge dependente pode requerer alimentos mesmo após a separação de fato, enquanto o divórcio não for decretado, e às vezes até depois. Isso funciona nos dois sentidos: é um direito para quem precisa e um risco para quem ignora a possibilidade de ser acionado.
+          </p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot vermelho">!</div>
+        <div>
+          <span class="tl-tag">Permanece até o divórcio formal</span>
+          <div class="tl-titulo">Impedimento para novo casamento</div>
+          <p class="tl-texto">
+            Enquanto o divórcio não for decretado, nenhum dos cônjuges pode contrair novo casamento. A separação de fato não dissolve o vínculo matrimonial. Uma união estável pode ser constituída durante esse período, mas com implicações patrimoniais próprias que precisam ser avaliadas, especialmente se a nova relação adquirir bens relevantes enquanto o divórcio ainda não foi formalizado.
+          </p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot vermelho">!</div>
+        <div>
+          <span class="tl-tag">Risco permanente sem formalização</span>
+          <div class="tl-titulo">Responsabilidade por dívidas do cônjuge</div>
+          <p class="tl-texto">
+            Em alguns regimes de bens, dívidas contraídas pelo cônjuge durante o casamento formal ainda podem atingir o patrimônio do outro, mesmo após a separação de fato. <strong>Sem o divórcio formalizado e a partilha realizada, o vínculo jurídico mantém essa vulnerabilidade aberta</strong>, que pode se materializar de forma inesperada se o ex-cônjuge contrair dívidas significativas no período de indefinição.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divisor"><div class="divisor-sym">◆</div></div>
+
+  <!-- SEÇÃO 3 -->
+  <section class="secao">
+    <span class="secao-n">03</span>
+    <h2 class="secao-titulo">Como provar a data: as evidências que o juiz aceita</h2>
+
+    <p class="p">
+      Toda a proteção patrimonial que a separação de fato oferece depende de uma única condição que muitas pessoas ignoram até o momento em que precisam dela: <strong>você consegue provar quando ela aconteceu?</strong> Sem prova, o juiz pode fixar a data com base nas alegações da parte contrária, e essa diferença de meses ou anos pode representar centenas de milhares de reais na partilha.
+    </p>
+
+    <p class="p">
+      O STJ consolidou que o ônus de provar a separação de fato é de quem a alega. Isso significa que quem quer se beneficiar do marco precisa produzir a prova. A boa notícia é que essa prova pode ser feita com documentos que muitas pessoas já têm, ainda que não saibam que têm.
+    </p>
+
+    <div class="provas">
+
+      <div class="prova-item">
+        <div class="prova-num">01</div>
+        <div>
+          <div class="prova-titulo">Comprovante de endereços diferentes</div>
+          <div class="prova-desc">Contrato de aluguel, conta de luz, correspondência bancária ou declaração de IR com endereços distintos na mesma época. É a prova mais objetiva e de maior peso porque é documental e difícil de contestar. <strong>Uma simples mudança de endereço no cadastro bancário, documentada em extrato, pode ser o elemento decisivo.</strong></div>
+        </div>
+      </div>
+
+      <div class="prova-item">
+        <div class="prova-num">02</div>
+        <div>
+          <div class="prova-titulo">Declaração de Imposto de Renda</div>
+          <div class="prova-desc">A declaração como "solteiro" ou "separado" após a data alegada, mesmo que o divórcio ainda não tenha sido formalizado, é um forte indício da separação de fato. A mudança de status na declaração de IR cria um registro oficial com data precisa que é muito difícil de contestar.</div>
+        </div>
+      </div>
+
+      <div class="prova-item">
+        <div class="prova-num">03</div>
+        <div>
+          <div class="prova-titulo">Mensagens e comunicações digitais</div>
+          <div class="prova-desc">Conversas no WhatsApp, e-mails ou mensagens que evidenciem o rompimento da relação e a independência financeira. Inclusive mensagens para terceiros que confirmem o contexto, como comunicando amigos ou familiares sobre o fim da relação em determinada data. <strong>Uma ata notarial que certifique o conteúdo dessas mensagens tem fé pública e é prova robusta.</strong></div>
+        </div>
+      </div>
+
+      <div class="prova-item">
+        <div class="prova-num">04</div>
+        <div>
+          <div class="prova-titulo">Extratos bancários com finanças independentes</div>
+          <div class="prova-desc">Demonstram que cada cônjuge passou a custear suas despesas individualmente, sem transferências ou pagamentos entre si, a partir de determinada data. A ausência de transações financeiras compartilhadas a partir de certo momento é um indício relevante de que a convivência e a comunhão de vida haviam cessado.</div>
+        </div>
+      </div>
+
+      <div class="prova-item">
+        <div class="prova-num">05</div>
+        <div>
+          <div class="prova-titulo">Prova testemunhal</div>
+          <div class="prova-desc">Familiares, amigos próximos ou vizinhos que possam afirmar em juízo quando cessou a convivência conjugal. Tem peso relevante quando combinada com prova documental, especialmente em casos onde os dois moravam na mesma casa por razões financeiras mas com rotinas completamente separadas.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="cx aviso">
+      <span class="cx-tag">⚡ O caso mais difícil</span>
+      <div class="cx-titulo">Continuaram morando juntos após a separação de fato</div>
+      <p class="cx-texto">
+        Muitos casais continuam morando na mesma casa após a separação por razões financeiras, pela criança, ou simplesmente porque nenhum dos dois teve condições de sair imediatamente. Isso dificulta a prova, mas não a inviabiliza. O STJ reconhece que coabitação e convivência conjugal são coisas distintas. A prova precisa mostrar que, mesmo morando no mesmo endereço, a vida conjugal havia cessado: <strong>quartos separados, finanças independentes, ausência de vida afetiva, testemunhos que confirmem o contexto.</strong> Quanto mais documentada for essa situação desde o início, mais sólida fica a posição futura em um eventual litígio.
+      </p>
+    </div>
+  </section>
+
+  <div class="divisor"><div class="divisor-sym">◆</div></div>
+
+  <!-- SEÇÃO 4 -->
+  <section class="secao">
+    <span class="secao-n">04</span>
+    <h2 class="secao-titulo">Os riscos que ninguém conta: perguntas e respostas diretas</h2>
+
+    <p class="p">
+      A maioria das pessoas que se separa de fato acredita que está protegida simplesmente por ter parado de conviver. As perguntas abaixo abordam os pontos onde essa crença costuma custar caro, às vezes anos depois, quando o litígio finalmente chega ao escritório.
+    </p>
+
+    <div class="acc-lista">
+
+      <div class="acc-item" onclick="toggleAcc(this)">
+        <div class="acc-header">
+          <div class="acc-icone">💰</div>
+          <div class="acc-titulo">Comprei um imóvel após a separação de fato. Ele entra na partilha?</div>
+          <div class="acc-seta">▾</div>
+        </div>
+        <div class="acc-corpo">
+          <span class="sim">Não entra</span>, desde que você comprove a data real da separação de fato. Se o imóvel foi adquirido com recursos exclusivos seus após esse marco, ele é bem particular. O problema surge quando a data é disputada: se o ex-cônjuge afirmar que a separação de fato foi posterior à compra e você não tiver prova documental da data real, o imóvel pode ser incluído na partilha. <strong>A prova da data é tão importante quanto a prova da origem dos recursos.</strong>
+        </div>
+      </div>
+
+      <div class="acc-item" onclick="toggleAcc(this)">
+        <div class="acc-header">
+          <div class="acc-icone">🏢</div>
+          <div class="acc-titulo">Minha empresa cresceu muito depois da separação de fato. O cônjuge pode reivindicar a valorização?</div>
+          <div class="acc-seta">▾</div>
+        </div>
+        <div class="acc-corpo">
+          <span class="atc">Depende da prova da data.</span> Se a separação de fato for comprovada, a valorização da empresa posterior a ela não deveria entrar na partilha, pois ocorreu após o encerramento da comunhão patrimonial. <strong>Mas se a data for disputada ou não comprovada, o STJ reconhece no REsp 1.787.027/RS que a valorização ativa da empresa durante o casamento pode ser objeto de partilha.</strong> A prova da data de separação de fato é, novamente, o elemento determinante. Documentá-la imediatamente, sem esperar o litígio, é a medida mais inteligente.
+        </div>
+      </div>
+
+      <div class="acc-item" onclick="toggleAcc(this)">
+        <div class="acc-header">
+          <div class="acc-icone">📅</div>
+          <div class="acc-titulo">Faz anos que estamos separados de fato. Preciso mesmo entrar com o divórcio?</div>
+          <div class="acc-seta">▾</div>
+        </div>
+        <div class="acc-corpo">
+          <span class="nao">Sim, e quanto antes melhor.</span> Cada mês sem o divórcio formalizado é um mês de vulnerabilidade jurídica que muitas pessoas subestimam. As principais: você não pode se casar novamente, está exposto às dívidas que o ex-cônjuge contrair dependendo do regime, pode ter dificuldade de comprovar que bens adquiridos são exclusivamente seus, e o cônjuge ainda figura como herdeiro em algumas situações. <strong>A separação de fato protege patrimonialmente, mas não resolve todas as amarras do vínculo matrimonial.</strong>
+        </div>
+      </div>
+
+      <div class="acc-item" onclick="toggleAcc(this)">
+        <div class="acc-header">
+          <div class="acc-icone">❤️</div>
+          <div class="acc-titulo">Entrei em nova relação após a separação de fato. Isso cria uma união estável?</div>
+          <div class="acc-seta">▾</div>
+        </div>
+        <div class="acc-corpo">
+          <span class="atc">Pode criar, e isso tem implicações patrimoniais sérias.</span> Se a nova relação preencher os requisitos de união estável, convivência pública, contínua e com intenção de constituir família, ela passa a existir juridicamente mesmo enquanto o divórcio do casamento anterior não foi decretado. <strong>Isso significa que você pode, simultaneamente, ter obrigações patrimoniais com o cônjuge do casamento e com o companheiro da nova união.</strong> A saída é formalizar o divórcio o quanto antes e, se quiser proteger o patrimônio da nova relação, estabelecer um contrato de convivência com seu novo parceiro.
+        </div>
+      </div>
+
+      <div class="acc-item" onclick="toggleAcc(this)">
+        <div class="acc-header">
+          <div class="acc-icone">💸</div>
+          <div class="acc-titulo">Tenho direito a alimentos mesmo após a separação de fato?</div>
+          <div class="acc-seta">▾</div>
+        </div>
+        <div class="acc-corpo">
+          <span class="sim">Sim, em determinadas circunstâncias.</span> A separação de fato não extingue a obrigação alimentar entre cônjuges. Se havia dependência econômica clara durante o casamento e essa situação persiste após a separação, é possível requerer alimentos provisórios por tutela antecipada, com base no Art. 300 CPC e no Art. 1.706 CC, mesmo antes de o divórcio ser decretado. <strong>O juiz pode fixá-los logo no início do processo.</strong> Para isso, a petição precisa demonstrar a dependência econômica e a capacidade financeira do cônjuge alimentante. Quanto mais documentada essa demonstração, mais rápida e favorável tende a ser a decisão.
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divisor"><div class="divisor-sym">◆</div></div>
+
+  <!-- SEÇÃO 5 -->
+  <section class="secao">
+    <span class="secao-n">05</span>
+    <h2 class="secao-titulo">O que fazer agora: ações concretas em ordem de prioridade</h2>
+
+    <p class="p">
+      Planejamento após a separação de fato não é sobre esperar o divórcio chegar. É sobre proteger ativamente o que você construiu e organizar o que ainda precisa ser resolvido. Cada ação abaixo tem uma justificativa jurídica clara e um impacto prático imediato.
+    </p>
+
+    <div class="tl">
+
+      <div class="tl-item">
+        <div class="tl-dot ativo">1</div>
+        <div>
+          <span class="tl-tag">Prioridade máxima</span>
+          <div class="tl-titulo">Documente a data de separação com o que estiver disponível agora</div>
+          <p class="tl-texto">
+            Reúna tudo que comprove que a separação ocorreu: troca de endereço em qualquer cadastro, declaração de IR, mensagens com familiares comunicando a separação, contrato de novo aluguel, extrato bancário com residência diferente. <strong>Não espere o processo judicial para produzir essa prova. Produza agora</strong>, enquanto as evidências ainda estão frescas e acessíveis, porque em um litígio futuro cada documento com data precisará de autenticidade verificável.
+          </p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot">2</div>
+        <div>
+          <span class="tl-tag">Proteção financeira</span>
+          <div class="tl-titulo">Abra contas bancárias exclusivamente no seu nome</div>
+          <p class="tl-texto">
+            Toda movimentação financeira após a separação de fato deve ser feita em contas exclusivamente suas. Isso cria um rastro documental que separa os recursos comuns do período do casamento dos recursos particulares do período posterior. <strong>Contas conjuntas que continuam ativas após a separação criam confusão sobre a origem dos recursos</strong> que pode ser usada contra você em uma partilha futura.
+          </p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot">3</div>
+        <div>
+          <span class="tl-tag">Segurança jurídica</span>
+          <div class="tl-titulo">Documente a origem de cada bem adquirido após a separação</div>
+          <p class="tl-texto">
+            Cada bem comprado depois da separação de fato precisa ter documentação clara da origem dos recursos: extrato bancário mostrando de onde veio o dinheiro, escritura com declaração de origem se for imóvel, nota fiscal ou recibo para bens de valor. <strong>Isso não é burocracia desnecessária: é a prova que permite excluir esse bem da partilha</strong> quando o litígio chegar, às vezes anos depois.
+          </p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot">4</div>
+        <div>
+          <span class="tl-tag">Resolução definitiva</span>
+          <div class="tl-titulo">Protocolize o divórcio o quanto antes</div>
+          <p class="tl-texto">
+            A separação de fato é uma proteção incompleta. O divórcio formal é a única forma de encerrar definitivamente o vínculo matrimonial e todas as obrigações e riscos que ele carrega. <strong>Cada mês adicional de indefinição é um mês de exposição desnecessária.</strong> A EC 66/2010 eliminou qualquer requisito de prazo ou causa para o divórcio direto. Você pode protocolar hoje, independente do tempo de casamento e independente de acordo ou não com o cônjuge.
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="cx verde">
+      <span class="cx-tag">✅ A orientação mais subestimada</span>
+      <div class="cx-titulo">Informe um advogado antes de tomar qualquer decisão patrimonial relevante</div>
+      <p class="cx-texto">
+        Vender um imóvel, abrir uma empresa, fazer um investimento significativo ou assinar um contrato relevante no período entre a separação de fato e o divórcio formal são todos atos com implicações jurídicas que variam conforme o regime de bens, a existência de dívidas comuns e o estado da partilha. <strong>Uma consulta antes de agir custa infinitamente menos do que desfazer um ato praticado sem orientação.</strong>
+      </p>
+    </div>
+  </section>
+
+  <div class="divisor"><div class="divisor-sym">◆</div></div>
+
+  <div class="destaque">
+    <p class="dest-texto">
+      A separação de fato protege. Mas apenas se você conseguir prová-la. E o Direito não protege quem tem razão. <strong>O Direito protege quem tem razão e consegue provar.</strong>
+    </p>
+    <div class="dest-autor">Dr. Filipe Ferreira · OAB/ES 37.159</div>
+  </div>
+
+  <div class="grava">
+    <span class="grava-label">📌 Os 7 pontos essenciais</span>
+    <div class="grava-item">Separação de fato encerra a comunhão patrimonial: <span>o divórcio encerra o vínculo. São duas coisas distintas.</span></div>
+    <div class="grava-item">Bens adquiridos após a separação de fato: <span>não entram na partilha. Com prova da data.</span></div>
+    <div class="grava-item">A batalha sobre a data: <span>frequentemente mais decisiva do que a batalha sobre os bens em si.</span></div>
+    <div class="grava-item">Alimentos entre cônjuges: <span>permanecem após a separação de fato. Só se extinguem com o divórcio formal ou quando cessam os requisitos.</span></div>
+    <div class="grava-item">Nova relação durante a separação de fato: <span>pode configurar união estável com implicações patrimoniais simultâneas.</span></div>
+    <div class="grava-item">Coabitação pós-separação: <span>dificulta a prova mas não a inviabiliza com documentação adequada de finanças e rotinas independentes.</span></div>
+    <div class="grava-item">EC 66/2010: <span>o divórcio pode ser pedido agora, sem prazo, sem causa, sem separação prévia. Não há motivo para esperar.</span></div>
+  </div>
+
+  <div class="cta-box">
+    <span class="cta-tag">Consultoria especializada</span>
+    <h2 class="cta-titulo">
+      Sua separação de fato está
+      <em>documentada e protegida?</em>
+    </h2>
+    <p class="cta-sub">Análise da sua situação com orientação sobre os próximos passos certos. Atendimento online para todo o Brasil.</p>
+    <div class="cta-btns">
+      <a href="https://wa.me/5527995187279?text=Ol%C3%A1%2C+vim+pelo+guia+de+Separa%C3%A7%C3%A3o+de+Fato+e+gostaria+de+uma+orienta%C3%A7%C3%A3o." class="btn-p">
+        💬 WhatsApp — Falar Agora
+      </a>
+      <a href="mailto:escritorio@filipeeassociadosadvogado.com.br?subject=Consulta%20sobre%20Separação%20de%20Fato" class="btn-s">
+        ✉️ Enviar E-mail
+      </a>
+    </div>
+    <div class="cta-oab">Filipe Ferreira · OAB/ES 37.159 · Direito de Família e Proteção Patrimonial</div>
+  </div>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-nome">Filipe Ferreira — Advogado e Associados</div>
+  <div class="footer-sub">OAB/ES 37.159 · Linhares, ES · Atendimento Online · Brasil</div>
+</footer>
+
+<script>
+  const respostas = {
+    a: { cls: 'aviso', label: '⚠️ Zona de risco ativa',
+      txt: 'Você está no período de maior vulnerabilidade jurídica. A comunhão patrimonial já pode estar encerrada na prática, mas todas as obrigações do casamento formal continuam ativas. <strong>A ação mais urgente é documentar a data da separação agora</strong>, com tudo que estiver disponível: troca de endereço em cadastros, extrato de conta pessoal, mensagem comunicando a separação a familiares. Depois, o quanto antes protocolar o divórcio. A EC 66/2010 permite fazê-lo imediatamente, sem nenhum prazo ou causa a comprovar.' },
+    b: { cls: 'verde', label: '✅ Você pode estar protegido',
+      txt: 'Bens comprados com seus próprios recursos após a separação de fato não entram na partilha, desde que você comprove a data real da separação. <strong>A prova é o elemento central:</strong> sem ela, o cônjuge pode contestar a data e incluir esses bens. Reúna agora tudo que documente a data: endereços diferentes, declarações de IR, extratos com finanças independentes. Quanto mais antiga e robusta for essa documentação, mais sólida é a sua proteção.' },
+    c: { cls: 'vermelho', label: '🔴 Risco patrimonial alto',
+      txt: 'A ausência de prova da data é o maior risco patrimonial em uma separação de fato. Sem prova, o juiz pode fixar a data com base nas alegações do cônjuge contrário, e isso pode incluir na partilha bens que você acredita serem exclusivamente seus. <strong>Mas ainda há saída:</strong> mensagens com familiares, troca de endereço em qualquer cadastro, declaração de IR com status alterado, extrato bancário com conta pessoal aberta naquela época. Consulte um advogado agora para mapear quais provas ainda podem ser recuperadas antes que o litígio comece.' },
+    d: { cls: 'verde', label: '✅ Direito aos alimentos',
+      txt: 'A separação de fato não extingue automaticamente a obrigação alimentar. <strong>Você pode requerer alimentos provisórios por tutela antecipada</strong>, com base no Art. 300 CPC e no Art. 1.706 CC, antes mesmo de o divórcio ser decretado. O juiz pode fixá-los logo no início do processo. Para isso, a petição precisa demonstrar sua dependência econômica e a capacidade financeira do cônjuge. Não espere o processo terminar para ter suporte financeiro.' },
+    e: { cls: 'aviso', label: '⚠️ Atenção às implicações patrimoniais',
+      txt: 'Uma nova relação durante a separação de fato pode configurar união estável se houver convivência pública, contínua e com intenção de constituir família. <strong>Isso significa que você pode ter simultaneamente obrigações patrimoniais com o cônjuge do casamento formal e com o companheiro da nova relação</strong>, dependendo de como cada situação se consolidar. A solução mais limpa é formalizar o divórcio o quanto antes e, se quiser proteger o patrimônio da nova relação, estabelecer um contrato de convivência com o novo parceiro antes de adquirir bens em conjunto.' }
+  };
+
+  let ativo = null;
+  function marcar(el, id) {
+    document.querySelectorAll('.q-item').forEach(q => {
+      q.classList.remove('on'); q.querySelector('.q-box').textContent = '';
+    });
+    const res = document.getElementById('q-res');
+    if (ativo === id) { ativo = null; res.classList.remove('visivel'); return; }
+    ativo = id;
+    el.classList.add('on'); el.querySelector('.q-box').textContent = '✓';
+    const r = respostas[id];
+    res.className = `q-res visivel ${r.cls}`;
+    res.innerHTML = `<span class="q-res-label">${r.label}</span><p class="q-res-texto">${r.txt}</p>`;
+  }
+
+  function toggleAcc(el) {
+    const ab = el.classList.contains('aberto');
+    document.querySelectorAll('.acc-item').forEach(a => a.classList.remove('aberto'));
+    if (!ab) el.classList.add('aberto');
+  }
+</script>
+
+</body>
+</html>

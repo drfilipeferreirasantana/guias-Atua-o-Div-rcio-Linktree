@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Partilha de Bens na Prática · Dr. Filipe Ferreira</title>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:          #f5f2ec;
+    --bg2:         #ece8de;
+    --bg3:         #ddd8ca;
+    --ink:         #14100c;
+    --ink2:        #1e1810;
+    --ink3:        #2a2218;
+    --cobre:       #7a3a18;
+    --cobre2:      #a05028;
+    --cobre3:      #c87040;
+    --cobre-dim:   rgba(122,58,24,0.08);
+    --cobre-brd:   rgba(122,58,24,0.2);
+    --areia:       #b89860;
+    --areia2:      #d0b878;
+    --areia3:      #e8d090;
+    --verde:       #1e5e36;
+    --verde-dim:   rgba(30,94,54,0.08);
+    --verde-brd:   rgba(30,94,54,0.22);
+    --verm:        #8c2020;
+    --verm-dim:    rgba(140,32,32,0.07);
+    --verm-brd:    rgba(140,32,32,0.2);
+    --aviso:       #7a5a00;
+    --aviso-dim:   rgba(122,90,0,0.08);
+    --aviso-brd:   rgba(122,90,0,0.22);
+    --text:        #2a2018;
+    --text2:       #4a3c28;
+    --muted:       #9a8a70;
+    --branco:      #fdfcf8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 400;
+    line-height: 1.85;
+    font-size: 17px;
+  }
+
+  /* HERO */
+  .hero {
+    background: var(--ink);
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: 80px 28px 72px;
+    position: relative; overflow: hidden;
+  }
+
+  .hero-fundo {
+    position: absolute; inset: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 85% 55% at 50% -5%, rgba(122,58,24,0.35) 0%, transparent 62%),
+      radial-gradient(ellipse 45% 40% at 5% 85%,  rgba(122,58,24,0.1)  0%, transparent 55%),
+      radial-gradient(ellipse 35% 35% at 95% 75%, rgba(184,152,96,0.08) 0%, transparent 50%);
+  }
+
+  /* Textura de mármore sutil */
+  .hero-marmore {
+    position: absolute; inset: 0; pointer-events: none;
+    background-image:
+      repeating-linear-gradient(
+        -45deg,
+        transparent, transparent 40px,
+        rgba(184,152,96,0.02) 40px, rgba(184,152,96,0.02) 41px
+      ),
+      repeating-linear-gradient(
+        45deg,
+        transparent, transparent 60px,
+        rgba(122,58,24,0.015) 60px, rgba(122,58,24,0.015) 61px
+      );
+  }
+
+  .hero-z { position: relative; z-index: 1; }
+
+  .hero-eyebrow {
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 5px; text-transform: uppercase;
+    color: var(--areia2); margin-bottom: 28px;
+    display: flex; align-items: center;
+    gap: 18px; justify-content: center;
+    animation: surgir 0.7s ease forwards;
+  }
+  .hero-eyebrow::before, .hero-eyebrow::after {
+    content: ''; width: 40px; height: 1px;
+    background: rgba(208,184,120,0.35);
+  }
+
+  .hero-h1 {
+    font-family: 'Bodoni Moda', serif;
+    font-size: clamp(38px, 7.5vw, 76px);
+    font-weight: 700; color: var(--bg);
+    line-height: 1.03; margin-bottom: 6px;
+    animation: surgir 0.8s ease forwards;
+  }
+  .hero-h1 .sub {
+    display: block; font-style: italic;
+    font-weight: 400; color: var(--areia2);
+    font-size: 0.52em; line-height: 1.6; margin-top: 10px;
+  }
+
+  .hero-sep {
+    width: 60px; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--cobre2), var(--areia), transparent);
+    margin: 28px auto;
+    animation: expandir 1s ease 0.3s both;
+    transform: scaleX(0); transform-origin: center;
+  }
+
+  .hero-desc {
+    font-size: clamp(15px, 2vw, 18px);
+    color: rgba(245,242,236,0.5); font-weight: 300;
+    max-width: 540px; margin: 0 auto 44px; line-height: 1.8;
+    animation: surgir 0.9s ease 0.15s both; opacity: 0;
+  }
+  .hero-desc strong { color: rgba(245,242,236,0.88); font-weight: 600; }
+
+  .hero-pills {
+    display: flex; flex-wrap: wrap;
+    justify-content: center; gap: 10px;
+    animation: surgir 1s ease 0.3s both; opacity: 0;
+  }
+  .pill {
+    background: rgba(122,58,24,0.18);
+    border: 1px solid rgba(200,112,64,0.28);
+    color: var(--cobre3);
+    font-size: 12px; font-weight: 600;
+    padding: 7px 18px; border-radius: 100px;
+  }
+
+  /* BALANÇA VISUAL */
+  .hero-balanca {
+    margin-top: 52px;
+    animation: surgir 1.1s ease 0.4s both; opacity: 0;
+  }
+  .balanca-svg { width: 100%; max-width: 440px; }
+
+  /* DIAGNÓSTICO */
+  .diag-section {
+    background: var(--ink2); padding: 80px 28px;
+    border-top: 1px solid rgba(255,255,255,0.04);
+  }
+  .diag-inner { max-width: 700px; margin: 0 auto; text-align: center; }
+  .d-tag {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 4px; text-transform: uppercase;
+    color: var(--areia2); margin-bottom: 14px; display: block;
+  }
+  .d-titulo {
+    font-family: 'Bodoni Moda', serif;
+    font-size: clamp(22px, 4vw, 34px);
+    font-weight: 700; color: var(--bg);
+    line-height: 1.2; margin-bottom: 10px;
+  }
+  .d-sub {
+    font-size: 16px; color: rgba(245,242,236,0.35);
+    font-weight: 300; margin-bottom: 36px;
+  }
+
+  .q-lista { text-align: left; display: flex; flex-direction: column; gap: 10px; }
+  .q-item {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 10px; padding: 16px 20px;
+    display: flex; align-items: flex-start; gap: 14px;
+    cursor: pointer; transition: all 0.25s; user-select: none;
+  }
+  .q-item:hover { background: var(--cobre-dim); border-color: var(--cobre-brd); }
+  .q-item.on { background: rgba(122,58,24,0.14); border-color: var(--cobre2); }
+  .q-box {
+    width: 22px; height: 22px; border-radius: 5px;
+    border: 1.5px solid rgba(255,255,255,0.15);
+    flex-shrink: 0; margin-top: 2px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 700; transition: all 0.2s;
+  }
+  .q-item.on .q-box { background: var(--cobre2); border-color: var(--cobre2); }
+  .q-texto { font-size: 16px; color: rgba(245,242,236,0.6); line-height: 1.55; }
+  .q-item.on .q-texto { color: var(--bg); }
+
+  .q-res {
+    display: none; margin-top: 24px;
+    padding: 24px 28px; border-radius: 10px;
+    text-align: left; animation: surgir 0.4s ease forwards;
+  }
+  .q-res.visivel { display: block; }
+  .q-res.cobre   { background: var(--cobre-dim); border: 1.5px solid var(--cobre-brd); }
+  .q-res.verde   { background: var(--verde-dim); border: 1.5px solid var(--verde-brd); }
+  .q-res.vermelho{ background: var(--verm-dim);  border: 1.5px solid var(--verm-brd);  }
+  .q-res.aviso   { background: var(--aviso-dim); border: 1.5px solid var(--aviso-brd); }
+  .q-res-label {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 3px; text-transform: uppercase;
+    margin-bottom: 8px; display: block;
+  }
+  .cobre   .q-res-label { color: var(--cobre3); }
+  .verde   .q-res-label { color: #50b870; }
+  .vermelho .q-res-label { color: #d06060; }
+  .aviso   .q-res-label { color: #c0a030; }
+  .q-res-texto { font-size: 16px; line-height: 1.8; }
+  .cobre   .q-res-texto { color: #a06030; }
+  .verde   .q-res-texto { color: #3a8858; }
+  .vermelho .q-res-texto { color: #a05050; }
+  .aviso   .q-res-texto { color: #907020; }
+  .q-res-texto strong { font-weight: 700; }
+
+  /* MAIN */
+  .main { max-width: 780px; margin: 0 auto; padding: 80px 28px 100px; }
+
+  .secao { margin-bottom: 80px; }
+  .secao-n {
+    font-family: 'Bodoni Moda', serif;
+    font-size: 110px; font-weight: 700; color: var(--bg2);
+    line-height: 0.85; display: block;
+    margin-bottom: -8px; user-select: none;
+  }
+  .secao-titulo {
+    font-family: 'Bodoni Moda', serif;
+    font-size: clamp(22px, 3.5vw, 30px);
+    font-weight: 700; color: var(--ink); line-height: 1.2;
+    padding-bottom: 16px; margin-bottom: 28px;
+    border-bottom: 1px solid var(--bg3); position: relative;
+  }
+  .secao-titulo::after {
+    content: ''; position: absolute;
+    left: 0; bottom: -1px; width: 48px; height: 2px;
+    background: linear-gradient(90deg, var(--cobre), var(--areia));
+  }
+
+  .p { font-size: 17px; color: var(--text2); line-height: 1.9; margin-bottom: 22px; }
+  .p strong { color: var(--ink); font-weight: 700; }
+
+  /* LEI */
+  .lei {
+    background: var(--ink); border-radius: 10px;
+    padding: 24px 30px; margin: 28px 0;
+    position: relative; overflow: hidden;
+  }
+  .lei::after {
+    content: '§'; position: absolute; right: 20px; top: 8px;
+    font-family: 'Bodoni Moda', serif;
+    font-size: 72px; color: rgba(122,58,24,0.1);
+    line-height: 1; pointer-events: none;
+  }
+  .lei-ref {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 3px; color: var(--cobre3);
+    text-transform: uppercase; margin-bottom: 10px; display: block;
+  }
+  .lei-texto {
+    font-family: 'Bodoni Moda', serif;
+    font-size: 17px; font-style: italic;
+    color: rgba(245,242,236,0.8); line-height: 1.85;
+  }
+  .lei-texto strong { color: var(--cobre3); font-style: normal; font-weight: 700; }
+
+  /* CAIXAS */
+  .cx { border-radius: 10px; padding: 24px 28px; margin: 28px 0; }
+  .cx.cobre  { background: var(--cobre-dim); border: 1.5px solid var(--cobre-brd); }
+  .cx.verde  { background: var(--verde-dim); border: 1.5px solid var(--verde-brd); }
+  .cx.verm   { background: var(--verm-dim);  border: 1.5px solid var(--verm-brd);  }
+  .cx.aviso  { background: var(--aviso-dim); border: 1.5px solid var(--aviso-brd); }
+  .cx-tag {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 3px; text-transform: uppercase;
+    margin-bottom: 8px; display: block;
+  }
+  .cobre .cx-tag { color: var(--cobre); }
+  .verde .cx-tag { color: var(--verde); }
+  .verm  .cx-tag { color: var(--verm); }
+  .aviso .cx-tag { color: var(--aviso); }
+  .cx-titulo {
+    font-family: 'Bodoni Moda', serif;
+    font-size: 19px; font-weight: 700; margin-bottom: 8px;
+  }
+  .cobre .cx-titulo { color: #803a18; }
+  .verde .cx-titulo { color: #1a5e34; }
+  .verm  .cx-titulo { color: #aa3030; }
+  .aviso .cx-titulo { color: #8a6010; }
+  .cx-texto { font-size: 17px; line-height: 1.85; }
+  .cobre .cx-texto { color: #7a3a20; }
+  .verde .cx-texto { color: #286040; }
+  .verm  .cx-texto { color: #8a3030; }
+  .aviso .cx-texto { color: #806010; }
+  .cx-texto strong { font-weight: 700; }
+  .cobre .cx-texto strong { color: #803a18; }
+  .verde .cx-texto strong { color: #1a5e34; }
+  .verm  .cx-texto strong { color: #aa3030; }
+  .aviso .cx-texto strong { color: #8a6010; }
+
+  /* TABELA DE BENS */
+  .tabela-bens {
+    width: 100%; border-collapse: collapse;
+    border-radius: 10px; overflow: hidden;
+    border: 1px solid var(--bg3); margin: 28px 0;
+  }
+  .tabela-bens thead tr { background: var(--ink); }
+  .tabela-bens th {
+    padding: 14px 18px; font-size: 12px; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase;
+    text-align: left; border-right: 1px solid rgba(255,255,255,0.06);
+  }
+  .tabela-bens th:first-child { color: var(--areia2); }
+  .tabela-bens th:nth-child(2) { color: var(--verde-brd); }
+  .tabela-bens th:nth-child(3) { color: var(--verm-brd); }
+  .tabela-bens th:last-child { color: var(--cobre3); border-right: none; }
+  .tabela-bens tbody tr {
+    background: var(--branco);
+    border-bottom: 1px solid var(--bg2);
+    transition: background 0.2s;
+  }
+  .tabela-bens tbody tr:hover { background: var(--cobre-dim); }
+  .tabela-bens td {
+    padding: 14px 18px; font-size: 16px; color: var(--text2);
+    line-height: 1.5; border-right: 1px solid var(--bg2);
+    vertical-align: top;
+  }
+  .tabela-bens td:last-child { border-right: none; }
+  .tabela-bens td strong { color: var(--ink); font-weight: 700; }
+  .badge-sim {
+    display: inline-block; background: var(--verde-dim); color: var(--verde);
+    border: 1px solid var(--verde-brd);
+    font-size: 12px; font-weight: 700;
+    padding: 3px 10px; border-radius: 100px;
+  }
+  .badge-nao {
+    display: inline-block; background: var(--verm-dim); color: var(--verm);
+    border: 1px solid var(--verm-brd);
+    font-size: 12px; font-weight: 700;
+    padding: 3px 10px; border-radius: 100px;
+  }
+  .badge-dep {
+    display: inline-block; background: var(--aviso-dim); color: var(--aviso);
+    border: 1px solid var(--aviso-brd);
+    font-size: 12px; font-weight: 700;
+    padding: 3px 10px; border-radius: 100px;
+  }
+
+  /* ACCORDION */
+  .acc-lista { display: flex; flex-direction: column; gap: 10px; margin: 28px 0; }
+  .acc-item {
+    background: var(--branco); border: 1px solid var(--bg3);
+    border-radius: 10px; overflow: hidden; cursor: pointer;
+    transition: border-color 0.2s;
+  }
+  .acc-item:hover { border-color: var(--cobre-brd); }
+  .acc-item.aberto { border-color: var(--cobre2); }
+  .acc-header { display: flex; align-items: flex-start; gap: 14px; padding: 18px 22px; }
+  .acc-icone {
+    width: 38px; height: 38px; border-radius: 8px;
+    background: var(--cobre-dim); border: 1px solid var(--cobre-brd);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 17px; flex-shrink: 0; margin-top: 1px;
+  }
+  .acc-titulo { font-size: 17px; font-weight: 700; color: var(--ink); line-height: 1.4; flex: 1; padding-top: 4px; }
+  .acc-seta { color: var(--muted); font-size: 12px; transition: transform 0.3s; flex-shrink: 0; padding-top: 8px; }
+  .acc-item.aberto .acc-seta { transform: rotate(180deg); }
+  .acc-corpo {
+    display: none; padding: 0 22px 20px 74px;
+    font-size: 17px; color: var(--text2); line-height: 1.85;
+    border-top: 1px solid var(--bg2); padding-top: 18px;
+  }
+  .acc-item.aberto .acc-corpo { display: block; }
+  .acc-corpo strong { color: var(--ink); font-weight: 700; }
+  .acc-corpo .sim { color: var(--verde); font-weight: 700; }
+  .acc-corpo .nao { color: var(--verm); font-weight: 700; }
+  .acc-corpo .dep { color: var(--aviso); font-weight: 700; }
+
+  /* SIMULADOR DE PARTILHA */
+  .simulador {
+    background: var(--ink); border-radius: 12px;
+    padding: 36px 32px; margin: 40px 0;
+  }
+  .sim-label {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 4px; color: var(--areia2);
+    text-transform: uppercase; margin-bottom: 6px; display: block;
+  }
+  .sim-titulo {
+    font-family: 'Bodoni Moda', serif;
+    font-size: 22px; font-weight: 700; color: var(--bg);
+    margin-bottom: 24px;
+  }
+  .sim-casos { display: flex; flex-direction: column; gap: 12px; }
+  .sim-caso {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 8px; padding: 16px 20px; cursor: pointer;
+    transition: all 0.25s; user-select: none;
+  }
+  .sim-caso:hover { border-color: rgba(200,112,64,0.4); }
+  .sim-caso-header { display: flex; align-items: flex-start; gap: 12px; }
+  .sim-num {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: var(--cobre-dim); border: 1px solid var(--cobre-brd);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700; color: var(--cobre3); flex-shrink: 0; margin-top: 1px;
+  }
+  .sim-pergunta { font-size: 15px; color: rgba(245,242,236,0.75); line-height: 1.5; flex: 1; }
+  .sim-seta { color: var(--muted); font-size: 11px; transition: transform 0.3s; flex-shrink: 0; padding-top: 3px; }
+  .sim-caso.aberto .sim-seta { transform: rotate(180deg); }
+  .sim-resposta {
+    display: none; padding-top: 14px; margin-top: 14px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    font-size: 16px; color: rgba(245,242,236,0.6); line-height: 1.75;
+  }
+  .sim-caso.aberto .sim-resposta { display: block; }
+  .sim-resposta strong { color: var(--areia2); font-weight: 700; }
+  .sim-resposta .ok  { color: #70d090; font-weight: 700; }
+  .sim-resposta .nao { color: #e08080; font-weight: 700; }
+  .sim-resposta .dep { color: #d0b050; font-weight: 700; }
+
+  /* DESTAQUE */
+  .destaque {
+    background: var(--ink);
+    border-top: 3px solid transparent;
+    border-image: linear-gradient(90deg, var(--cobre), var(--areia)) 1;
+    border-radius: 0 0 10px 10px;
+    padding: 32px 36px; margin: 36px 0;
+    position: relative; overflow: hidden;
+  }
+  .destaque::before {
+    content: '"'; font-family: 'Bodoni Moda', serif;
+    font-size: 130px; color: rgba(122,58,24,0.08);
+    position: absolute; top: -20px; left: 12px;
+    line-height: 1; pointer-events: none;
+  }
+  .dest-texto {
+    font-family: 'Bodoni Moda', serif;
+    font-size: clamp(17px, 2.5vw, 21px);
+    font-style: italic; color: rgba(245,242,236,0.85);
+    line-height: 1.7; position: relative; z-index: 1;
+  }
+  .dest-texto strong { color: var(--areia2); font-style: normal; }
+  .dest-autor {
+    margin-top: 16px; font-size: 11px; font-weight: 700;
+    letter-spacing: 2px; color: var(--cobre2);
+    text-transform: uppercase; position: relative; z-index: 1;
+  }
+
+  /* DIVISOR */
+  .divisor {
+    display: flex; align-items: center; gap: 20px; margin: 64px 0;
+  }
+  .divisor::before, .divisor::after {
+    content: ''; flex: 1; height: 1px; background: var(--bg3);
+  }
+  .divisor-sym {
+    font-family: 'Bodoni Moda', serif;
+    font-size: 18px; color: var(--cobre); opacity: 0.4;
+  }
+
+  /* GRAVA */
+  .grava {
+    background: linear-gradient(135deg, var(--cobre-dim), rgba(122,58,24,0.02));
+    border: 1px solid var(--cobre-brd); border-radius: 10px;
+    padding: 32px 36px; margin: 48px 0; text-align: center;
+  }
+  .grava-label {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 4px; color: var(--cobre);
+    text-transform: uppercase; margin-bottom: 24px; display: block;
+  }
+  .grava-item {
+    font-size: 17px; font-weight: 700;
+    color: var(--cobre2); margin-bottom: 10px; line-height: 1.6;
+  }
+  .grava-item span { color: var(--ink2); font-weight: 400; }
+
+  /* CTA */
+  .cta-box {
+    background: var(--ink); border-radius: 12px;
+    padding: 60px 40px; text-align: center;
+    margin-top: 72px; position: relative; overflow: hidden;
+  }
+  .cta-box::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 50% at 50% 110%, rgba(122,58,24,0.25) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .cta-tag {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 4px; color: var(--cobre3);
+    text-transform: uppercase; margin-bottom: 18px; display: block;
+    position: relative; z-index: 1;
+  }
+  .cta-titulo {
+    font-family: 'Bodoni Moda', serif;
+    font-size: clamp(26px, 5vw, 44px);
+    font-weight: 700; color: var(--bg);
+    line-height: 1.1; margin-bottom: 14px;
+    position: relative; z-index: 1;
+  }
+  .cta-titulo em { color: var(--cobre3); font-style: italic; }
+  .cta-sub {
+    font-size: 17px; font-weight: 300;
+    color: rgba(245,242,236,0.4); max-width: 440px;
+    margin: 0 auto 36px; position: relative; z-index: 1; line-height: 1.7;
+  }
+  .cta-btns {
+    display: flex; flex-wrap: wrap;
+    justify-content: center; gap: 12px; position: relative; z-index: 1;
+  }
+  .btn-p {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--cobre2); color: #fff;
+    font-size: 14px; font-weight: 700;
+    letter-spacing: 1px; text-transform: uppercase;
+    padding: 16px 32px; border-radius: 100px;
+    text-decoration: none; transition: all 0.3s;
+  }
+  .btn-p:hover { background: var(--cobre3); transform: translateY(-2px); }
+  .btn-s {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: transparent; color: var(--cobre3);
+    font-size: 14px; font-weight: 600;
+    padding: 16px 28px; border-radius: 100px;
+    text-decoration: none; border: 1px solid var(--cobre-brd); transition: all 0.3s;
+  }
+  .btn-s:hover { background: var(--cobre-dim); border-color: var(--cobre2); }
+  .cta-oab {
+    margin-top: 20px; font-size: 12px; letter-spacing: 2px;
+    color: rgba(245,242,236,0.15); text-transform: uppercase;
+    position: relative; z-index: 1;
+  }
+
+  .footer {
+    background: var(--ink2); text-align: center;
+    padding: 32px 24px; border-top: 1px solid rgba(122,58,24,0.14);
+  }
+  .footer-nome {
+    font-family: 'Bodoni Moda', serif;
+    font-size: 17px; color: var(--bg); margin-bottom: 4px;
+  }
+  .footer-sub {
+    font-size: 12px; letter-spacing: 2px;
+    color: rgba(245,242,236,0.15); text-transform: uppercase;
+  }
+
+  @keyframes surgir {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes expandir {
+    from { transform: scaleX(0); }
+    to   { transform: scaleX(1); }
+  }
+  @keyframes oscilar {
+    0%   { transform: rotate(-2deg); }
+    50%  { transform: rotate(2deg);  }
+    100% { transform: rotate(-2deg); }
+  }
+
+  @media (max-width: 600px) {
+    .tabela-bens { font-size: 14px; }
+    .tabela-bens th, .tabela-bens td { padding: 10px 10px; }
+    .acc-corpo { padding-left: 22px; }
+    .sim-resposta { font-size: 15px; }
+    .cta-box { padding: 40px 22px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-fundo"></div>
+  <div class="hero-marmore"></div>
+  <div class="hero-z">
+
+    <div class="hero-eyebrow">Direito de Família</div>
+
+    <h1 class="hero-h1">
+      Partilha de Bens
+      na Prática
+      <span class="sub">O que entra, o que não entra e como cada bem é dividido</span>
+    </h1>
+
+    <div class="hero-sep"></div>
+
+    <p class="hero-desc">
+      A teoria dos regimes de bens é uma coisa. O que acontece na mesa de negociação e no processo judicial é outra. <strong>Este guia trata da prática: como os bens são identificados, avaliados e efetivamente divididos no divórcio.</strong>
+    </p>
+
+    <div class="hero-pills">
+      <span class="pill">Bens Comuns</span>
+      <span class="pill">Bens Particulares</span>
+      <span class="pill">Avaliação</span>
+      <span class="pill">Imóvel</span>
+      <span class="pill">Investimentos</span>
+      <span class="pill">FGTS</span>
+      <span class="pill">Previdência Privada</span>
+    </div>
+
+    <!-- BALANÇA ANIMADA SVG -->
+    <div class="hero-balanca">
+      <svg class="balanca-svg" viewBox="0 0 440 200" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="grad-cobre" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#7a3a18;stop-opacity:0.8"/>
+            <stop offset="100%" style="stop-color:#c87040;stop-opacity:0.8"/>
+          </linearGradient>
+        </defs>
+        <!-- Haste vertical -->
+        <line x1="220" y1="20" x2="220" y2="100" stroke="url(#grad-cobre)" stroke-width="2" opacity="0.7"/>
+        <!-- Base -->
+        <rect x="195" y="155" width="50" height="6" rx="3" fill="rgba(200,112,64,0.4)"/>
+        <!-- Haste horizontal com animação -->
+        <g style="transform-origin:220px 100px; animation:oscilar 4s ease-in-out infinite;">
+          <line x1="80" y1="100" x2="360" y2="100" stroke="url(#grad-cobre)" stroke-width="2" opacity="0.7"/>
+          <!-- Correntes esquerda -->
+          <line x1="80" y1="100" x2="80" y2="140" stroke="rgba(200,112,64,0.5)" stroke-width="1.5" stroke-dasharray="3,3"/>
+          <!-- Prato esquerdo -->
+          <ellipse cx="80" cy="148" rx="44" ry="8" fill="rgba(200,112,64,0.25)" stroke="rgba(200,112,64,0.4)" stroke-width="1.5"/>
+          <text x="80" y="144" text-anchor="middle" font-family="Bodoni Moda, serif" font-size="13" fill="rgba(245,242,236,0.7)" font-style="italic">Comuns</text>
+          <!-- Correntes direita -->
+          <line x1="360" y1="100" x2="360" y2="140" stroke="rgba(200,112,64,0.5)" stroke-width="1.5" stroke-dasharray="3,3"/>
+          <!-- Prato direito -->
+          <ellipse cx="360" cy="148" rx="44" ry="8" fill="rgba(200,112,64,0.25)" stroke="rgba(200,112,64,0.4)" stroke-width="1.5"/>
+          <text x="360" y="144" text-anchor="middle" font-family="Bodoni Moda, serif" font-size="13" fill="rgba(245,242,236,0.7)" font-style="italic">Particulares</text>
+        </g>
+        <!-- Pivô -->
+        <circle cx="220" cy="100" r="5" fill="rgba(200,112,64,0.6)"/>
+        <!-- Topo -->
+        <circle cx="220" cy="20" r="4" fill="rgba(184,152,96,0.5)"/>
+      </svg>
+    </div>
+
+  </div>
+</header>
+
+<!-- DIAGNÓSTICO -->
+<section class="diag-section">
+  <div class="diag-inner">
+    <span class="d-tag">🔍 Diagnóstico rápido</span>
+    <h2 class="d-titulo">Qual é o seu principal ponto de dúvida?</h2>
+    <p class="d-sub">Selecione e veja a análise específica para o seu cenário.</p>
+
+    <div class="q-lista">
+      <div class="q-item" onclick="marcar(this,'a')">
+        <div class="q-box"></div>
+        <div class="q-texto">Não sei distinguir quais bens são comuns e quais são particulares no meu caso</div>
+      </div>
+      <div class="q-item" onclick="marcar(this,'b')">
+        <div class="q-box"></div>
+        <div class="q-texto">Tenho imóvel, investimentos ou FGTS e quero saber se entram na partilha</div>
+      </div>
+      <div class="q-item" onclick="marcar(this,'c')">
+        <div class="q-box"></div>
+        <div class="q-texto">Já sei quais bens comunicam, mas quero entender como o valor é calculado e como a divisão é feita na prática</div>
+      </div>
+      <div class="q-item" onclick="marcar(this,'d')">
+        <div class="q-box"></div>
+        <div class="q-texto">Suspeito que meu cônjuge tem bens que não estão sendo declarados na partilha</div>
+      </div>
+    </div>
+
+    <div class="q-res" id="q-res"></div>
+  </div>
+</section>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- SEÇÃO 1 -->
+  <section class="secao">
+    <span class="secao-n">01</span>
+    <h2 class="secao-titulo">O mapa completo: o que entra e o que não entra na partilha</h2>
+
+    <p class="p">
+      A primeira operação em qualquer partilha é a classificação dos bens. Cada bem precisa ser colocado em uma das duas categorias antes de qualquer negociação: bem comum, que entra na partilha e é dividido igualmente, ou bem particular, que fica com quem o detém. A confusão entre essas duas categorias é a origem da maioria dos litígios de partilha no Brasil.
+    </p>
+
+    <p class="p">
+      O regime de bens do casamento define a regra geral. Na Comunhão Parcial, que é o regime de mais de 60% dos casamentos brasileiros, a divisão segue uma lógica temporal: bens anteriores ao casamento são particulares, bens adquiridos durante o casamento com recursos comuns são comuns. Parece simples na teoria e é genuinamente complexo na prática, porque a maioria dos casais mistura recursos ao longo dos anos sem documentar a origem de cada bem.
+    </p>
+
+    <table class="tabela-bens">
+      <thead>
+        <tr>
+          <th>Bem ou Ativo</th>
+          <th>Comunica?</th>
+          <th>Fundamento</th>
+          <th>Observação prática</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Imóvel comprado durante o casamento</strong></td>
+          <td><span class="badge-sim">Sim</span></td>
+          <td>Art. 1.660, I CC</td>
+          <td>Mesmo se estiver só em um nome. A sub-rogação pode alterar se a origem dos recursos for particular.</td>
+        </tr>
+        <tr>
+          <td><strong>Imóvel anterior ao casamento</strong></td>
+          <td><span class="badge-nao">Não</span></td>
+          <td>Art. 1.659, I CC</td>
+          <td>Precisa de prova da data de aquisição. Benfeitorias feitas com recursos comuns podem comunicar parcialmente.</td>
+        </tr>
+        <tr>
+          <td><strong>Herança recebida durante o casamento</strong></td>
+          <td><span class="badge-nao">Não</span></td>
+          <td>Art. 1.659, I CC</td>
+          <td>Na Comunhão Universal comunica, salvo cláusula de incomunicabilidade. Frutos da herança comunicam na CP.</td>
+        </tr>
+        <tr>
+          <td><strong>FGTS depositado durante o casamento</strong></td>
+          <td><span class="badge-sim">Sim</span></td>
+          <td>Tema 1.070 STJ</td>
+          <td>O STJ consolidou que o FGTS é bem comum na CP. O saldo depositado durante o casamento entra na partilha.</td>
+        </tr>
+        <tr>
+          <td><strong>Previdência privada (PGBL/VGBL)</strong></td>
+          <td><span class="badge-dep">Depende</span></td>
+          <td>STJ — caso a caso</td>
+          <td>Aportes feitos durante o casamento com recursos comuns tendem a comunicar. Há divergência sobre VGBL.</td>
+        </tr>
+        <tr>
+          <td><strong>Investimentos feitos durante o casamento</strong></td>
+          <td><span class="badge-sim">Sim</span></td>
+          <td>Art. 1.660, I CC</td>
+          <td>Inclui ações, fundos, CDB e similares. A data de aquisição e a origem dos recursos definem a partilha.</td>
+        </tr>
+        <tr>
+          <td><strong>Criptoativos comprados durante o casamento</strong></td>
+          <td><span class="badge-sim">Sim</span></td>
+          <td>Art. 1.660, I CC</td>
+          <td>Seguem a regra geral. A prova é feita por declaração de IR e histórico de transações em exchange.</td>
+        </tr>
+        <tr>
+          <td><strong>Veículo comprado durante o casamento</strong></td>
+          <td><span class="badge-sim">Sim</span></td>
+          <td>Art. 1.660, I CC</td>
+          <td>Mesmo registrado em um só nome. O documento do veículo não define propriedade no regime de bens.</td>
+        </tr>
+        <tr>
+          <td><strong>Dívida contraída durante o casamento</strong></td>
+          <td><span class="badge-dep">Depende</span></td>
+          <td>Art. 1.663 CC</td>
+          <td>Dívidas em benefício do casal comunicam. Dívidas pessoais de um cônjuge, em regra, não alcançam o outro.</td>
+        </tr>
+        <tr>
+          <td><strong>Empresa constituída antes do casamento</strong></td>
+          <td><span class="badge-dep">Depende</span></td>
+          <td>REsp 1.787.027/RS</td>
+          <td>Cotas são particulares. Valorização ativa durante o casamento pode ser partilhada por esforço comum.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="cx cobre">
+      <span class="cx-tag">📌 O ponto que mais causa confusão</span>
+      <div class="cx-titulo">O nome no documento não define quem é dono do bem</div>
+      <p class="cx-texto">
+        Em um casamento em Comunhão Parcial, um imóvel comprado com recursos comuns pertence a ambos os cônjuges mesmo que a escritura esteja registrada em apenas um nome. O registro no cartório define a titularidade formal, mas o regime de bens define a titularidade jurídica real. <strong>Na partilha, um cônjuge pode reivindicar metade de um bem que nunca esteve no seu nome</strong>, desde que prove que foi adquirido durante o casamento com recursos comuns. Essa é a surpresa que mais impacta clientes na primeira consulta.
+      </p>
+    </div>
+  </section>
+
+  <div class="divisor"><div class="divisor-sym">◆</div></div>
+
+  <!-- SEÇÃO 2 -->
+  <section class="secao">
+    <span class="secao-n">02</span>
+    <h2 class="secao-titulo">Os bens que mais geram disputa: imóvel, FGTS e previdência privada</h2>
+
+    <p class="p">
+      Embora todos os bens comuns sejam tecnicamente iguais na partilha, três categorias concentram a maior parte das disputas nos escritórios de família. Isso acontece porque cada uma tem uma peculiaridade que faz com que a regra geral da Comunhão Parcial se aplique de forma não óbvia.
+    </p>
+
+    <div class="acc-lista">
+
+      <div class="acc-item" onclick="toggleAcc(this)">
+        <div class="acc-header">
+          <div class="acc-icone">🏠</div>
+          <div class="acc-titulo">Imóvel: como é avaliado e como é dividido na prática</div>
+          <div class="acc-seta">▾</div>
+        </div>
+        <div class="acc-corpo">
+          O imóvel comum pode ser dividido de três formas na prática. A primeira é a <strong>venda e divisão do produto</strong>: o imóvel é vendido, os custos são descontados e o valor líquido é dividido igualmente. É a forma mais limpa mas depende de consenso ou de ordem judicial de venda. A segunda é a <strong>adjudicação com compensação financeira</strong>: um cônjuge fica com o imóvel e paga ao outro o equivalente à metade do valor avaliado. A terceira, mais rara, é a <strong>condomínio forçado</strong>, em que ambos continuam coproprietários, geralmente usada como solução transitória quando há filhos que precisam permanecer no imóvel.<br><br>
+          A avaliação do imóvel é feita por laudo de perito avaliador, geralmente um engenheiro civil ou arquiteto com habilitação para isso. O valor de mercado, não o valor venal do IPTU, é a referência correta. <strong>A diferença entre laudo conservador e laudo a mercado pode representar dezenas ou centenas de milhares de reais dependendo do imóvel</strong>, por isso a escolha do perito e a metodologia de avaliação são frequentemente contestadas em processos litigiosos.
+        </div>
+      </div>
+
+      <div class="acc-item" onclick="toggleAcc(this)">
+        <div class="acc-header">
+          <div class="acc-icone">💼</div>
+          <div class="acc-titulo">FGTS: o STJ consolidou que comunica. Como calcular?</div>
+          <div class="acc-seta">▾</div>
+        </div>
+        <div class="acc-corpo">
+          O Tema 1.070 do STJ consolidou em 2021 que os depósitos do FGTS realizados durante o casamento em Comunhão Parcial de Bens são bens comuns e entram na partilha. Essa decisão resolveu uma controvérsia que havia anos dividia os tribunais brasileiros.<br><br>
+          Na prática, o cálculo considera apenas os depósitos realizados durante o casamento, ou seja, do início do casamento até a data da separação de fato. Os depósitos anteriores ao casamento são bens particulares do trabalhador e não entram na partilha. <strong>A extração do histórico de depósitos é feita diretamente no aplicativo do FGTS ou por meio de ofício ao banco que administra o fundo</strong>, e o perito calcula a fração correspondente ao período do casamento. O cônjuge que não é o titular do FGTS recebe metade do valor depositado nesse período, geralmente via depósito em conta bancária após liberação pelo juízo.
+        </div>
+      </div>
+
+      <div class="acc-item" onclick="toggleAcc(this)">
+        <div class="acc-header">
+          <div class="acc-icone">📊</div>
+          <div class="acc-titulo">Previdência privada: PGBL e VGBL têm tratamentos diferentes</div>
+          <div class="acc-seta">▾</div>
+        </div>
+        <div class="acc-corpo">
+          A previdência privada é o bem com a jurisprudência mais inconstante do Brasil. A questão central é a seguinte: aportes feitos durante o casamento em Comunhão Parcial são bens comuns ou proventos do trabalho individual, que são excluídos da comunhão pelo Art. 1.659, VI CC?<br><br>
+          O PGBL, que funciona com dedução no IR e tributação no resgate, tem maior tendência a ser tratado como bem comum pela jurisprudência, especialmente quando os aportes foram feitos com recursos do casal. O VGBL, tratado como seguro de vida pela legislação tributária, tem uma discussão mais complexa sobre sua natureza jurídica para fins de partilha.<br><br>
+          <strong>O entendimento que vem prevalecendo no STJ é que os aportes feitos durante o casamento com recursos comuns do casal entram na partilha</strong>, independente da modalidade. A proteção real, nesse caso, é fazer os aportes com recursos de natureza particular e documentar essa origem desde o início.
+        </div>
+      </div>
+
+      <div class="acc-item" onclick="toggleAcc(this)">
+        <div class="acc-header">
+          <div class="acc-icone">📈</div>
+          <div class="acc-titulo">Investimentos financeiros: o que incluir e como avaliar</div>
+          <div class="acc-seta">▾</div>
+        </div>
+        <div class="acc-corpo">
+          Investimentos em renda fixa como CDB, LCI, LCA, tesouro direto e fundos, além de ações, ETFs e outros ativos de renda variável, adquiridos durante o casamento com recursos comuns são bens comuns e entram na partilha. A avaliação usa a cotação ou o valor de resgate na data da separação de fato.<br><br>
+          A principal complicação é a <strong>contaminação de recursos</strong>: quando a pessoa investia parte de salário e parte de herança na mesma corretora, sem separação clara. Nesse caso, o perito precisa reconstruir o histórico de aportes e determinar a proporção de recursos comuns versus particulares. <strong>Quem manteve contas separadas para investimentos com origem diferente tem uma prova muito mais simples e um risco muito menor</strong> de ver recursos particulares incluídos na partilha por falta de segregação.
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divisor"><div class="divisor-sym">◆</div></div>
+
+  <!-- SEÇÃO 3 -->
+  <section class="secao">
+    <span class="secao-n">03</span>
+    <h2 class="secao-titulo">Como a partilha funciona na prática: do inventário ao acordo</h2>
+
+    <p class="p">
+      Entender o que entra na partilha é metade do caminho. A outra metade é entender como o processo funciona, desde a identificação dos bens até o momento em que cada cônjuge fica com o que é seu.
+    </p>
+
+    <div class="cx verde">
+      <span class="cx-tag">✅ A partilha consensual</span>
+      <div class="cx-titulo">Quando os dois lados chegam a um acordo: o caminho mais eficiente</div>
+      <p class="cx-texto">
+        Quando há consenso sobre o que é bem comum e sobre como dividir, a partilha pode ser formalizada em um acordo homologado pelo juiz no divórcio judicial, ou em escritura pública de divórcio extrajudicial quando não há filhos menores. O acordo precisa ser específico: não basta dizer que a partilha foi feita de comum acordo. <strong>É preciso listar cada bem, indicar para qual cônjuge vai e, quando houver compensação financeira, estabelecer o valor e a forma de pagamento.</strong> Um acordo genérico cria ambiguidades que voltam como litígio anos depois.
+      </p>
+    </div>
+
+    <div class="cx verm">
+      <span class="cx-tag">⚠️ A partilha litigiosa</span>
+      <div class="cx-titulo">Quando não há consenso: como o processo se organiza</div>
+      <p class="cx-texto">
+        Na partilha litigiosa, o juiz nomeia um perito para fazer o inventário dos bens comuns e avaliá-los. Cada cônjuge apresenta sua lista de bens que considera comuns, suas provas de origem e, se houver contestação, os argumentos jurídicos para incluir ou excluir cada bem. O perito produz um laudo, as partes impugnam o que discordam, e o juiz decide. <strong>A fase de avaliação pericial é onde a maioria dos recursos financeiros é gasta em um divórcio litigioso</strong>, e é onde advogados com domínio técnico fazem a diferença real para o cliente.
+      </p>
+    </div>
+
+    <div class="cx cobre">
+      <span class="cx-tag">📌 O que muitos não sabem</span>
+      <div class="cx-titulo">A partilha pode ser feita depois do divórcio</div>
+      <p class="cx-texto">
+        O divórcio dissolve o vínculo matrimonial, mas a partilha pode ser realizada posteriormente como ação autônoma. Isso é relevante quando o casal quer se divorciar rapidamente mas ainda está em discussão sobre os bens. <strong>O risco de separar os dois processos é que, durante o período entre o divórcio e a partilha, um dos ex-cônjuges pode alienar bens comuns sem a necessidade de outorga</strong>, já que o vínculo formal foi extinto. Por isso, quando a partilha não é feita simultaneamente ao divórcio, o ideal é que uma tutela cautelar de indisponibilidade proteja o patrimônio comum até a partilha ser concluída.
+      </p>
+    </div>
+  </section>
+
+  <div class="divisor"><div class="divisor-sym">◆</div></div>
+
+  <!-- SEÇÃO 4: SIMULADOR -->
+  <section class="secao">
+    <span class="secao-n">04</span>
+    <h2 class="secao-titulo">Simulador: analise cada bem antes de ver a resposta</h2>
+
+    <p class="p">
+      Os casos abaixo apresentam situações reais que chegam ao escritório. Antes de abrir cada resposta, tente definir: esse bem entra ou não entra na partilha, por qual fundamento e qual seria a complicação prática?
+    </p>
+
+    <div class="simulador">
+      <span class="sim-label">Simulador de Partilha</span>
+      <div class="sim-titulo">Clique em cada caso para ver a análise</div>
+      <div class="sim-casos">
+
+        <div class="sim-caso" onclick="toggleSim(this)">
+          <div class="sim-caso-header">
+            <div class="sim-num">1</div>
+            <div class="sim-pergunta">Ela tinha R$ 80k em investimentos antes de casar. Durante o casamento, reinvestiu os rendimentos e o saldo chegou a R$ 340k. No divórcio, ele quer metade dos R$ 340k. Tem razão?</div>
+            <div class="sim-seta">▾</div>
+          </div>
+          <div class="sim-resposta">
+            <strong>Parcialmente.</strong> O capital original de R$ 80k é <span class="ok">bem particular</span> dela, não entra na partilha. Os rendimentos gerados durante o casamento são frutos do bem particular e <span class="nao">comunicam</span> pelo Art. 1.660, V CC. Se os R$ 260k de crescimento foram integralmente formados por rendimentos sobre o capital particular, ele tem direito à metade desses R$ 260k, ou seja, R$ 130k. A prova é feita pelo histórico de extratos que separe capital aportado de rendimentos acumulados.
+          </div>
+        </div>
+
+        <div class="sim-caso" onclick="toggleSim(this)">
+          <div class="sim-caso-header">
+            <div class="sim-num">2</div>
+            <div class="sim-pergunta">Ele comprou um apartamento durante o casamento com dinheiro do seu pai, recebido como empréstimo. O apartamento está no nome dele. Ela quer metade. Tem direito?</div>
+            <div class="sim-seta">▾</div>
+          </div>
+          <div class="sim-resposta">
+            <span class="dep">Depende da prova.</span> Se o dinheiro do pai foi recebido como doação durante o casamento, é bem particular e o apartamento também seria particular por sub-rogação. Art. 1.659, I CC. Se foi empréstimo efetivo com obrigação de restituição, o apartamento foi comprado com dívida contraída durante o casamento, e a análise muda. <strong>A prova decisiva aqui é o instrumento que formalizou a transferência do dinheiro</strong>: contrato de doação, recibo de empréstimo ou apenas depósito bancário sem documentação. Sem documento, a presunção de bem comum pelo Art. 1.660, I CC tende a prevalecer.
+          </div>
+        </div>
+
+        <div class="sim-caso" onclick="toggleSim(this)">
+          <div class="sim-caso-header">
+            <div class="sim-num">3</div>
+            <div class="sim-pergunta">O casal se separou de fato em janeiro de 2022. Ele comprou um carro em agosto de 2022 com dinheiro próprio. O divórcio foi formalizado em março de 2024. O carro entra na partilha?</div>
+            <div class="sim-seta">▾</div>
+          </div>
+          <div class="sim-resposta">
+            <span class="ok">Não entra</span>, desde que a separação de fato de janeiro de 2022 seja comprovada. O STJ consolidou que a separação de fato encerra a comunhão patrimonial, independente de quando o divórcio é formalizado. O carro comprado em agosto de 2022, após a separação de fato, é bem particular. <strong>A prova da data de separação é decisiva</strong>: se ela for contestada e o juiz fixar uma data posterior a agosto de 2022, o carro pode entrar na partilha. Endereços diferentes, declarações de IR distintas, mensagens e testemunhos são as provas mais eficazes.
+          </div>
+        </div>
+
+        <div class="sim-caso" onclick="toggleSim(this)">
+          <div class="sim-caso-header">
+            <div class="sim-num">4</div>
+            <div class="sim-pergunta">Ela recebeu R$ 200k de herança durante o casamento e reformou com esse dinheiro o imóvel que ele tinha antes de casar. Na partilha, ela tem direito a algo sobre esse imóvel?</div>
+            <div class="sim-seta">▾</div>
+          </div>
+          <div class="sim-resposta">
+            <span class="ok">Sim, sobre a benfeitoria.</span> O imóvel em si é bem particular dele, anterior ao casamento. Mas benfeitorias realizadas com recursos comuns ou particulares de um cônjuge em bem particular do outro geram direito de ressarcimento. Art. 1.660, IV CC: benfeitorias em bens particulares feitas com recursos comuns são bens comuns. <strong>Ela tem direito a ser ressarcida no valor da reforma</strong>, atualizado monetariamente, porque os R$ 200k da herança foram investidos em bem alheio. A prova é feita pelos recibos e notas fiscais da reforma.
+          </div>
+        </div>
+
+        <div class="sim-caso" onclick="toggleSim(this)">
+          <div class="sim-caso-header">
+            <div class="sim-num">5</div>
+            <div class="sim-pergunta">Ela tem R$ 85k de FGTS, dos quais R$ 30k foram depositados antes do casamento e R$ 55k durante o casamento de 10 anos. O marido quer metade do FGTS total. Tem razão?</div>
+            <div class="sim-seta">▾</div>
+          </div>
+          <div class="sim-resposta">
+            <span class="nao">Não tem razão sobre o total.</span> Os R$ 30k depositados antes do casamento são <span class="ok">bem particular</span> dela. Apenas os R$ 55k depositados durante o casamento são bens comuns pelo Tema 1.070 do STJ. Ele tem direito à metade dos R$ 55k, ou seja, <strong>R$ 27,5k</strong>, não à metade dos R$ 85k totais. O histórico de extrato do FGTS comprova facilmente quais depósitos foram feitos em qual período.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="divisor"><div class="divisor-sym">◆</div></div>
+
+  <!-- SEÇÃO 5 -->
+  <section class="secao">
+    <span class="secao-n">05</span>
+    <h2 class="secao-titulo">Quando a partilha não é justa: ocultação de bens e como combatê-la</h2>
+
+    <p class="p">
+      A partilha pressupõe que ambos os lados apresentam todos os bens comuns de forma transparente. Na prática, isso nem sempre acontece. A omissão de bens na partilha pode ser involuntária, por esquecimento genuíno de contas e ativos pouco usados, ou pode ser intencional, com o objetivo de subtrair patrimônio do cônjuge que teria direito a ele.
+    </p>
+
+    <p class="p">
+      O ordenamento brasileiro trata a ocultação de bens intencional de forma severa. A alienação de bens comuns com o objetivo de fraudar a meação é enquadrada no Art. 1.722 CC como fraude à meação, com consequências que incluem a anulação da alienação e a possibilidade de responsabilidade civil por perdas e danos.
+    </p>
+
+    <div class="cx aviso">
+      <span class="cx-tag">⚡ Os instrumentos de levantamento patrimonial</span>
+      <div class="cx-titulo">Como descobrir bens que não foram declarados voluntariamente</div>
+      <p class="cx-texto">
+        O advogado tem à disposição um conjunto de ferramentas processuais para levantar o patrimônio real do cônjuge quando há suspeita de omissão. A expedição de ofício ao sistema BACENJUD permite identificar todas as contas bancárias e saldos no sistema financeiro. O ofício ao DETRAN revela veículos em nome do cônjuge. O ofício à Receita Federal permite acesso às declarações de IR dos últimos anos, que listam bens declarados, rendimentos e participações societárias. O ofício à Junta Comercial revela participações em empresas. E o ofício ao Cartório de Registro de Imóveis de cada comarca identifica imóveis registrados. <strong>Cada um desses instrumentos é gratuito quando expedido pelo juízo e pode revelar bens que não foram mencionados voluntariamente.</strong>
+      </p>
+    </div>
+
+    <lei>
+      <span class="lei-ref">Art. 1.722 — Código Civil</span>
+      <p class="lei-texto">
+        "É anulável o ato praticado pelo cônjuge sem a necessária vênia conjugal, <strong>salvo se o outro cônjuge não puder dá-la</strong>."
+      </p>
+    </lei>
+
+    <p class="p">
+      Além das ferramentas de levantamento patrimonial, a produção de prova documental em poder do próprio cônjuge pode ser requerida ao juízo com base no Art. 396 do CPC, que permite ao juiz ordenar a exibição de documentos. Extratos bancários, balanços de empresa, demonstrativos de investimento e qualquer outro documento que o cônjuge tenha e não apresentou voluntariamente podem ser objeto desse pedido. A recusa injustificada em apresentar os documentos pode ser interpretada pelo juiz em desfavor de quem recusou.
+    </p>
+  </section>
+
+  <div class="divisor"><div class="divisor-sym">◆</div></div>
+
+  <div class="destaque">
+    <p class="dest-texto">
+      A partilha não é um ato de generosidade. É um ato jurídico com regras precisas. <strong>Cada bem que você acha que não precisa declarar tem uma ferramenta processual que pode localizá-lo.</strong> Transparência não é apenas ética. É a posição processual mais inteligente.
+    </p>
+    <div class="dest-autor">Dr. Filipe Ferreira · OAB/ES 37.159</div>
+  </div>
+
+  <div class="grava">
+    <span class="grava-label">📌 Os 8 pontos essenciais</span>
+    <div class="grava-item">O nome no documento não define propriedade: <span>o regime de bens define. Um cônjuge pode ter direito a bem que nunca esteve no seu nome.</span></div>
+    <div class="grava-item">FGTS depositado durante o casamento: <span>bem comum. Tema 1.070 STJ. Apenas o saldo do período do casamento entra.</span></div>
+    <div class="grava-item">Frutos do bem particular: <span>comunicam na Comunhão Parcial mesmo que o bem principal não comunique. Art. 1.660, V CC.</span></div>
+    <div class="grava-item">Separação de fato: <span>encerra a comunhão patrimonial. Bens adquiridos depois são particulares, com prova da data.</span></div>
+    <div class="grava-item">Partilha pode ser feita após o divórcio: <span>mas exige cautela para proteger os bens comuns no período de intervalo.</span></div>
+    <div class="grava-item">Imóvel comum: <span>venda e divisão, adjudicação com compensação ou condomínio são as três formas práticas.</span></div>
+    <div class="grava-item">Contaminação de recursos: <span>misturar recursos particulares e comuns sem documentação prejudica a prova da origem.</span></div>
+    <div class="grava-item">Ocultação de bens: <span>BACENJUD, DETRAN, Receita Federal e Junta Comercial localizam o que não foi declarado voluntariamente.</span></div>
+  </div>
+
+  <div class="cta-box">
+    <span class="cta-tag">Consultoria especializada</span>
+    <h2 class="cta-titulo">
+      Sua partilha está sendo<br><em>feita corretamente?</em>
+    </h2>
+    <p class="cta-sub">Análise completa dos bens e da estratégia de partilha. Atendimento online para todo o Brasil.</p>
+    <div class="cta-btns">
+      <a href="https://wa.me/5527995187279?text=Ol%C3%A1%2C+vim+pelo+guia+de+Partilha+de+Bens+e+gostaria+de+uma+orienta%C3%A7%C3%A3o." class="btn-p">
+        💬 WhatsApp — Falar Agora
+      </a>
+      <a href="mailto:escritorio@filipeeassociadosadvogado.com.br?subject=Consulta%20sobre%20Partilha%20de%20Bens" class="btn-s">
+        ✉️ Enviar E-mail
+      </a>
+    </div>
+    <div class="cta-oab">Filipe Ferreira · OAB/ES 37.159 · Direito de Família e Proteção Patrimonial</div>
+  </div>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-nome">Filipe Ferreira — Advogado e Associados</div>
+  <div class="footer-sub">OAB/ES 37.159 · Linhares, ES · Atendimento Online · Brasil</div>
+</footer>
+
+<script>
+  const respostas = {
+    a: { cls: 'cobre', label: '📋 A distinção fundamental',
+      txt: 'Na Comunhão Parcial, a linha divisória é temporal e documental. <strong>Bem adquirido antes do casamento com recursos próprios é particular.</strong> Bem adquirido durante o casamento com recursos comuns é comum. O problema real está nos casos mistos: bem comprado com parte de herança e parte de salário, investimento com origem não documentada, imóvel cujos recursos vieram de várias fontes. Nesses casos, a prova documental da origem de cada recurso é o que define quanto entra ou fica de fora da partilha. A tabela da Seção 1 deste guia cobre os principais bens com a regra aplicável a cada um.' },
+    b: { cls: 'aviso', label: '⚠️ Atenção a cada categoria',
+      txt: 'Para imóveis, o valor de partilha é calculado por laudo de avaliação a mercado, não pelo valor venal do IPTU. Para o FGTS, o STJ consolidou que os depósitos realizados durante o casamento comunicam, Tema 1.070, e apenas essa fração entra na partilha. Para previdência privada, o entendimento dominante é que aportes feitos com recursos comuns durante o casamento comunicam, mas há variações por modalidade e por tribunal. Para investimentos, a data de aquisição e a origem dos recursos definem se comunicam. Cada um desses bens tem uma especificidade técnica que pode mudar significativamente o valor final da partilha.' },
+    c: { cls: 'verde', label: '✅ Como a divisão é feita',
+      txt: 'Na partilha consensual, os dois lados listam os bens, concordam com os valores e formalizam a divisão em acordo homologado judicialmente. Na litigiosa, um perito avalia os bens e o juiz decide sobre cada impugnação. O imóvel pode ser vendido com divisão do produto, adjudicado a um cônjuge com compensação financeira, ou mantido em condomínio temporário. FGTS e investimentos são geralmente transferidos por ordem judicial diretamente à conta do beneficiário. <strong>A Seção 3 e o Simulador da Seção 4 deste guia mostram como cada situação se resolve na prática.</strong>' },
+    d: { cls: 'vermelho', label: '🔴 Ação imediata recomendada',
+      txt: 'Quando há suspeita de ocultação, o caminho processual é requerer ao juízo a expedição de ofícios ao BACENJUD para levantamento de contas e saldos, ao DETRAN para veículos, à Receita Federal para declarações de IR dos últimos 5 anos e à Junta Comercial para participações societárias. Também é possível requerer exibição de documentos com base no Art. 396 CPC. <strong>A recusa injustificada em apresentar documentos pode ser interpretada pelo juiz em desfavor do cônjuge que recusou.</strong> Quanto antes esse requerimento for feito, menor o risco de que bens sejam alienados antes de qualquer bloqueio cautelar.' }
+  };
+
+  let ativo = null;
+  function marcar(el, id) {
+    document.querySelectorAll('.q-item').forEach(q => {
+      q.classList.remove('on'); q.querySelector('.q-box').textContent = '';
+    });
+    const res = document.getElementById('q-res');
+    if (ativo === id) { ativo = null; res.classList.remove('visivel'); return; }
+    ativo = id;
+    el.classList.add('on'); el.querySelector('.q-box').textContent = '✓';
+    const r = respostas[id];
+    res.className = `q-res visivel ${r.cls}`;
+    res.innerHTML = `<span class="q-res-label">${r.label}</span><p class="q-res-texto">${r.txt}</p>`;
+  }
+
+  function toggleAcc(el) {
+    const ab = el.classList.contains('aberto');
+    document.querySelectorAll('.acc-item').forEach(a => a.classList.remove('aberto'));
+    if (!ab) el.classList.add('aberto');
+  }
+
+  function toggleSim(el) {
+    const ab = el.classList.contains('aberto');
+    document.querySelectorAll('.sim-caso').forEach(s => s.classList.remove('aberto'));
+    if (!ab) el.classList.add('aberto');
+  }
+</script>
+
+</body>
+</html>
