@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guia do Divórcio Litigioso · Dr. Filipe Ferreira</title>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:         #f6f4f8;
+    --bg2:        #ede9f2;
+    --bg3:        #ddd8e8;
+    --ink:        #160e22;
+    --ink2:       #221636;
+    --ink3:       #2e2044;
+    --roxo:       #5a3a8a;
+    --roxo2:      #7a5aaa;
+    --roxo3:      #a080cc;
+    --roxo-dim:   rgba(90,58,138,0.08);
+    --roxo-brd:   rgba(90,58,138,0.2);
+    --verde:      #276a4a;
+    --verde-dim:  rgba(39,106,74,0.08);
+    --verde-brd:  rgba(39,106,74,0.2);
+    --verm:       #8a2a2a;
+    --verm-dim:   rgba(138,42,42,0.07);
+    --verm-brd:   rgba(138,42,42,0.2);
+    --aviso:      #7a5010;
+    --aviso-dim:  rgba(122,80,16,0.08);
+    --aviso-brd:  rgba(122,80,16,0.22);
+    --text:       #2a2038;
+    --text2:      #4a4060;
+    --muted:      #8a8098;
+    --branco:     #fdfcff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Sora', sans-serif;
+    font-weight: 400;
+    line-height: 1.85;
+    font-size: 17px;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    background: var(--ink);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 28px 72px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-fundo {
+    position: absolute; inset: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% -10%, rgba(90,58,138,0.18) 0%, transparent 65%),
+      radial-gradient(ellipse 40% 40% at 10% 90%, rgba(90,58,138,0.08) 0%, transparent 60%);
+  }
+  .hero-grade {
+    position: absolute; inset: 0; pointer-events: none;
+    background-image:
+      linear-gradient(rgba(90,58,138,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(90,58,138,0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  .hero-z { position: relative; z-index: 1; }
+
+  .hero-eyebrow {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 5px; text-transform: uppercase;
+    color: var(--roxo3);
+    margin-bottom: 28px;
+    display: flex; align-items: center;
+    gap: 18px; justify-content: center;
+    animation: subir 0.7s ease forwards;
+  }
+  .hero-eyebrow::before, .hero-eyebrow::after {
+    content: ''; width: 40px; height: 1px;
+    background: rgba(160,128,204,0.3);
+  }
+
+  .hero-h1 {
+    font-family: 'Spectral', serif;
+    font-size: clamp(38px, 7.5vw, 74px);
+    font-weight: 700;
+    color: var(--bg);
+    line-height: 1.02;
+    margin-bottom: 6px;
+    animation: subir 0.8s ease forwards;
+  }
+  .hero-h1 .sub {
+    display: block;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--roxo3);
+    font-size: 0.52em;
+    line-height: 1.6;
+    margin-top: 10px;
+  }
+
+  .hero-sep {
+    width: 60px; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--roxo2), transparent);
+    margin: 28px auto;
+    animation: expandir 1s ease 0.3s forwards;
+    transform: scaleX(0); transform-origin: center;
+  }
+
+  .hero-desc {
+    font-size: clamp(15px, 2vw, 18px);
+    color: rgba(246,244,248,0.5);
+    font-weight: 300;
+    max-width: 540px;
+    margin: 0 auto 44px;
+    line-height: 1.8;
+    animation: subir 0.9s ease 0.15s forwards;
+    opacity: 0;
+  }
+  .hero-desc strong { color: rgba(246,244,248,0.85); font-weight: 600; }
+
+  .hero-pills {
+    display: flex; flex-wrap: wrap;
+    justify-content: center; gap: 10px;
+    animation: subir 1s ease 0.3s forwards; opacity: 0;
+  }
+  .hero-pill {
+    background: rgba(90,58,138,0.15);
+    border: 1px solid rgba(160,128,204,0.25);
+    color: var(--roxo3);
+    font-size: 12px; font-weight: 500;
+    padding: 7px 18px; border-radius: 100px;
+  }
+
+  /* ALERTA NUMÉRICO DO HERO */
+  .hero-nums {
+    display: flex; flex-wrap: wrap;
+    justify-content: center; gap: 28px;
+    margin-top: 56px;
+    animation: subir 1.1s ease 0.4s forwards; opacity: 0;
+  }
+  .hero-num-item { text-align: center; }
+  .hero-num-valor {
+    font-family: 'Spectral', serif;
+    font-size: 42px; font-weight: 700;
+    color: var(--roxo3); line-height: 1; display: block;
+  }
+  .hero-num-label {
+    font-size: 11px; font-weight: 500;
+    color: rgba(246,244,248,0.35);
+    letter-spacing: 1px; text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  /* ===== DIAGNÓSTICO ===== */
+  .diag-section {
+    background: var(--ink2);
+    padding: 80px 28px;
+    border-top: 1px solid rgba(255,255,255,0.04);
+  }
+  .diag-inner { max-width: 700px; margin: 0 auto; text-align: center; }
+  .diag-tag {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 4px; text-transform: uppercase;
+    color: var(--roxo3); margin-bottom: 14px; display: block;
+  }
+  .diag-titulo {
+    font-family: 'Spectral', serif;
+    font-size: clamp(22px, 4vw, 34px);
+    font-weight: 600; color: var(--bg);
+    line-height: 1.2; margin-bottom: 10px;
+  }
+  .diag-sub {
+    font-size: 16px; color: rgba(246,244,248,0.35);
+    font-weight: 300; margin-bottom: 36px;
+  }
+
+  .quiz-lista { text-align: left; display: flex; flex-direction: column; gap: 10px; }
+  .quiz-item {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 10px;
+    padding: 16px 20px;
+    display: flex; align-items: flex-start;
+    gap: 14px; cursor: pointer;
+    transition: all 0.25s; user-select: none;
+  }
+  .quiz-item:hover { background: var(--roxo-dim); border-color: var(--roxo-brd); }
+  .quiz-item.ativo { background: rgba(90,58,138,0.14); border-color: var(--roxo2); }
+  .quiz-box {
+    width: 22px; height: 22px;
+    border-radius: 5px;
+    border: 1.5px solid rgba(255,255,255,0.15);
+    flex-shrink: 0; margin-top: 2px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 700;
+    transition: all 0.2s;
+  }
+  .quiz-item.ativo .quiz-box { background: var(--roxo2); border-color: var(--roxo2); }
+  .quiz-texto { font-size: 16px; color: rgba(246,244,248,0.6); line-height: 1.55; }
+  .quiz-item.ativo .quiz-texto { color: var(--bg); }
+
+  .quiz-res {
+    display: none; margin-top: 24px;
+    padding: 24px 28px; border-radius: 10px;
+    text-align: left;
+    animation: subir 0.4s ease forwards;
+  }
+  .quiz-res.visivel { display: block; }
+  .quiz-res.verde { background: var(--verde-dim); border: 1.5px solid var(--verde-brd); }
+  .quiz-res.amarelo { background: var(--aviso-dim); border: 1.5px solid var(--aviso-brd); }
+  .quiz-res.vermelho { background: var(--verm-dim); border: 1.5px solid var(--verm-brd); }
+  .quiz-res.roxo { background: var(--roxo-dim); border: 1.5px solid var(--roxo-brd); }
+  .quiz-res-label {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 3px; text-transform: uppercase;
+    margin-bottom: 8px; display: block;
+  }
+  .verde .quiz-res-label { color: #50b080; }
+  .amarelo .quiz-res-label { color: #c09030; }
+  .vermelho .quiz-res-label { color: #d07070; }
+  .roxo .quiz-res-label { color: var(--roxo3); }
+  .quiz-res-texto { font-size: 16px; line-height: 1.8; }
+  .verde .quiz-res-texto { color: #60a880; }
+  .amarelo .quiz-res-texto { color: #a07830; }
+  .vermelho .quiz-res-texto { color: #b06060; }
+  .roxo .quiz-res-texto { color: #9878c0; }
+  .quiz-res-texto strong { font-weight: 700; }
+
+  /* ===== MAIN ===== */
+  .main { max-width: 780px; margin: 0 auto; padding: 80px 28px 100px; }
+
+  .secao { margin-bottom: 80px; }
+  .secao-n {
+    font-family: 'Spectral', serif;
+    font-size: 110px; font-weight: 700;
+    color: var(--bg2); line-height: 0.85;
+    display: block; margin-bottom: -8px;
+    user-select: none;
+  }
+  .secao-titulo {
+    font-family: 'Spectral', serif;
+    font-size: clamp(22px, 3.5vw, 30px);
+    font-weight: 700; color: var(--ink);
+    line-height: 1.2;
+    padding-bottom: 16px; margin-bottom: 28px;
+    border-bottom: 1px solid var(--bg3);
+    position: relative;
+  }
+  .secao-titulo::after {
+    content: ''; position: absolute;
+    left: 0; bottom: -1px;
+    width: 48px; height: 2px;
+    background: var(--roxo);
+  }
+
+  .p {
+    font-size: 17px; color: var(--text2);
+    line-height: 1.9; margin-bottom: 22px;
+  }
+  .p strong { color: var(--ink); font-weight: 600; }
+
+  /* LEI */
+  .lei {
+    background: var(--ink);
+    border-radius: 10px;
+    padding: 24px 30px;
+    margin: 28px 0;
+    position: relative; overflow: hidden;
+  }
+  .lei::after {
+    content: '§'; position: absolute;
+    right: 20px; top: 8px;
+    font-family: 'Spectral', serif;
+    font-size: 72px;
+    color: rgba(90,58,138,0.07);
+    line-height: 1; pointer-events: none;
+  }
+  .lei-ref {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 3px; color: var(--roxo3);
+    text-transform: uppercase;
+    margin-bottom: 10px; display: block;
+  }
+  .lei-texto {
+    font-family: 'Spectral', serif;
+    font-size: 17px; font-style: italic;
+    color: rgba(246,244,248,0.78);
+    line-height: 1.85;
+  }
+  .lei-texto strong { color: var(--roxo3); font-style: normal; font-weight: 700; }
+
+  /* CAIXAS */
+  .caixa {
+    border-radius: 10px;
+    padding: 24px 28px;
+    margin: 28px 0;
+  }
+  .caixa.verde { background: var(--verde-dim); border: 1.5px solid var(--verde-brd); }
+  .caixa.vermelho { background: var(--verm-dim); border: 1.5px solid var(--verm-brd); }
+  .caixa.aviso { background: var(--aviso-dim); border: 1.5px solid var(--aviso-brd); }
+  .caixa.roxo { background: var(--roxo-dim); border: 1.5px solid var(--roxo-brd); }
+  .cx-tag {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 3px; text-transform: uppercase;
+    margin-bottom: 8px; display: block;
+  }
+  .verde .cx-tag { color: var(--verde); }
+  .vermelho .cx-tag { color: var(--verm); }
+  .aviso .cx-tag { color: var(--aviso); }
+  .roxo .cx-tag { color: var(--roxo2); }
+  .cx-titulo {
+    font-family: 'Spectral', serif;
+    font-size: 18px; font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .verde .cx-titulo { color: #2a7a54; }
+  .vermelho .cx-titulo { color: #c06060; }
+  .aviso .cx-titulo { color: #c09040; }
+  .roxo .cx-titulo { color: var(--roxo2); }
+  .cx-texto { font-size: 17px; line-height: 1.85; }
+  .verde .cx-texto { color: #3a8060; }
+  .vermelho .cx-texto { color: #a06060; }
+  .aviso .cx-texto { color: #906030; }
+  .roxo .cx-texto { color: #7858a8; }
+  .cx-texto strong { font-weight: 700; }
+  .verde .cx-texto strong { color: #2a7a54; }
+  .vermelho .cx-texto strong { color: #c06060; }
+  .aviso .cx-texto strong { color: #a07830; }
+  .roxo .cx-texto strong { color: var(--roxo2); }
+
+  /* ETAPAS DO PROCESSO */
+  .etapas { display: flex; flex-direction: column; gap: 0; margin: 28px 0; }
+  .etapa {
+    display: flex; gap: 20px;
+    padding-bottom: 28px;
+    position: relative;
+  }
+  .etapa:not(:last-child)::after {
+    content: ''; position: absolute;
+    left: 21px; top: 46px; bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, rgba(90,58,138,0.3), transparent);
+  }
+  .etapa-circulo {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: var(--ink);
+    border: 2px solid var(--roxo-brd);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Spectral', serif;
+    font-size: 18px; font-weight: 700;
+    color: var(--roxo3); flex-shrink: 0;
+  }
+  .etapa-circulo.ativo { background: var(--roxo); border-color: var(--roxo); color: #fff; }
+  .etapa-corpo {}
+  .etapa-tag {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 3px; color: var(--roxo2);
+    text-transform: uppercase;
+    margin-bottom: 4px; display: block;
+  }
+  .etapa-titulo {
+    font-family: 'Spectral', serif;
+    font-size: 18px; font-weight: 700;
+    color: var(--ink); margin-bottom: 6px;
+  }
+  .etapa-texto { font-size: 17px; color: var(--text2); line-height: 1.8; }
+  .etapa-texto strong { color: var(--ink); font-weight: 600; }
+
+  /* CHECKLIST DE DOCUMENTOS */
+  .doc-lista { display: flex; flex-direction: column; gap: 10px; margin: 28px 0; }
+  .doc-item {
+    background: var(--branco);
+    border: 1px solid var(--bg3);
+    border-left: 3px solid var(--roxo);
+    border-radius: 0 10px 10px 0;
+    padding: 16px 20px;
+    display: flex; gap: 14px; align-items: flex-start;
+  }
+  .doc-icone { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+  .doc-corpo {}
+  .doc-titulo { font-size: 17px; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
+  .doc-desc { font-size: 16px; color: var(--text2); line-height: 1.65; }
+
+  /* ACCORDION */
+  .accordion { margin: 28px 0; display: flex; flex-direction: column; gap: 10px; }
+  .acc {
+    background: var(--branco);
+    border: 1px solid var(--bg3);
+    border-radius: 10px;
+    overflow: hidden; cursor: pointer;
+    transition: border-color 0.2s;
+  }
+  .acc:hover { border-color: var(--roxo-brd); }
+  .acc.aberto { border-color: var(--roxo-brd); }
+  .acc-header {
+    display: flex; align-items: flex-start;
+    gap: 14px; padding: 18px 22px;
+  }
+  .acc-icone {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    background: var(--roxo-dim);
+    border: 1px solid var(--roxo-brd);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; flex-shrink: 0; margin-top: 1px;
+  }
+  .acc-titulo { font-size: 17px; font-weight: 600; color: var(--ink); line-height: 1.4; flex: 1; padding-top: 4px; }
+  .acc-seta { color: var(--muted); font-size: 12px; transition: transform 0.3s; flex-shrink: 0; padding-top: 8px; }
+  .acc.aberto .acc-seta { transform: rotate(180deg); }
+  .acc-corpo {
+    display: none;
+    padding: 0 22px 20px 72px;
+    font-size: 17px; color: var(--text2); line-height: 1.85;
+    border-top: 1px solid var(--bg2);
+    padding-top: 18px;
+  }
+  .acc.aberto .acc-corpo { display: block; }
+  .acc-corpo strong { color: var(--ink); font-weight: 600; }
+  .acc-corpo .sim { color: var(--verde); font-weight: 700; }
+  .acc-corpo .nao { color: var(--verm); font-weight: 700; }
+  .acc-corpo .atencao { color: var(--aviso); font-weight: 700; }
+
+  /* DESTAQUE */
+  .destaque {
+    background: var(--ink);
+    border-top: 3px solid var(--roxo2);
+    border-radius: 0 0 10px 10px;
+    padding: 32px 36px;
+    margin: 36px 0; position: relative; overflow: hidden;
+  }
+  .destaque::before {
+    content: '"';
+    font-family: 'Spectral', serif;
+    font-size: 130px;
+    color: rgba(90,58,138,0.07);
+    position: absolute; top: -20px; left: 12px;
+    line-height: 1; pointer-events: none;
+  }
+  .dest-texto {
+    font-family: 'Spectral', serif;
+    font-size: clamp(17px, 2.5vw, 20px);
+    font-style: italic; color: rgba(246,244,248,0.85);
+    line-height: 1.7; position: relative; z-index: 1;
+  }
+  .dest-texto strong { color: var(--roxo3); font-style: normal; }
+  .dest-autor {
+    margin-top: 16px;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 2px; color: var(--roxo2);
+    text-transform: uppercase;
+    position: relative; z-index: 1;
+  }
+
+  /* DIVISOR */
+  .divisor {
+    display: flex; align-items: center; gap: 20px;
+    margin: 64px 0;
+  }
+  .divisor::before, .divisor::after {
+    content: ''; flex: 1; height: 1px; background: var(--bg3);
+  }
+  .divisor-sym {
+    font-family: 'Spectral', serif;
+    font-size: 18px; color: var(--roxo); opacity: 0.4;
+  }
+
+  /* GRAVA */
+  .grava {
+    background: linear-gradient(135deg, var(--roxo-dim), rgba(90,58,138,0.02));
+    border: 1px solid var(--roxo-brd);
+    border-radius: 10px;
+    padding: 32px 36px; margin: 48px 0; text-align: center;
+  }
+  .grava-label {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 4px; color: var(--roxo);
+    text-transform: uppercase;
+    margin-bottom: 24px; display: block;
+  }
+  .grava-item {
+    font-size: 17px; font-weight: 700;
+    color: var(--roxo2); margin-bottom: 10px; line-height: 1.6;
+  }
+  .grava-item span { color: var(--ink2); font-weight: 400; }
+
+  /* CTA */
+  .cta-box {
+    background: var(--ink);
+    border-radius: 12px;
+    padding: 60px 40px; text-align: center;
+    margin-top: 72px;
+    position: relative; overflow: hidden;
+  }
+  .cta-box::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 50% at 50% 110%, rgba(90,58,138,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .cta-tag {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 4px; color: var(--roxo3);
+    text-transform: uppercase;
+    margin-bottom: 18px; display: block;
+    position: relative; z-index: 1;
+  }
+  .cta-titulo {
+    font-family: 'Spectral', serif;
+    font-size: clamp(26px, 5vw, 44px);
+    font-weight: 700; color: var(--bg);
+    line-height: 1.1; margin-bottom: 14px;
+    position: relative; z-index: 1;
+  }
+  .cta-titulo em { color: var(--roxo3); font-style: italic; }
+  .cta-sub {
+    font-size: 17px; font-weight: 300;
+    color: rgba(246,244,248,0.4);
+    max-width: 440px; margin: 0 auto 36px;
+    position: relative; z-index: 1; line-height: 1.7;
+  }
+  .cta-btns {
+    display: flex; flex-wrap: wrap;
+    justify-content: center; gap: 12px;
+    position: relative; z-index: 1;
+  }
+  .btn-p {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--roxo);
+    color: #fff;
+    font-size: 14px; font-weight: 700;
+    letter-spacing: 1px; text-transform: uppercase;
+    padding: 16px 32px; border-radius: 100px;
+    text-decoration: none; transition: all 0.3s;
+  }
+  .btn-p:hover { background: var(--roxo2); transform: translateY(-2px); }
+  .btn-s {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: transparent; color: var(--roxo3);
+    font-size: 14px; font-weight: 600;
+    padding: 16px 28px; border-radius: 100px;
+    text-decoration: none;
+    border: 1px solid var(--roxo-brd);
+    transition: all 0.3s;
+  }
+  .btn-s:hover { background: var(--roxo-dim); border-color: var(--roxo2); }
+  .cta-oab {
+    margin-top: 20px;
+    font-size: 12px; letter-spacing: 2px;
+    color: rgba(246,244,248,0.15);
+    text-transform: uppercase;
+    position: relative; z-index: 1;
+  }
+
+  /* FOOTER */
+  .footer {
+    background: var(--ink2); text-align: center;
+    padding: 32px 24px;
+    border-top: 1px solid rgba(90,58,138,0.12);
+  }
+  .footer-nome {
+    font-family: 'Spectral', serif;
+    font-size: 17px; color: var(--bg); margin-bottom: 4px;
+  }
+  .footer-sub {
+    font-size: 12px; letter-spacing: 2px;
+    color: rgba(246,244,248,0.15); text-transform: uppercase;
+  }
+
+  /* ANIMAÇÕES */
+  @keyframes subir {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes expandir {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+
+  @media (max-width: 600px) {
+    .acc-corpo { padding-left: 22px; }
+    .cta-box { padding: 40px 22px; }
+    .hero-nums { gap: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-fundo"></div>
+  <div class="hero-grade"></div>
+  <div class="hero-z">
+
+    <div class="hero-eyebrow">Direito de Família</div>
+
+    <h1 class="hero-h1">
+      Divórcio Litigioso
+      <span class="sub">O que você precisa saber antes de entrar com o processo</span>
+    </h1>
+
+    <div class="hero-sep"></div>
+
+    <p class="hero-desc">
+      Quando o acordo não é possível, cada decisão processual tem peso. <strong>Entender como funciona o divórcio litigioso pode ser a diferença entre proteger ou perder o que você construiu.</strong>
+    </p>
+
+    <div class="hero-pills">
+      <span class="hero-pill">Petição Inicial</span>
+      <span class="hero-pill">Partilha de Bens</span>
+      <span class="hero-pill">Guarda e Alimentos</span>
+      <span class="hero-pill">Tutelas de Urgência</span>
+      <span class="hero-pill">Separação de Fato</span>
+      <span class="hero-pill">EC 66/2010</span>
+    </div>
+
+    <div class="hero-nums">
+      <div class="hero-num-item">
+        <span class="hero-num-valor">0</span>
+        <span class="hero-num-label">dias de prazo mínimo</span>
+      </div>
+      <div class="hero-num-item">
+        <span class="hero-num-valor">5</span>
+        <span class="hero-num-label">pedidos que não podem faltar</span>
+      </div>
+      <div class="hero-num-item">
+        <span class="hero-num-valor">1ª</span>
+        <span class="hero-num-label">petição define o ritmo</span>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- DIAGNÓSTICO -->
+<section class="diag-section">
+  <div class="diag-inner">
+    <span class="diag-tag">🔍 Sua situação agora</span>
+    <h2 class="diag-titulo">Em que momento você está?</h2>
+    <p class="diag-sub">Selecione a opção que mais se aproxima da sua realidade e veja a análise.</p>
+
+    <div class="quiz-lista">
+      <div class="quiz-item" onclick="marcar(this,'a')">
+        <div class="quiz-box"></div>
+        <div class="quiz-texto">Ainda não entrei com o processo, mas o acordo está sendo impossível</div>
+      </div>
+      <div class="quiz-item" onclick="marcar(this,'b')">
+        <div class="quiz-box"></div>
+        <div class="quiz-texto">O processo já foi iniciado pelo outro lado e preciso me defender</div>
+      </div>
+      <div class="quiz-item" onclick="marcar(this,'c')">
+        <div class="quiz-box"></div>
+        <div class="quiz-texto">Suspeito que o cônjuge está tentando esconder ou transferir bens</div>
+      </div>
+      <div class="quiz-item" onclick="marcar(this,'d')">
+        <div class="quiz-box"></div>
+        <div class="quiz-texto">Não tenho renda própria desde a separação e preciso de suporte financeiro urgente</div>
+      </div>
+      <div class="quiz-item" onclick="marcar(this,'e')">
+        <div class="quiz-box"></div>
+        <div class="quiz-texto">A disputa maior é pela guarda dos filhos, não pelo patrimônio</div>
+      </div>
+    </div>
+
+    <div class="quiz-res" id="q-res"></div>
+  </div>
+</section>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- SEÇÃO 1 -->
+  <section class="secao">
+    <span class="secao-n">01</span>
+    <h2 class="secao-titulo">O que mudou com a EC 66/2010: sem prazo, sem causa</h2>
+
+    <p class="p">
+      Antes de 2010, o divórcio no Brasil exigia comprovação de tempo mínimo de separação, discussão de culpa e, em muitos casos, separação judicial prévia. A Emenda Constitucional 66/2010 eliminou tudo isso de uma só vez. Hoje, qualquer pessoa casada pode pedir o divórcio a qualquer momento, sem precisar demonstrar nenhuma causa e sem aguardar nenhum prazo.
+    </p>
+
+    <p class="p">
+      Isso tem uma consequência prática direta: quem quiser agir primeiro pode agir agora. O divórcio litigioso pode ser distribuído sem que o cônjuge saiba, sem aviso prévio e sem espera. A primeira petição ao juízo define o enquadramento dos fatos, o rol de bens em disputa e o tom da estratégia processual.
+    </p>
+
+    <div class="lei">
+      <span class="lei-ref">EC 66/2010 — Constituição Federal, Art. 226, §6º</span>
+      <p class="lei-texto">
+        "O casamento civil pode ser dissolvido pelo divórcio."<br><br>
+        Após a emenda, o texto foi simplificado para eliminar toda exigência de prazo ou separação prévia. <strong>O divórcio direto é um direito potestativo</strong>, o que significa que pode ser exercido unilateralmente, sem necessidade de concordância do outro cônjuge.
+      </p>
+    </div>
+
+    <div class="caixa roxo">
+      <span class="cx-tag">📌 O que é direito potestativo</span>
+      <div class="cx-titulo">Você não precisa da concordância do cônjuge para se divorciar</div>
+      <p class="cx-texto">
+        Direito potestativo é aquele que uma parte exerce independentemente da vontade da outra. No divórcio litigioso, <strong>o réu não pode impedir o divórcio</strong>. Ele pode contestar partilha, alimentos e guarda. Mas o vínculo matrimonial será dissolvido de qualquer forma, independente da resistência do outro lado. Isso é algo que muitos clientes não sabem quando chegam ao escritório, achando que o cônjuge pode "se recusar a se divorciar".
+      </p>
+    </div>
+  </section>
+
+  <div class="divisor"><div class="divisor-sym">◆</div></div>
+
+  <!-- SEÇÃO 2 -->
+  <section class="secao">
+    <span class="secao-n">02</span>
+    <h2 class="secao-titulo">Consensual ou litigioso: entenda a diferença antes de escolher o caminho</h2>
+
+    <p class="p">
+      O divórcio consensual acontece quando os dois cônjuges chegam a um acordo sobre todos os pontos em discussão: partilha de bens, guarda dos filhos, regime de convivência, alimentos e uso do nome. Quando existe consenso total e não há filhos menores ou incapazes, o processo pode ser feito até por escritura pública em cartório, sem precisar ir ao juízo. É mais rápido, mais barato e menos desgastante.
+    </p>
+
+    <p class="p">
+      O divórcio litigioso é o caminho quando o consenso não existe ou quando um dos cônjuges não coopera. Aqui o processo vai obrigatoriamente ao juízo, há citação do réu, prazo para contestação, produção de provas e, ao final, sentença judicial. A complexidade aumenta proporcionalmente aos pontos de conflito. Cada ponto em disputa, seja um imóvel, a guarda de um filho ou o valor dos alimentos, passa a ser objeto de debate processual com ônus de prova de cada lado.
+    </p>
+
+    <div class="caixa aviso">
+      <span class="cx-tag">⚠️ Atenção</span>
+      <div class="cx-titulo">O caminho muda mesmo quando há acordo parcial</div>
+      <p class="cx-texto">
+        Muitos casais chegam ao escritório achando que têm consenso, mas na prática discordam em um ou dois pontos relevantes, como o valor dos alimentos ou a divisão de um imóvel específico. <strong>Qualquer ponto de desacordo já torna o processo litigioso</strong>, pelo menos naquele aspecto. Uma alternativa é iniciar como litigioso nos pontos em disputa e protocolar um acordo parcial nos pontos que já foram definidos, acelerando a resolução do que está claro enquanto o restante tramita judicialmente.
+      </p>
+    </div>
+  </section>
+
+  <div class="divisor"><div class="divisor-sym">◆</div></div>
+
+  <!-- SEÇÃO 3 -->
+  <section class="secao">
+    <span class="secao-n">03</span>
+    <h2 class="secao-titulo">Como funciona o processo: passo a passo real</h2>
+
+    <p class="p">
+      Entender o fluxo do processo retira a sensação de que tudo é imprevisível e longo. O divórcio litigioso tem etapas definidas e cada uma delas tem um papel específico.
+    </p>
+
+    <div class="etapas">
+
+      <div class="etapa">
+        <div class="etapa-circulo ativo">1</div>
+        <div class="etapa-corpo">
+          <span class="etapa-tag">Primeiro movimento</span>
+          <div class="etapa-titulo">Petição inicial</div>
+          <p class="etapa-texto">O advogado do autor protocola a petição inicial ao juízo competente. Essa peça define os pedidos, narra os fatos relevantes, indica os bens em disputa e pode incluir requerimento de tutela de urgência para alimentos provisórios ou bloqueio de bens. <strong>A qualidade da petição inicial determina o posicionamento estratégico de todo o processo.</strong></p>
+        </div>
+      </div>
+
+      <div class="etapa">
+        <div class="etapa-circulo">2</div>
+        <div class="etapa-corpo">
+          <span class="etapa-tag">Comunicação processual</span>
+          <div class="etapa-titulo">Citação do réu</div>
+          <p class="etapa-texto">O juízo cita o réu, que passa a ter prazo de 15 dias para apresentar contestação. A citação marca o início formal do contraditório. A partir daqui, o réu precisa de advogado para se defender adequadamente.</p>
+        </div>
+      </div>
+
+      <div class="etapa">
+        <div class="etapa-circulo">3</div>
+        <div class="etapa-corpo">
+          <span class="etapa-tag">Defesa do réu</span>
+          <div class="etapa-titulo">Contestação e reconvenção</div>
+          <p class="etapa-texto">O réu apresenta sua defesa, contestando os fatos e pedidos do autor. Pode também propor reconvenção, fazendo pedidos próprios dentro do mesmo processo. <strong>Argumentos não apresentados nessa fase podem ser considerados preclusos</strong>, ou seja, perdidos para o restante do processo.</p>
+        </div>
+      </div>
+
+      <div class="etapa">
+        <div class="etapa-circulo">4</div>
+        <div class="etapa-corpo">
+          <span class="etapa-tag">Instrução processual</span>
+          <div class="etapa-titulo">Produção de provas</div>
+          <p class="etapa-texto">Audiência de instrução, depoimentos, perícias e documentação. É aqui que a batalha sobre partilha, guarda e alimentos se decide concretamente. A prova documental juntada na inicial e na contestação tem peso determinante nessa fase, especialmente em disputas sobre bens e origem de recursos.</p>
+        </div>
+      </div>
+
+      <div class="etapa">
+        <div class="etapa-circulo">5</div>
+        <div class="etapa-corpo">
+          <span class="etapa-tag">Decisão judicial</span>
+          <div class="etapa-titulo">Sentença</div>
+          <p class="etapa-texto">O juiz profere a sentença, dissolvendo o vínculo matrimonial e decidindo sobre partilha, guarda e alimentos conforme as provas produzidas. <strong>A sentença de divórcio pode ser objeto de recurso</strong>, o que pode prolongar o processo por mais alguns meses.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divisor"><div class="divisor-sym">◆</div></div>
+
+  <!-- SEÇÃO 4 -->
+  <section class="secao">
+    <span class="secao-n">04</span>
+    <h2 class="secao-titulo">Os pedidos que não podem faltar na petição inicial</h2>
+
+    <p class="p">
+      A petição inicial do divórcio litigioso é um documento estratégico, não apenas formal. Pedidos que não são formulados na inicial podem ser perdidos por preclusão ou exigir uma nova ação independente, com todo o custo e demora que isso implica. Cumulação consciente de pedidos é uma das competências mais importantes do advogado de família.
+    </p>
+
+    <div class="caixa verde">
+      <span class="cx-tag">✅ Pedidos essenciais em todo divórcio litigioso</span>
+      <div class="cx-titulo">O mínimo que precisa constar em toda petição inicial</div>
+      <p class="cx-texto">
+        Dissolução do vínculo conjugal com base na EC 66/2010. Homologação do regime de bens adotado. Partilha dos bens comuns, com identificação dos bens disputados. Regulamentação da guarda e do regime de convivência com os filhos, quando houver. Fixação de alimentos para os filhos e, se cabível, para o cônjuge dependente.
+      </p>
+    </div>
+
+    <div class="caixa roxo">
+      <span class="cx-tag">📋 Pedidos estratégicos conforme o caso</span>
+      <div class="cx-titulo">O que incluir dependendo do perfil patrimonial</div>
+      <p class="cx-texto">
+        Tutela antecipada para fixação de alimentos provisórios desde a citação, com base no Art. 300 CPC. Medida cautelar de indisponibilidade de bens, quando houver risco de alienação, com base no Art. 301 CPC. <strong>Expedição de ofícios à Receita Federal, ao DETRAN, ao sistema BACENJUD e à Junta Comercial</strong> para levantamento patrimonial completo do réu. Nomeação de perito para avaliação de empresa ou cotas societárias. Determinação de inventário dos bens comuns com data de corte na separação de fato.
+      </p>
+    </div>
+
+    <div class="caixa vermelho">
+      <span class="cx-tag">🔴 Erro frequente</span>
+      <div class="cx-titulo">Pedido genérico de partilha sem identificar os bens</div>
+      <p class="cx-texto">
+        Pedir a partilha "dos bens comuns a serem apurados" sem identificar os bens que se pretende incluir enfraquece a posição do autor e permite que o réu esvazie o patrimônio antes da resposta. <strong>A petição inicial precisa mapear os bens com a máxima precisão disponível</strong>: imóveis com matrícula, veículos com placa, participações societárias com CNPJ, investimentos com instituição financeira. O que não for identificado agora precisará ser descoberto depois, com custo processual adicional.
+      </p>
+    </div>
+  </section>
+
+  <div class="divisor"><div class="divisor-sym">◆</div></div>
+
+  <!-- SEÇÃO 5 -->
+  <section class="secao">
+    <span class="secao-n">05</span>
+    <h2 class="secao-titulo">Documentos: o que juntar na inicial e o que requerer ao juízo</h2>
+
+    <p class="p">
+      Uma petição bem fundamentada precisa de suporte documental sólido desde o início. O que você junta na inicial define o que o juiz pode analisar imediatamente ao receber o processo. O que está fora do seu alcance precisa ser requerido via expedição de ofícios, com base no poder instrutório do juízo.
+    </p>
+
+    <div class="doc-lista">
+      <div class="doc-item">
+        <div class="doc-icone">📄</div>
+        <div class="doc-corpo">
+          <div class="doc-titulo">Certidão de casamento atualizada</div>
+          <div class="doc-desc">Documento fundante do processo. Comprova o vínculo matrimonial, o regime de bens adotado e a data do casamento. Deve ser recente, emitida há menos de 90 dias.</div>
+        </div>
+      </div>
+      <div class="doc-item">
+        <div class="doc-icone">🏠</div>
+        <div class="doc-corpo">
+          <div class="doc-titulo">Certidões dos imóveis comuns</div>
+          <div class="doc-desc">Matrícula atualizada de todos os imóveis que se pretende incluir na partilha. Disponível no Cartório de Registro de Imóveis de cada comarca. Comprova titularidade e eventuais ônus reais.</div>
+        </div>
+      </div>
+      <div class="doc-item">
+        <div class="doc-icone">💳</div>
+        <div class="doc-corpo">
+          <div class="doc-titulo">Extratos bancários do período relevante</div>
+          <div class="doc-desc">Demonstram movimentações financeiras, origem de recursos para compra de bens e eventuais saques expressivos após a separação de fato. Fundamentais para rastrear patrimônio e contestar datas.</div>
+        </div>
+      </div>
+      <div class="doc-item">
+        <div class="doc-icone">📊</div>
+        <div class="doc-corpo">
+          <div class="doc-titulo">Declarações de IR dos últimos 3 anos</div>
+          <div class="doc-desc">Revelam o patrimônio declarado pelo cônjuge: imóveis, veículos, participações societárias, investimentos e rendimentos. São o primeiro mapa patrimonial disponível ao advogado antes de requerer ofícios.</div>
+        </div>
+      </div>
+      <div class="doc-item">
+        <div class="doc-icone">🏢</div>
+        <div class="doc-corpo">
+          <div class="doc-titulo">Contrato social das empresas, se houver</div>
+          <div class="doc-desc">Identifica participação societária, capital social, sócios e data de constituição. Permite avaliar se as cotas foram constituídas antes ou durante o casamento e qual proteção eventual holding tem no contrato social.</div>
+        </div>
+      </div>
+      <div class="doc-item">
+        <div class="doc-icone">👶</div>
+        <div class="doc-corpo">
+          <div class="doc-titulo">Certidões de nascimento dos filhos</div>
+          <div class="doc-desc">Obrigatórias quando há pedido de guarda e alimentos. Determinam a competência do juízo e são a base para cálculo dos alimentos e definição do regime de convivência.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divisor"><div class="divisor-sym">◆</div></div>
+
+  <!-- SEÇÃO 6 -->
+  <section class="secao">
+    <span class="secao-n">06</span>
+    <h2 class="secao-titulo">Tutelas de urgência: proteger antes que o dano aconteça</h2>
+
+    <p class="p">
+      Em um divórcio litigioso, o tempo entre a distribuição da petição e a citação do réu é um período de vulnerabilidade real. O cônjuge citado pode, em tese, tentar alienar bens, sacar valores de contas comuns ou transferir patrimônio para terceiros antes que qualquer decisão judicial o impeça.
+    </p>
+
+    <p class="p">
+      O instrumento para agir nesse momento é a tutela de urgência, que o juiz pode conceder antes mesmo de ouvir o réu quando houver prova suficiente do risco concreto.
+    </p>
+
+    <div class="accordion">
+
+      <div class="acc" onclick="toggleAcc(this)">
+        <div class="acc-header">
+          <div class="acc-icone">⚡</div>
+          <div class="acc-titulo">Tutela antecipada: alimentos provisórios desde já</div>
+          <div class="acc-seta">▾</div>
+        </div>
+        <div class="acc-corpo">
+          A tutela antecipada antecipa, provisoriamente, o próprio bem da vida que você pede no mérito. No caso dos alimentos, você pede ao juiz que os fixe imediatamente, sem esperar o processo terminar, porque quem depende do cônjuge não pode aguardar meses ou anos.<br><br>
+          <strong>Base legal:</strong> Art. 300 CPC + Art. 1.706 CC. Os requisitos são a probabilidade do direito, demonstrada pela dependência econômica comprovada, e o perigo de dano irreparável se a decisão demorar.<br><br>
+          O valor pedido precisa ser calculado com base em três elementos que devem constar da petição: a necessidade de quem recebe, a possibilidade financeira de quem paga e a proporcionalidade entre os dois. <span class="atencao">Pedido desproporcional cria descrédito para o restante da causa.</span>
+        </div>
+      </div>
+
+      <div class="acc" onclick="toggleAcc(this)">
+        <div class="acc-header">
+          <div class="acc-icone">🔒</div>
+          <div class="acc-titulo">Tutela cautelar: bloqueio de bens antes que somam</div>
+          <div class="acc-seta">▾</div>
+        </div>
+        <div class="acc-corpo">
+          A tutela cautelar não entrega o bem. Ela <strong>preserva</strong> o bem para que ele ainda exista quando a sentença chegar. É a medida adequada quando há risco concreto de que o cônjuge aliene imóvel, esvazie conta ou transfira cotas de empresa antes da partilha.<br><br>
+          <strong>Base legal:</strong> Art. 301 CPC. O perigo precisa ser concreto e específico. Alegação genérica de "risco de dilapidação" tende a ser indeferida. O que funciona é prova objetiva: anúncio de imóvel à venda, extrato mostrando saque expressivo após a separação, contrato preliminar de compra e venda.<br><br>
+          <span class="sim">Quando o risco for imediato</span>, o juiz pode conceder a medida sem ouvir o réu antes, com base no Art. 300, §2º CPC. Isso é especialmente relevante quando a ciência prévia pelo réu frustraria completamente a eficácia do bloqueio.
+        </div>
+      </div>
+
+      <div class="acc" onclick="toggleAcc(this)">
+        <div class="acc-header">
+          <div class="acc-icone">⚖️</div>
+          <div class="acc-titulo">Responsabilidade: tutela excessiva pode gerar indenização</div>
+          <div class="acc-seta">▾</div>
+        </div>
+        <div class="acc-corpo">
+          O Art. 302 CPC estabelece que quem obtém tutela de urgência responde pelos prejuízos causados ao réu se o pedido for julgado improcedente ou se a tutela for revogada.<br><br>
+          <strong>Isso significa que pedir bloqueio de valor muito superior ao direito real gera risco financeiro para o próprio autor</strong> se o processo for perdido. A regra prática é pedir a indisponibilidade proporcional ao valor estimado da meação, não de todo o patrimônio do réu.
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divisor"><div class="divisor-sym">◆</div></div>
+
+  <!-- SEÇÃO 7 -->
+  <section class="secao">
+    <span class="secao-n">07</span>
+    <h2 class="secao-titulo">A data da separação de fato e por que ela define a partilha</h2>
+
+    <p class="p">
+      Um ponto técnico que poucos clientes entendem no início do processo: no divórcio litigioso em Comunhão Parcial, o que se parte não é o patrimônio existente na data do ajuizamento da ação. O que se parte é o patrimônio existente na data da separação de fato, que é o momento em que a convivência conjugal efetivamente cessou.
+    </p>
+
+    <p class="p">
+      O STJ consolidou que a separação de fato encerra a comunhão patrimonial, mesmo que o divórcio formal ainda não tenha ocorrido. Isso protege quem construiu patrimônio após a separação, mas exige prova. Sem prova da data, o cônjuge contrário pode arguir uma data posterior e incluir na partilha bens que pertenceriam exclusivamente a quem os adquiriu.
+    </p>
+
+    <div class="caixa aviso">
+      <span class="cx-tag">⚡ Estratégia processual</span>
+      <div class="cx-titulo">A batalha sobre a data muitas vezes vale mais do que a batalha sobre os bens</div>
+      <p class="cx-texto">
+        Em disputas de alto valor, a diferença entre a data de separação de fato declarada pelo autor e a data declarada pelo réu pode representar anos de patrimônio acumulado. <strong>Provar a data real com documentos</strong>, como endereços distintos, declarações de IR, mensagens e testemunhos, é frequentemente a estratégia mais decisiva de todo o processo, antes mesmo de discutir quais bens entram na partilha.
+      </p>
+    </div>
+  </section>
+
+  <div class="divisor"><div class="divisor-sym">◆</div></div>
+
+  <div class="destaque">
+    <p class="dest-texto">
+      Uma petição inicial fraca abre brechas que duram todo o processo. Uma petição inicial sólida, com pedidos cumulados corretamente, documentação completa e tutela de urgência bem fundamentada, <strong>fecha o cerco antes que o réu tenha a primeira chance de reagir.</strong>
+    </p>
+    <div class="dest-autor">Dr. Filipe Ferreira · OAB/ES 37.159</div>
+  </div>
+
+  <!-- GRAVA -->
+  <div class="grava">
+    <span class="grava-label">📌 Os 8 pontos essenciais</span>
+    <div class="grava-item">EC 66/2010: <span>sem prazo, sem causa, sem separação prévia. O divórcio pode ser pedido agora.</span></div>
+    <div class="grava-item">Direito potestativo: <span>o réu não pode impedir o divórcio. Pode contestar partilha, guarda e alimentos.</span></div>
+    <div class="grava-item">Petição inicial: <span>primeiro movimento estratégico. Define o ritmo e o perímetro da disputa.</span></div>
+    <div class="grava-item">Pedido não feito na inicial: <span>pode gerar preclusão. Cumulação consciente é obrigatória.</span></div>
+    <div class="grava-item">Tutela antecipada: <span>antecipa alimentos provisórios. Art. 300 CPC + Art. 1.706 CC.</span></div>
+    <div class="grava-item">Tutela cautelar: <span>bloqueia bens em risco de alienação. Perigo precisa ser concreto e documentado.</span></div>
+    <div class="grava-item">Separação de fato: <span>encerra a comunhão patrimonial. A data precisa ser provada.</span></div>
+    <div class="grava-item">Tutela excessiva: <span>gera responsabilidade indenizatória do autor se revogada. Art. 302 CPC.</span></div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-box">
+    <span class="cta-tag">Consultoria especializada</span>
+    <h2 class="cta-titulo">
+      Pronto para dar<br><em>o primeiro passo certo?</em>
+    </h2>
+    <p class="cta-sub">Atendimento online para todo o Brasil. Análise da sua situação e orientação sobre a estratégia mais adequada para o seu caso.</p>
+    <div class="cta-btns">
+      <a href="https://wa.me/5527995187279?text=Ol%C3%A1%2C+vim+pelo+guia+do+Div%C3%B3rcio+Litigioso+e+gostaria+de+uma+orienta%C3%A7%C3%A3o." class="btn-p">
+        💬 WhatsApp — Falar Agora
+      </a>
+      <a href="mailto:escritorio@filipeeassociadosadvogado.com.br?subject=Consulta%20sobre%20Divórcio%20Litigioso" class="btn-s">
+        ✉️ Enviar E-mail
+      </a>
+    </div>
+    <div class="cta-oab">Filipe Ferreira · OAB/ES 37.159 · Direito de Família e Proteção Patrimonial</div>
+  </div>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-nome">Filipe Ferreira — Advogado e Associados</div>
+  <div class="footer-sub">OAB/ES 37.159 · Linhares, ES · Atendimento Online · Brasil</div>
+</footer>
+
+<script>
+  // Diagnóstico
+  const respostas = {
+    a: {
+      cls: 'roxo', label: '📋 Você está no momento certo de agir',
+      txt: 'Quem age primeiro define o campo. <strong>Distribuir a petição inicial antes do cônjuge</strong> significa escolher o juízo, enquadrar os fatos na narrativa mais favorável e, se necessário, obter tutela de urgência antes que o outro lado perceba o que está acontecendo. O primeiro passo é um diagnóstico patrimonial completo com um advogado especialista para identificar os bens a incluir na partilha e os pedidos que precisam constar na inicial.'
+    },
+    b: {
+      cls: 'vermelho', label: '🔴 Ação urgente necessária',
+      txt: 'Quando a ação foi distribuída pelo outro lado, <strong>o prazo para contestação é de 15 dias a partir da citação</strong>. Não apresentar contestação significa perder a chance de refutar os fatos narrados pelo autor e os pedidos que ele formulou. Procure um advogado especialista imediatamente. A contestação mal feita ou fora do prazo pode comprometer irrecuperavelmente sua posição em toda a disputa.'
+    },
+    c: {
+      cls: 'vermelho', label: '🔴 Tutela cautelar urgente',
+      txt: 'Suspeita de ocultação ou transferência de bens é um dos cenários mais urgentes em um divórcio litigioso. <strong>A solução é a tutela cautelar de indisponibilidade de bens</strong>, que pode ser obtida pelo juízo antes mesmo de o réu ser citado, desde que haja prova concreta do risco. Anúncios de venda de imóveis, saques expressivos de contas, transferências para empresas recém-constituídas: qualquer um desses elementos pode fundamentar a medida. Cada dia sem agir é um dia de risco real ao patrimônio.'
+    },
+    d: {
+      cls: 'amarelo', label: '⚠️ Alimentos provisórios são seu direito',
+      txt: 'A separação de fato não extingue a obrigação alimentar. <strong>Você pode requerer alimentos provisórios por tutela antecipada</strong>, com base no Art. 300 CPC e no Art. 1.706 CC, antes mesmo de qualquer audiência. O juiz pode fixá-los logo no início do processo. Para isso, a petição precisa demonstrar sua dependência econômica e a capacidade financeira do cônjuge. Quanto mais documentada for essa demonstração, mais rápida e favorável tende a ser a decisão.'
+    },
+    e: {
+      cls: 'amarelo', label: '⚠️ A guarda exige estratégia própria',
+      txt: 'Quando a disputa central é a guarda dos filhos, a dinâmica processual é diferente do que quando o conflito é sobre patrimônio. <strong>A guarda compartilhada é a regra legal</strong> desde a Lei 13.058/2014, o que significa que o juiz parte desse pressuposto. Afastar a guarda compartilhada, ou garantir o modelo de convivência que você considera mais adequado para os filhos, exige prova sólida das circunstâncias de cada cônjuge, da rotina dos filhos e, quando relevante, de eventuais condutas de alienação parental pelo outro lado.'
+    }
+  };
+
+  let ativo = null;
+  function marcar(el, id) {
+    document.querySelectorAll('.quiz-item').forEach(q => {
+      q.classList.remove('ativo');
+      q.querySelector('.quiz-box').textContent = '';
+    });
+    const res = document.getElementById('q-res');
+    if (ativo === id) { ativo = null; res.classList.remove('visivel'); return; }
+    ativo = id;
+    el.classList.add('ativo');
+    el.querySelector('.quiz-box').textContent = '✓';
+    const r = respostas[id];
+    res.className = `quiz-res visivel ${r.cls}`;
+    res.innerHTML = `<span class="quiz-res-label">${r.label}</span><p class="quiz-res-texto">${r.txt}</p>`;
+  }
+
+  // Accordion
+  function toggleAcc(el) {
+    const aberto = el.classList.contains('aberto');
+    document.querySelectorAll('.acc').forEach(a => a.classList.remove('aberto'));
+    if (!aberto) el.classList.add('aberto');
+  }
+</script>
+
+</body>
+</html>
